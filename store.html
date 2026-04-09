@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Tienda König · Cervezas, Indumentaria y Accesorios</title>
+<meta name="description" content="Tienda oficial König. Cervezas artesanales, remeras, gorras, hoodies y accesorios. Pedidos por WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,700;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MorphSVGPlugin.min.js"></script>
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="manifest" href="site.webmanifest">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+:root{
+  --negro:#0a0a0a;--carbon:#111;--carbon2:#1a1a1a;--carbon3:#242424;
+  --oro:#c9971c;--oro2:#e8b832;--oro-lt:rgba(201,151,28,.15);--oro-borde:rgba(201,151,28,.5);
+  --blanco:#f5f0e8;--gris2:#c9bb94;--txt2:rgba(245,240,232,.88);
+  --wa:#25d366;--rojo:#e74c3c;--sin-stock:#555;
+}
+body{font-family:'Raleway',sans-serif;background:var(--negro);color:var(--blanco);}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-thumb{background:var(--oro);border-radius:2px;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 6%;background:rgba(10,10,10,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--oro-borde);}
+.n-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.n-logo img{height:48px;width:48px;object-fit:contain;}
+.n-nombre{font-family:'Cormorant Garamond',serif;font-weight:700;font-style:italic;font-size:1.5rem;color:var(--oro2);}
+.n-sub{font-size:.55rem;letter-spacing:3px;text-transform:uppercase;color:var(--gris2);}
+.n-links{display:flex;gap:0;list-style:none;align-items:center;}
+.n-links a{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--txt2);padding:9px 16px;text-decoration:none;font-weight:600;font-family:'Cinzel',serif;}
+.n-links a:hover{color:var(--oro2);}
+.n-links a.active{color:var(--oro2);border-bottom:1px solid var(--oro);}
+.cart-icon{position:relative;margin-left:12px;cursor:pointer;padding:9px 16px;}
+.cart-count{position:absolute;top:2px;right:2px;background:var(--oro);color:var(--negro);font-size:.65rem;font-weight:bold;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;}
+.ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
+.ham span{width:24px;height:1px;background:var(--oro);display:block;transition:all .3s;}
+.mob{display:none;position:fixed;inset:0;z-index:190;background:rgba(10,10,10,.98);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:30px;}
+.mob.open{display:flex;}
+.mob a{font-family:'Cinzel',serif;font-size:1.6rem;color:var(--blanco);text-decoration:none;text-transform:uppercase;}
+.mob a:hover{color:var(--oro2);}
+.mob-x{position:absolute;top:24px;right:26px;background:none;border:none;color:var(--gris2);font-size:1.5rem;cursor:pointer;}
+
+/* ── HERO ── */
+.store-hero{text-align:center;padding:120px 6% 40px;background:var(--negro);}
+.store-hero-icon img{width:80px;height:80px;margin-bottom:16px;object-fit:contain;}
+.store-hero h1{font-family:'Cinzel',serif;font-size:clamp(2rem,5vw,3rem);color:var(--blanco);letter-spacing:3px;}
+.store-hero h1 em{font-style:italic;color:var(--oro2);}
+.store-hero p{color:var(--txt2);font-size:.95rem;max-width:500px;margin:12px auto 0;}
+
+/* ── STOCK AVISO ── */
+.stock-aviso{background:rgba(201,151,28,.08);border:1px solid var(--oro-borde);border-radius:8px;padding:10px 20px;max-width:700px;margin:16px auto 0;font-size:.8rem;color:var(--gris2);display:flex;align-items:center;gap:10px;}
+.stock-aviso i{color:var(--oro);font-size:1rem;flex-shrink:0;}
+
+/* ── FILTROS ── */
+.filters-sec{padding:20px 6% 20px;}
+.filters-wrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:1200px;margin:0 auto;}
+.filter-btn{background:var(--carbon2);border:1px solid var(--carbon3);color:var(--txt2);padding:10px 22px;border-radius:30px;font-size:.78rem;font-weight:600;font-family:'Cinzel',serif;cursor:pointer;transition:all .2s;}
+.filter-btn:hover,.filter-btn.active{background:var(--oro-lt);border-color:var(--oro);color:var(--oro2);}
+
+/* ── GRID ── */
+.products-sec{padding:20px 6% 80px;}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:28px;max-width:1200px;margin:0 auto;}
+
+/* ── CARD ── */
+.product-card{background:var(--carbon);border:1px solid var(--carbon3);border-radius:12px;overflow:hidden;transition:all .3s;position:relative;}
+.product-card:hover{transform:translateY(-5px);border-color:var(--oro-borde);}
+.product-card.sin-stock{opacity:.65;pointer-events:none;}
+.product-card.sin-stock .product-img::after{content:'SIN STOCK';position:absolute;inset:0;background:rgba(10,10,10,.75);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:1.1rem;letter-spacing:3px;color:var(--blanco);font-weight:700;}
+
+.product-img{width:100%;aspect-ratio:1/1;background:var(--carbon2);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;cursor:pointer;}
+.product-img img{width:100%;height:100%;object-fit:contain;object-position:center;transition:transform .4s ease;background:var(--carbon2);}
+.product-card:hover .product-img img{transform:scale(1.04);}
+@media(max-width:600px){
+  .product-img{aspect-ratio:4/3;}
+  .products-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;}
+}
+.img-zoom-hint{position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,.6);color:var(--oro);font-size:.7rem;padding:4px 10px;border-radius:20px;opacity:0;transition:opacity .3s;pointer-events:none;letter-spacing:1px;}
+.product-card:hover .img-zoom-hint{opacity:1;}
+
+.product-info{padding:20px;}
+.product-tag{position:absolute;top:12px;left:12px;background:var(--oro);color:var(--negro);font-size:.68rem;font-weight:700;padding:4px 10px;border-radius:4px;z-index:1;font-family:'Cinzel',serif;}
+.product-tag.rojo{background:var(--rojo);color:#fff;}
+.product-title{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--blanco);margin-bottom:6px;}
+.product-desc{font-size:.83rem;color:var(--txt2);line-height:1.6;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+
+.product-price{font-family:'Cinzel',serif;font-size:1.15rem;color:var(--oro2);margin-bottom:12px;font-weight:700;}
+
+.variant-label{font-size:.72rem;color:var(--gris2);text-transform:uppercase;margin-bottom:5px;display:block;font-weight:600;letter-spacing:1px;}
+.variant-select{width:100%;padding:9px 12px;background:var(--carbon3);border:1px solid var(--carbon3);border-radius:6px;color:var(--blanco);font-size:.85rem;margin-bottom:12px;cursor:pointer;}
+.variant-select:focus{outline:none;border-color:var(--oro);}
+
+.talles-wrap{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+.talle-btn{background:var(--carbon3);border:1px solid var(--carbon3);color:var(--txt2);padding:6px 12px;border-radius:4px;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Cinzel',serif;}
+.talle-btn:hover,.talle-btn.selected{background:var(--oro-lt);border-color:var(--oro);color:var(--oro2);}
+
+/* ── BOTÓN AGREGAR CON ANIMACIÓN ── */
+.add-to-cart-btn {
+  --background-default: var(--oro);
+  --background-hover: var(--oro2);
+  --background-scale: 1;
+  --text-color: var(--negro);
+  --text-o: 1;
+  --text-x: 12px;
+  --cart: var(--negro);
+  --cart-x: -48px;
+  --cart-y: 0px;
+  --cart-rotate: 0deg;
+  --cart-scale: 0.75;
+  --cart-clip: 0px;
+  --cart-clip-x: 0px;
+  --cart-tick-offset: 10px;
+  --cart-tick-color: var(--negro);
+  --shirt-y: -16px;
+  --shirt-scale: 0;
+  --shirt-color: var(--oro);
+  --shirt-logo: var(--negro);
+  --shirt-second-y: 24px;
+  --shirt-second-color: var(--blanco);
+  --shirt-second-logo: var(--negro);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  outline: none;
+  background: none;
+  border: none;
+  padding: 12px 0;
+  width: 100%;
+  margin: 0;
+  cursor: pointer;
+  position: relative;
+  font-family: 'Cinzel', serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-to-cart-btn:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 6px;
+  transition: background 0.25s;
+  background: var(--background, var(--background-default));
+  transform: scaleX(var(--background-scale)) translateZ(0);
+}
+
+.add-to-cart-btn:not(.active):hover {
+  --background: var(--background-hover);
+}
+
+.add-to-cart-btn span {
+  display: block;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 24px;
+  color: var(--text-color);
+  opacity: var(--text-o);
+  transform: translateX(var(--text-x)) translateZ(0);
+}
+
+.add-to-cart-btn svg {
+  display: block;
+  width: var(--svg-width, 24px);
+  height: var(--svg-height, 24px);
+  position: var(--svg-position, relative);
+  left: var(--svg-left, 0);
+  top: var(--svg-top, 0);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.add-to-cart-btn svg path {
+  fill: var(--svg-fill, none);
+  stroke: var(--svg-stroke, none);
+  stroke-width: var(--svg-stroke-width, 2);
+}
+
+.add-to-cart-btn .morph {
+  --svg-width: 64px;
+  --svg-height: 13px;
+  --svg-left: 50%;
+  --svg-top: -12px;
+  --svg-position: absolute;
+  --svg-fill: var(--background, var(--background-default));
+  transition: fill 0.25s;
+  pointer-events: none;
+  margin-left: -32px;
+}
+
+.add-to-cart-btn .shirt,
+.add-to-cart-btn .cart {
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+}
+
+.add-to-cart-btn .shirt {
+  margin: -12px 0 0 -12px;
+  top: 0;
+  transform-origin: 50% 100%;
+  transform: translateY(var(--shirt-y)) scale(var(--shirt-scale));
+}
+
+.add-to-cart-btn .shirt svg {
+  --svg-fill: var(--shirt-color);
+}
+
+.add-to-cart-btn .shirt svg g {
+  --svg-fill: var(--svg-g-fill, var(--shirt-logo));
+}
+
+.add-to-cart-btn .shirt svg.second {
+  --svg-fill: var(--shirt-second-color);
+  --svg-g-fill: var(--shirt-second-logo);
+  --svg-position: absolute;
+  clip-path: polygon(0 var(--shirt-second-y), 24px var(--shirt-second-y), 24px 24px, 0 24px);
+}
+
+.add-to-cart-btn .cart {
+  --svg-width: 36px;
+  --svg-height: 26px;
+  --svg-stroke: var(--cart);
+  top: 10px;
+  margin-left: -18px;
+  transform: translate(var(--cart-x), var(--cart-y)) rotate(var(--cart-rotate)) scale(var(--cart-scale)) translateZ(0);
+}
+
+.add-to-cart-btn .cart:before {
+  content: "";
+  display: block;
+  width: 22px;
+  height: 12px;
+  position: absolute;
+  left: 7px;
+  top: 7px;
+  background: var(--cart);
+  clip-path: polygon(0 0, 22px 0, calc(22px - var(--cart-clip-x)) var(--cart-clip), var(--cart-clip-x) var(--cart-clip));
+}
+
+.add-to-cart-btn .cart path.wheel {
+  --svg-stroke-width: 1.5;
+}
+
+.add-to-cart-btn .cart path.tick {
+  --svg-stroke: var(--cart-tick-color);
+  stroke-dasharray: 10px;
+  stroke-dashoffset: var(--cart-tick-offset);
+}
+
+/* ── LIGHTBOX ── */
+.lightbox{display:none;position:fixed;inset:0;z-index:900;background:rgba(0,0,0,.92);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px;}
+.lightbox.open{display:flex;}
+.lightbox-inner{background:var(--carbon);border:1px solid var(--oro-borde);border-radius:16px;max-width:900px;width:100%;max-height:90vh;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;position:relative;}
+.lightbox-img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:16px 0 0 16px;}
+.lightbox-info{padding:36px 32px;display:flex;flex-direction:column;gap:16px;justify-content:center;}
+.lightbox-tag{display:inline-block;background:var(--oro);color:var(--negro);font-size:.68rem;font-weight:700;padding:4px 12px;border-radius:4px;font-family:'Cinzel',serif;width:fit-content;}
+.lightbox-tag.rojo{background:var(--rojo);color:#fff;}
+.lightbox-title{font-family:'Cinzel',serif;font-size:1.6rem;color:var(--blanco);line-height:1.2;}
+.lightbox-style{font-size:.78rem;letter-spacing:2px;text-transform:uppercase;color:var(--oro);font-weight:600;}
+.lightbox-desc{font-size:.9rem;color:var(--txt2);line-height:1.7;}
+.lightbox-specs{display:flex;flex-direction:column;gap:8px;}
+.lightbox-spec{display:flex;gap:10px;font-size:.82rem;}
+.lightbox-spec strong{color:var(--gris2);min-width:110px;font-weight:600;}
+.lightbox-spec span{color:var(--blanco);}
+.lightbox-price{font-family:'Cinzel',serif;font-size:1.8rem;color:var(--oro2);font-weight:700;}
+.lightbox-price small{font-size:.9rem;color:var(--gris2);font-family:'Raleway',sans-serif;font-weight:400;}
+.lightbox-variants{display:flex;flex-direction:column;gap:8px;}
+.lightbox-add{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:var(--oro);color:var(--negro);border:none;padding:14px;border-radius:8px;font-size:.82rem;font-weight:700;letter-spacing:1px;cursor:pointer;font-family:'Cinzel',serif;transition:background .2s;margin-top:4px;}
+.lightbox-add:hover{background:var(--oro2);}
+.lightbox-close{position:absolute;top:16px;right:16px;background:var(--carbon3);border:none;color:var(--gris2);width:36px;height:36px;border-radius:50%;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:10;}
+.lightbox-close:hover{background:var(--rojo);color:#fff;}
+@media(max-width:680px){
+  .lightbox-inner{grid-template-columns:1fr;}
+  .lightbox-img{border-radius:16px 16px 0 0;aspect-ratio:4/3;}
+  .lightbox-info{padding:24px 20px;}
+}
+
+/* ── CARRITO MODAL ── */
+.cart-modal{position:fixed;top:0;right:0;bottom:0;width:100%;max-width:600px;background:var(--carbon);z-index:1000;transform:translateX(100%);transition:transform .3s ease;box-shadow:-5px 0 30px rgba(0,0,0,.6);display:flex;flex-direction:column;}
+.cart-modal.open{transform:translateX(0);}
+.cart-header{display:flex;justify-content:space-between;align-items:center;padding:24px;border-bottom:1px solid var(--oro-borde);}
+.cart-header h2{font-family:'Cinzel',serif;font-size:1.4rem;color:var(--oro2);}
+.cart-close{background:none;border:none;color:var(--gris2);font-size:1.4rem;cursor:pointer;}
+.cart-items{flex:1;overflow-y:auto;padding:24px;}
+.cart-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--carbon3);}
+.cart-item-img{width:70px;height:70px;background:var(--carbon2);display:flex;align-items:center;justify-content:center;border-radius:8px;overflow:hidden;flex-shrink:0;}
+.cart-item-img img{width:100%;height:100%;object-fit:cover;}
+.cart-item-info{flex:1;}
+.cart-item-name{font-family:'Cinzel',serif;font-size:.95rem;color:var(--blanco);margin-bottom:4px;}
+.cart-item-variant{font-size:.82rem;color:var(--gris2);margin:4px 0;}
+.cart-item-quantity{font-size:.82rem;color:var(--txt2);display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.quantity-controls{display:flex;align-items:center;gap:6px;margin-top:4px;}
+.quantity-btn{background:transparent;border:1px solid var(--oro);color:var(--oro);width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s;}
+.quantity-btn:hover{background:var(--oro);color:var(--negro);}
+.cart-item-remove{background:none;border:none;color:var(--rojo);cursor:pointer;font-size:.78rem;margin-top:8px;}
+.cart-footer{padding:24px;border-top:1px solid var(--oro-borde);}
+.cart-total{display:flex;justify-content:space-between;margin-bottom:20px;font-size:1rem;font-weight:bold;color:var(--blanco);}
+.cart-wa-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:var(--wa);color:#fff;border:none;padding:14px;border-radius:8px;font-size:.85rem;font-weight:700;cursor:pointer;text-decoration:none;transition:background .2s;}
+.cart-wa-btn:hover{background:#1da851;}
+.empty-cart{text-align:center;color:var(--gris2);padding:50px 20px;}
+.empty-cart i{font-size:2.5rem;margin-bottom:16px;display:block;color:var(--carbon3);}
+
+/* ── CARRITO FAB ── */
+.cart-fab{display:none;position:fixed;bottom:28px;left:28px;z-index:500;width:56px;height:56px;border-radius:50%;background:var(--oro);color:var(--negro);font-size:1.4rem;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(201,151,28,.45);cursor:pointer;border:none;transition:transform .2s,background .2s;}
+.cart-fab:hover{transform:scale(1.1);background:var(--oro2);}
+.cart-fab-count{position:absolute;top:-6px;right:-6px;background:var(--negro);color:var(--oro);font-size:.62rem;font-weight:bold;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--oro);}
+@media(max-width:960px){.cart-fab{display:flex;}}
+
+/* ── BANNER PENDIENTE ── */
+.banner-pendiente{position:fixed;bottom:0;left:0;right:0;z-index:600;background:var(--carbon);border-top:2px solid var(--oro);padding:14px 6%;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 -4px 24px rgba(0,0,0,.5);transform:translateY(100%);transition:transform .4s ease;}
+.banner-pendiente.visible{transform:translateY(0);}
+.banner-pendiente-txt{display:flex;align-items:center;gap:12px;}
+.banner-pendiente-txt i{color:var(--oro);font-size:1.3rem;}
+.banner-pendiente-txt p{font-size:.85rem;color:var(--blanco);line-height:1.4;}
+.banner-pendiente-txt strong{color:var(--oro2);font-family:'Cinzel',serif;}
+.banner-pendiente-btns{display:flex;gap:8px;flex-shrink:0;}
+.banner-btn-continuar{background:var(--oro);color:var(--negro);border:none;padding:10px 22px;font-size:.75rem;font-weight:700;letter-spacing:1px;cursor:pointer;font-family:'Cinzel',serif;border-radius:4px;}
+.banner-btn-continuar:hover{background:var(--oro2);}
+.banner-btn-cerrar{background:transparent;color:var(--gris2);border:1px solid var(--carbon3);padding:10px 14px;font-size:.8rem;cursor:pointer;border-radius:4px;}
+
+/* ── LOADING ── */
+.stock-loading{text-align:center;padding:60px 20px;color:var(--gris2);font-size:.9rem;letter-spacing:2px;}
+.stock-loading i{display:block;font-size:2rem;color:var(--oro);margin-bottom:16px;animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ── FOOTER ── */
+footer{background:var(--carbon);border-top:1px solid var(--oro-borde);padding:44px 6% 28px;}
+.ft-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px;max-width:1160px;margin:0 auto;}
+.ft-logo{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.ft-logo img{width:44px;height:44px;object-fit:contain;}
+.ft-nombre{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;color:var(--oro2);}
+.ft-desc{font-size:.85rem;color:var(--txt2);margin-top:12px;line-height:1.6;}
+.ft-socs{display:flex;gap:8px;margin-top:16px;}
+.ft-soc{width:36px;height:36px;border:1px solid var(--oro-borde);display:flex;align-items:center;justify-content:center;color:var(--gris2);text-decoration:none;transition:all .2s;}
+.ft-soc:hover{border-color:var(--oro);color:var(--oro2);}
+.ft-col h4{font-family:'Cinzel',serif;font-size:.75rem;color:var(--oro);margin-bottom:16px;letter-spacing:2px;}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.ft-col ul li a{font-size:.85rem;color:var(--txt2);text-decoration:none;transition:color .2s;}
+.ft-col ul li a:hover{color:var(--oro2);}
+.ft-bot{text-align:center;margin-top:36px;padding-top:20px;border-top:1px solid rgba(201,151,28,.1);}
+.ft-cr{font-size:.7rem;color:var(--gris2);}
+@media(max-width:960px){.n-links{display:none;}.ham{display:flex;}.ft-top{grid-template-columns:1fr;gap:28px;}.cart-modal{max-width:100%;}}
+@media(max-width:600px){.banner-pendiente{padding:14px 5%;}.banner-pendiente-txt p{font-size:.78rem;}}
+</style>
+</head>
+<body>
+
+
+<!-- VERIFICACIÓN DE EDAD -->
+<div id="ageGate" style="position:fixed;inset:0;z-index:10000;background:rgba(5,5,5,.98);display:none;flex-direction:column;align-items:center;justify-content:center;padding:28px;">
+  <img src="imagenes/logo_koing.png" alt="König" style="width:90px;margin-bottom:28px;filter:drop-shadow(0 0 20px rgba(201,151,28,.4));" onerror="this.style.display='none'">
+  <p style="font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:5px;text-transform:uppercase;color:#c9971c;margin-bottom:12px;">König · Cerveza Artesanal</p>
+  <h2 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.6rem,5vw,2.4rem);color:#f5f0e8;text-align:center;margin-bottom:10px;">¿Sos mayor de 18 años?</h2>
+  <p style="font-size:.8rem;color:#c9bb94;margin-bottom:36px;text-align:center;max-width:320px;line-height:1.6;">El consumo de alcohol está prohibido para menores de edad. Ingresá solo si tenés 18 años o más.</p>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;">
+    <button onclick="confirmarEdad(true)" style="background:#c9971c;color:#0a0a0a;border:none;padding:14px 36px;font-family:'Cinzel',serif;font-size:.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .2s;" onmouseover="this.style.background='#e8b832'" onmouseout="this.style.background='#c9971c'">Sí, tengo 18 o más</button>
+    <button onclick="confirmarEdad(false)" style="background:transparent;color:#c9bb94;border:1px solid rgba(201,151,28,.4);padding:14px 36px;font-family:'Cinzel',serif;font-size:.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;" onmouseover="this.style.borderColor='#c9971c';this.style.color='#f5f0e8'" onmouseout="this.style.borderColor='rgba(201,151,28,.4)';this.style.color='#c9bb94'">No, soy menor</button>
+  </div>
+  <p style="font-size:.65rem;color:#555;margin-top:32px;text-align:center;max-width:340px;line-height:1.6;">Al ingresar confirmás que tenés 18 años o más y aceptás nuestros <a href="terminos.html#arrepentimiento" style="font-size:.65rem;color:#c9bb94;text-decoration:none;letter-spacing:1px;" onmouseover="this.style.color='#e8b832'" onmouseout="this.style.color='#c9bb94'">Botón de Arrepentimiento</a>
+      <span style="color:#444;font-size:.65rem;">|</span>
+      <a href="terminos.html" style="color:#c9971c;">Términos y Condiciones</a>. Ley 24.788 — Lucha contra el Alcoholismo.</p>
+</div>
+
+<nav>
+  <a href="index.html" class="n-logo">
+    <img src="imagenes/logo_koing.png" alt="König" width="48" height="48">
+    <div><div class="n-nombre">König</div><div class="n-sub">Cerveza Artesanal</div></div>
+  </a>
+  <ul class="n-links">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="index.html#marca">Nosotros</a></li>
+    <li><a href="store.html" class="active">Tienda</a></li>
+    <li class="cart-icon" id="cartIconBtn" role="button" aria-label="Ver carrito">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="cart-count" id="cartCount">0</span>
+    </li>
+  </ul>
+  <button class="ham" id="ham" aria-label="Menú"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mob" id="mob">
+  <button class="mob-x" id="mobX" aria-label="Cerrar menú"><i class="fas fa-times"></i></button>
+  <a href="index.html" onclick="cerrarMob()">Inicio</a>
+  <a href="index.html#marca" onclick="cerrarMob()">Nosotros</a>
+  <a href="store.html" onclick="cerrarMob()" style="color:var(--oro2)">Tienda</a>
+</div>
+
+<section class="store-hero">
+  <div class="store-hero-icon">
+    <img src="imagenes/logo_koing.png" alt="König" width="80" height="80" loading="eager">
+  </div>
+  <h1>Tienda <em>König</em></h1>
+  <p>Cervezas artesanales, indumentaria y accesorios oficiales. Pedidos por WhatsApp.</p>
+</section>
+
+<section class="filters-sec">
+  <div class="filters-wrap" id="filtersWrap">
+    <button class="filter-btn active" data-categoria="todos">🍺 Todos</button>
+    <button class="filter-btn" data-categoria="cervezas">🍺 Cervezas</button>
+    <button class="filter-btn" data-categoria="remeras">👕 Remeras</button>
+    <button class="filter-btn" data-categoria="hoodies">🧥 Hoodies</button>
+    <button class="filter-btn" data-categoria="gorras">🧢 Gorras</button>
+    <button class="filter-btn" data-categoria="vasos">🥃 Vasos</button>
+  </div>
+</section>
+
+<section class="products-sec">
+  <div id="stockLoading" class="stock-loading">
+    <i class="fas fa-circle-notch"></i>
+    Cargando productos...
+  </div>
+  <div class="products-grid" id="productsGrid" style="display:none;"></div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar"><i class="fas fa-times"></i></button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="" loading="lazy">
+    <div class="lightbox-info">
+      <span class="lightbox-tag" id="lightboxTag"></span>
+      <div class="lightbox-style" id="lightboxStyle"></div>
+      <h2 class="lightbox-title" id="lightboxTitle"></h2>
+      <p class="lightbox-desc" id="lightboxDesc"></p>
+      <div class="lightbox-specs" id="lightboxSpecs"></div>
+      <div class="lightbox-price" id="lightboxPrice"></div>
+      <div class="lightbox-variants" id="lightboxVariants"></div>
+      <button class="lightbox-add" id="lightboxAdd"><i class="fas fa-cart-plus"></i> Agregar</button>
+    </div>
+  </div>
+</div>
+
+<!-- CARRITO MODAL -->
+<div class="cart-modal" id="cartModal">
+  <div class="cart-header">
+    <h2><i class="fas fa-shopping-cart"></i> Tu pedido</h2>
+    <button class="cart-close" id="cartCloseBtn" aria-label="Cerrar carrito"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <div class="cart-total"><span>Total items:</span><span id="cartTotalItems">0</span></div>
+    <button class="cart-wa-btn" id="cartWhatsappBtn">
+      <i class="fab fa-whatsapp"></i> Enviar pedido por WhatsApp
+    </button>
+  </div>
+</div>
+
+<!-- FAB MOBILE -->
+<button class="cart-fab" id="cartFab" aria-label="Ver carrito">
+  <i class="fas fa-shopping-cart"></i>
+  <span class="cart-fab-count" id="cartFabCount">0</span>
+</button>
+
+<!-- BANNER PENDIENTE -->
+<div class="banner-pendiente" id="bannerPendiente">
+  <div class="banner-pendiente-txt">
+    <i class="fas fa-shopping-cart"></i>
+    <p><strong>Tenés una compra sin terminar</strong><br>Tu carrito todavía tiene productos esperándote.</p>
+  </div>
+  <div class="banner-pendiente-btns">
+    <button class="banner-btn-continuar" onclick="continuarCompra()"><i class="fas fa-cart-arrow-down"></i> Terminar compra</button>
+    <button class="banner-btn-cerrar" onclick="cerrarBanner()"><i class="fas fa-times"></i></button>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-top">
+    <div>
+      <div class="ft-logo">
+        <img src="imagenes/logo_koing.png" alt="König" width="44" height="44" loading="lazy">
+        <div class="ft-nombre">König</div>
+      </div>
+      <p class="ft-desc">Cervecería Artesanal<br>Villa Larroque, Entre Ríos</p>
+      <div class="ft-socs">
+        <a href="https://www.instagram.com/cerveza_konig/" target="_blank" rel="noopener noreferrer" class="ft-soc" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/5493446559217" target="_blank" rel="noopener noreferrer" class="ft-soc" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="ft-col">
+      <h4>Tienda</h4>
+      <ul>
+        <li><a href="#" onclick="filtrar('cervezas');return false;">Cervezas</a></li>
+        <li><a href="#" onclick="filtrar('remeras');return false;">Remeras</a></li>
+        <li><a href="#" onclick="filtrar('gorras');return false;">Gorras</a></li>
+        <li><a href="#" onclick="filtrar('vasos');return false;">Vasos</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="https://wa.me/5493446559217" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+        <li><a href="https://www.instagram.com/cerveza_konig/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bot">
+    <p class="ft-cr">© 2026 König · Cerveza Artesanal · Entre Ríos, Argentina</p>
+    <p class="ft-cr" style="margin-top:4px;">Diseño web: <a href="https://www.wbserviceinformatica.com.ar" target="_blank" rel="noopener noreferrer" style="color:var(--oro2);font-weight:700;">WB Service</a></p>
+    <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(201,151,28,.07);">
+    <div style="display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-bottom:14px;">
+      <a href="privacidad.html" style="font-size:.65rem;color:#c9bb94;text-decoration:none;letter-spacing:1px;transition:color .2s;" onmouseover="this.style.color='#e8b832'" onmouseout="this.style.color='#c9bb94'">Política de Privacidad</a>
+      <span style="color:#444;font-size:.65rem;">|</span>
+      <a href="terminos.html" style="font-size:.65rem;color:#c9bb94;text-decoration:none;letter-spacing:1px;transition:color .2s;" onmouseover="this.style.color='#e8b832'" onmouseout="this.style.color='#c9bb94'">Términos y Condiciones</a>
+      <span style="color:#444;font-size:.65rem;">|</span>
+      <span style="font-size:.65rem;color:#666;">Ley N° 24.240 — Defensa del Consumidor &nbsp;·&nbsp; Ley N° 25.326 — Protección de Datos</span>
+    </div>
+      <p style="font-size:.6rem;color:#444;text-align:center;line-height:1.7;">CUIT: <span style="color:#666;">A completar por König</span> &nbsp;·&nbsp; König Cerveza Artesanal<br>Beber con moderación. Prohibida la venta a menores de 18 años. Ley 24.788.<br>Los precios pueden variar sin previo aviso. König no se responsabiliza por diferencias de precios en puntos de venta no oficiales.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ================================================================
+// CONFIGURACIÓN
+// ================================================================
+const SHEETS_URL = ""; // <-- Completar con URL de Google Sheets si se usa
+const WA_NUMBER = "5493446559217";
+
+// ================================================================
+// PRODUCTOS
+// ================================================================
+const productos = [
+  { id:1, nombre:"Blonde", categoria:"cervezas", style:"Rubia · Maltosa", descripcion:"Rubia, suave y refrescante. Perfil maltoso y bajo amargor.", specs:{"Graduación":"4.5% ABV","Amargor":"14 IBU","Perfil":"Maltoso","Temperatura":"4–6°C"}, imagen:"imagenes/productos/pack-cervezas1.jpg", variantes:[{tipo:"Presentación",opciones:["Lata 473ml","Pack x6"]}], precio:"$1.800", tag:"Clásica" },
+  { id:2, nombre:"Sweet Red", categoria:"cervezas", style:"Red Ale · Estilo Irlandés", descripcion:"Roja estilo irlandés con cuerpo medio, notas de caramelo dulce y bajo amargor.", specs:{"Graduación":"4.2% ABV","Amargor":"14 IBU","Perfil":"Caramelo dulce","Temperatura":"6–8°C"}, imagen:"imagenes/productos/pack-cervezas2.jpg", variantes:[{tipo:"Presentación",opciones:["Lata 473ml","Pack x6"]}], precio:"$2.000", tag:"Premiada" },
+  { id:3, nombre:"Honey", categoria:"cervezas", style:"Rubia con Miel", descripcion:"Rubia de cuerpo medio con intenso aroma y sabor a miel. Fresca y agradable.", specs:{"Graduación":"6.0% ABV","Amargor":"12 IBU","Perfil":"Miel · Floral","Temperatura":"4–6°C"}, imagen:"imagenes/productos/pack-cervezas.jpg", variantes:[{tipo:"Presentación",opciones:["Lata 473ml","Pack x6"]}], precio:"$2.100", tag:"⭐ Top ventas" },
+  { id:4, nombre:"Session IPA", categoria:"cervezas", style:"Session IPA", descripcion:"Ligera y refrescante con lúpulos cítricos y herbales. Bajo alcohol y amargor moderado.", specs:{"Graduación":"4.2% ABV","Amargor":"30 IBU","Perfil":"Cítrico · Herbal","Temperatura":"5–7°C"}, imagen:"imagenes/productos/pack-cervezas.jpg", variantes:[{tipo:"Presentación",opciones:["Lata 473ml","Pack x6"]}], precio:"$2.100", tag:"Refrescante" },
+  { id:5, nombre:"American IPA", categoria:"cervezas", style:"American IPA", descripcion:"Cuerpo medio, amargor moderado y lúpulos americanos con notas cítricas, tropicales y melón.", specs:{"Graduación":"5.5% ABV","Amargor":"40 IBU","Perfil":"Cítrico · Tropical","Temperatura":"6–8°C"}, imagen:"imagenes/productos/pack-cervezas.jpg", variantes:[{tipo:"Presentación",opciones:["Lata 473ml","Pack x6"]}], precio:"$2.200", tag:"Hoppy" },
+  { id:6, nombre:"Bohemia Pilsen", categoria:"cervezas", style:"Pilsen · Bohemia", descripcion:"Dorada, liviana y refrescante. Fácil de tomar para cualquier ocasión.", specs:{"Graduación":"5.2% ABV","Amargor":"13 IBU","Perfil":"Suave · Dorado","Temperatura":"4–6°C"}, imagen:"imagenes/productos/pack-cervezas.jpg", variantes:[{tipo:"Presentación",opciones:["Lata 473ml","Pack x6"]}], precio:"$1.900", tag:"Verano" },
+  { id:7, nombre:"NEIPA", categoria:"cervezas", style:"New England IPA", descripcion:"Cerveza turbia de amargor suave con notas frutales tropicales, textura cremosa y fácil de beber.", specs:{"Graduación":"6.5% ABV","Amargor":"40 IBU","Perfil":"Tropical · Cremoso","Temperatura":"6–8°C"}, imagen:"imagenes/productos/pack-cervezas.jpg", variantes:[{tipo:"Presentación",opciones:["Lata 473ml","Pack x6"]}], precio:"$2.300", tag:"Edición especial" },
+  { id:8, nombre:"Remera König", categoria:"remeras", style:"Indumentaria oficial", descripcion:"100% algodón peinado. Estampado frontal con logo König.", specs:{"Material":"100% algodón","Estampado":"Frontal serigrafía","Cuidado":"Lavar a 30°C"}, imagen:"imagenes/productos/remera-konig.jpg", variantes:[{tipo:"Talle",opciones:["S","M","L","XL"]}], precio:"$8.500", tag:"Nuevo" },
+  { id:9, nombre:"Remera König (Mujer)", categoria:"remeras", style:"Indumentaria oficial", descripcion:"Remerón oversize. Algodón premium.", specs:{"Material":"100% algodón","Corte":"Oversize","Cuidado":"Lavar a 30°C"}, imagen:"imagenes/productos/remera-mujer.jpg", variantes:[{tipo:"Talle",opciones:["S","M","L"]}], precio:"$8.500", tag:"Nuevo" },
+  { id:10, nombre:"Hoodie König", categoria:"hoodies", style:"Indumentaria oficial", descripcion:"Buzo canguro con capucha. Frisa interior.", specs:{"Material":"Algodón + poliéster","Interior":"Frisa","Cuidado":"Lavar a 30°C"}, imagen:"imagenes/productos/hoodie-konig.jpg", variantes:[{tipo:"Talle",opciones:["S","M","L","XL"]}], precio:"$18.000", tag:"Edición limitada" },
+  { id:11, nombre:"Gorra König", categoria:"gorras", style:"Accesorio oficial", descripcion:"Gorra negra con bordado König. Ajustable.", specs:{"Material":"100% algodón","Cierre":"Ajustable","Bordado":"Logo frontal"}, imagen:"imagenes/productos/gorra-konig.jpg", variantes:[{tipo:"Color",opciones:["Negro","Dorado"]}], precio:"$6.500", tag:"Top ventas" },
+  { id:12, nombre:"Vaso König", categoria:"vasos", style:"Accesorio oficial", descripcion:"Vaso de vidrio grabado con logo König.", specs:{"Material":"Vidrio templado","Capacidad":"500ml","Grabado":"Láser"}, imagen:"imagenes/productos/vaso-konig.jpg", variantes:[{tipo:"Modelo",opciones:["Pinta","Largo"]}], precio:"$4.800", tag:"Exclusivo" }
+];
+
+// ================================================================
+// ESTADO GLOBAL
+// ================================================================
+let carrito = [];
+let categoriaActual = "todos";
+let stockData = {};
+let productoLightboxActual = null;
+
+// ================================================================
+// STOCK (Google Sheets)
+// ================================================================
+async function cargarStock() {
+  if (!SHEETS_URL) {
+    productos.forEach(p => stockData[p.id] = true);
+    mostrarProductos();
+    return;
+  }
+  try {
+    const res = await fetch(SHEETS_URL + "&t=" + Date.now());
+    const text = await res.text();
+    const rows = text.trim().split("\n").slice(1);
+    rows.forEach(row => {
+      const [id, stock] = row.split(",");
+      if (id && stock !== undefined) stockData[parseInt(id.trim())] = stock.trim().toUpperCase() === "TRUE";
+    });
+  } catch(e) { productos.forEach(p => stockData[p.id] = true); }
+  mostrarProductos();
+}
+
+function tieneStock(id) { return stockData[id] !== false; }
+
+// ================================================================
+// RENDER PRODUCTOS
+// ================================================================
+function mostrarProductos() {
+  document.getElementById("stockLoading").style.display = "none";
+  document.getElementById("productsGrid").style.display = "grid";
+  renderProductos();
+}
+
+function renderProductos() {
+  const grid = document.getElementById("productsGrid");
+  const filtrados = categoriaActual === "todos" ? productos : productos.filter(p => p.categoria === categoriaActual);
+  if (filtrados.length === 0) { grid.innerHTML = '<p style="color:var(--gris2);text-align:center;grid-column:1/-1;padding:40px;">No hay productos en esta categoría.</p>'; return; }
+
+  grid.innerHTML = filtrados.map(prod => {
+    const conStock = tieneStock(prod.id);
+    const esTalle = prod.variantes.some(v => v.tipo === "Talle");
+    let variantesHTML = "";
+    if (esTalle) {
+      const v = prod.variantes.find(v => v.tipo === "Talle");
+      variantesHTML = `<span class="variant-label">Talle</span><div class="talles-wrap" id="talles-${prod.id}">${v.opciones.map((op,i) => `<button class="talle-btn${i===0?' selected':''}" onclick="seleccionarTalle(event, '${prod.id}')" data-talle="${op}">${op}</button>`).join('')}</div>`;
+    } else {
+      variantesHTML = prod.variantes.map(v => `<span class="variant-label">${v.tipo}</span><select class="variant-select" id="variant-${prod.id}-${v.tipo}">${v.opciones.map(op => `<option value="${op}">${op}</option>`).join('')}</select>`).join('');
+    }
+    const botonHTML = conStock
+      ? `<button class="add-to-cart-btn" data-id="${prod.id}" data-nombre="${prod.nombre}" data-precio="${prod.precio}"><span>Agregar</span><svg class="morph" viewBox="0 0 64 13"><path d="M0 12C6 12 17 12 32 12C47.9024 12 58 12 64 12V13H0V12Z"/></svg><div class="shirt"><svg class="first" viewBox="0 0 24 24"><path d="M4.99997 3L8.99997 1.5C8.99997 1.5 10.6901 3 12 3C13.3098 3 15 1.5 15 1.5L19 3L22.5 8L19.5 10.5L19 9.5L17.1781 18.6093C17.062 19.1901 16.778 19.7249 16.3351 20.1181C15.4265 20.925 13.7133 22.3147 12 23C10.2868 22.3147 8.57355 20.925 7.66487 20.1181C7.22198 19.7249 6.93798 19.1901 6.82183 18.6093L4.99997 9.5L4.5 10.5L1.5 8L4.99997 3Z"/><g><path d="M16.3516 9.65383H14.3484V7.83652H14.1742V9.8269H16.5258V7.83652H16.3516V9.65383Z"/><path d="M14.5225 6.01934V7.66357H14.6967V7.4905H14.8186V7.66357H14.9928V6.01934H14.8186V7.31742H14.6967V6.01934H14.5225Z"/><path d="M14.1742 5.67319V7.66357H14.3484V5.84627H16.3516V7.66357H16.5258V5.67319H14.1742Z"/><path d="M15.707 9.48071H15.8812V9.28084L16.0032 9.4807V9.48071H16.1774V7.83648H16.0032V9.14683L15.8812 8.94697V7.83648H15.707V9.48071Z"/><path d="M15.5852 6.01931H15.1149V6.19238H15.5852V6.01931Z"/><path d="M15.707 6.01934V7.66357H15.8812V7.46371L16.0032 7.66357H16.1774V6.01934H16.0032V7.32969L15.8812 7.12984V6.01934H15.707Z"/><path d="M15.411 7.31742H15.2891V6.53857H15.411V7.31742ZM15.1149 7.66357H15.2891V7.4905H15.411V7.66357H15.5852V6.3655H15.1149V7.66357Z"/><path d="M14.5225 8.69756L14.8186 9.18291V9.30763H14.6967V9.13455H14.5225V9.48071H14.9928V9.13456V9.13455L14.6967 8.64917V8.00956H14.8186V8.6586H14.9928V7.83648H14.5225V8.69756Z"/><path d="M15.411 9.30763H15.2891V8.00956H15.411V9.30763ZM15.1149 9.48071H15.5852V7.83648H15.1149V9.48071Z"/></g></svg><svg class="second" viewBox="0 0 24 24"><path d="M4.99997 3L8.99997 1.5C8.99997 1.5 10.6901 3 12 3C13.3098 3 15 1.5 15 1.5L19 3L22.5 8L19.5 10.5L19 9.5L17.1781 18.6093C17.062 19.1901 16.778 19.7249 16.3351 20.1181C15.4265 20.925 13.7133 22.3147 12 23C10.2868 22.3147 8.57355 20.925 7.66487 20.1181C7.22198 19.7249 6.93798 19.1901 6.82183 18.6093L4.99997 9.5L4.5 10.5L1.5 8L4.99997 3Z"/><g><path d="M16.3516 9.65383H14.3484V7.83652H14.1742V9.8269H16.5258V7.83652H16.3516V9.65383Z"/><path d="M14.5225 6.01934V7.66357H14.6967V7.4905H14.8186V7.66357H14.9928V6.01934H14.8186V7.31742H14.6967V6.01934H14.5225Z"/><path d="M14.1742 5.67319V7.66357H14.3484V5.84627H16.3516V7.66357H16.5258V5.67319H14.1742Z"/><path d="M15.707 9.48071H15.8812V9.28084L16.0032 9.4807V9.48071H16.1774V7.83648H16.0032V9.14683L15.8812 8.94697V7.83648H15.707V9.48071Z"/><path d="M15.5852 6.01931H15.1149V6.19238H15.5852V6.01931Z"/><path d="M15.707 6.01934V7.66357H15.8812V7.46371L16.0032 7.66357H16.1774V6.01934H16.0032V7.32969L15.8812 7.12984V6.01934H15.707Z"/><path d="M15.411 7.31742H15.2891V6.53857H15.411V7.31742ZM15.1149 7.66357H15.2891V7.4905H15.411V7.66357H15.5852V6.3655H15.1149V7.66357Z"/><path d="M14.5225 8.69756L14.8186 9.18291V9.30763H14.6967V9.13455H14.5225V9.48071H14.9928V9.13456V9.13455L14.6967 8.64917V8.00956H14.8186V8.6586H14.9928V7.83648H14.5225V8.69756Z"/><path d="M15.411 9.30763H15.2891V8.00956H15.411V9.30763ZM15.1149 9.48071H15.5852V7.83648H15.1149V9.48071Z"/></g></svg></div><div class="cart"><svg viewBox="0 0 36 26"><path d="M1 2.5H6L10 18.5H25.5L28.5 7.5L7.5 7.5" class="shape"/><path d="M11.5 25C12.6046 25 13.5 24.1046 13.5 23C13.5 21.8954 12.6046 21 11.5 21C10.3954 21 9.5 21.8954 9.5 23C9.5 24.1046 10.3954 25 11.5 25Z" class="wheel"/><path d="M24 25C25.1046 25 26 24.1046 26 23C26 21.8954 25.1046 21 24 21C22.8954 21 22 21.8954 22 23C22 24.1046 22.8954 25 24 25Z" class="wheel"/><path d="M14.5 13.5L16.5 15.5L21.5 10.5" class="tick"/></svg></div></button>`
+      : `<button class="add-to-cart-btn" style="background:var(--carbon3);color:var(--gris2);cursor:not-allowed;" disabled><span>Sin stock</span></button>`;
+    return `<div class="product-card${conStock?'':' sin-stock'}" id="card-${prod.id}">${prod.tag ? `<div class="product-tag">${prod.tag}</div>` : ''}<div class="product-img" onclick="abrirLightbox(${prod.id})"><img src="${prod.imagen}" alt="${prod.nombre}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'300\' viewBox=\'0 0 300 300\'%3E%3Crect width=\'300\' height=\'300\' fill=\'%231a1a1a\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' fill=\'%23c9971c\' font-size=\'14\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3ESin imagen%3C/text%3E%3C/svg%3E'"><span class="img-zoom-hint"><i class="fas fa-search-plus"></i> Ver detalle</span></div><div class="product-info"><h3 class="product-title">${prod.nombre}</h3><p class="product-desc">${prod.descripcion}</p>${prod.precio ? `<div class="product-price">${prod.precio}</div>` : ''}${variantesHTML}${botonHTML}</div></div>`;
+  }).join('');
+  inicializarBotonesAnimados();
+}
+
+// ================================================================
+// SELECCIÓN DE TALLE (CORREGIDO)
+// ================================================================
+function seleccionarTalle(event, prodId) {
+  event.stopPropagation();
+  const btn = event.currentTarget;
+  const container = btn.parentNode;
+  if (container) {
+    container.querySelectorAll('.talle-btn').forEach(b => b.classList.remove('selected'));
+  }
+  btn.classList.add('selected');
+}
+
+// ================================================================
+// BOTÓN ANIMADO (GSAP + MORPH)
+// ================================================================
+function inicializarBotonesAnimados() {
+  document.querySelectorAll('.add-to-cart-btn:not([disabled])').forEach(button => {
+    if (button.dataset.animado === "true") return;
+    button.dataset.animado = "true";
+    const morph = button.querySelector('.morph path');
+    const shirt = button.querySelectorAll('.shirt svg > path, .shirt svg g path');
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (button.classList.contains('active')) return;
+      const id = parseInt(button.dataset.id);
+      const nombre = button.dataset.nombre;
+      const precio = button.dataset.precio;
+      const prod = productos.find(p => p.id === id);
+      if (!prod) return;
+      const vars = obtenerVariantesProducto(prod);
+      agregarAlCarritoLogica(prod, vars);
+      button.classList.add('active');
+      gsap.to(button, { keyframes: [{ '--background-scale': 0.97, duration: 0.15 }, { '--background-scale': 1, delay: 0.125, duration: 1.2, ease: 'elastic.out(1, 0.6)' }] });
+      gsap.to(button, { keyframes: [{ '--shirt-scale': 1, '--shirt-y': '-42px', '--cart-x': '0px', '--cart-scale': 1, duration: 0.4, ease: 'power1.in' }, { '--shirt-y': '-40px', duration: 0.3 }, { '--shirt-y': '16px', '--shirt-scale': 0.9, duration: 0.25, ease: 'none' }, { '--shirt-scale': 0, duration: 0.3, ease: 'none' }] });
+      gsap.to(button, { '--shirt-second-y': '0px', delay: 0.835, duration: 0.12 });
+      gsap.to(button, { keyframes: [{ '--cart-clip': '12px', '--cart-clip-x': '3px', delay: 0.9, duration: 0.06 }, { '--cart-y': '2px', duration: 0.1 }, { '--cart-tick-offset': '0px', '--cart-y': '0px', duration: 0.2, onComplete() { button.style.overflow = 'hidden'; } }, { '--cart-x': '52px', '--cart-rotate': '-15deg', duration: 0.2 }, { '--cart-x': '104px', '--cart-rotate': '0deg', duration: 0.2, clearProps: true, onComplete() { button.style.overflow = 'hidden'; button.style.setProperty('--text-o', 0); button.style.setProperty('--text-x', '0px'); button.style.setProperty('--cart-x', '-104px'); } }, { '--text-o': 1, '--text-x': '12px', '--cart-x': '-48px', '--cart-scale': 0.75, duration: 0.25, clearProps: true, onComplete() { button.classList.remove('active'); } }] });
+      gsap.to(button, { keyframes: [{ '--text-o': 0, duration: 0.3 }] });
+      if (morph) { gsap.to(morph, { keyframes: [{ morphSVG: 'M0 12C6 12 20 10 32 0C43.9024 9.99999 58 12 64 12V13H0V12Z', duration: 0.25, ease: 'power1.out' }, { morphSVG: 'M0 12C6 12 17 12 32 12C47.9024 12 58 12 64 12V13H0V12Z', duration: 0.15, ease: 'none' }] }); }
+      if (shirt.length) { gsap.to(shirt, { keyframes: [{ morphSVG: 'M4.99997 3L8.99997 1.5C8.99997 1.5 10.6901 3 12 3C13.3098 3 15 1.5 15 1.5L19 3L23.5 8L20.5 11L19 9.5L18 22.5C18 22.5 14 21.5 12 21.5C10 21.5 5.99997 22.5 5.99997 22.5L4.99997 9.5L3.5 11L0.5 8L4.99997 3Z', duration: 0.25, delay: 0.25 }, { morphSVG: 'M4.99997 3L8.99997 1.5C8.99997 1.5 10.6901 3 12 3C13.3098 3 15 1.5 15 1.5L19 3L23.5 8L20.5 11L19 9.5L18.5 22.5C18.5 22.5 13.5 22.5 12 22.5C10.5 22.5 5.5 22.5 5.5 22.5L4.99997 9.5L3.5 11L0.5 8L4.99997 3Z', duration: 0.85, ease: 'elastic.out(1, 0.5)' }, { morphSVG: 'M4.99997 3L8.99997 1.5C8.99997 1.5 10.6901 3 12 3C13.3098 3 15 1.5 15 1.5L19 3L22.5 8L19.5 10.5L19 9.5L17.1781 18.6093C17.062 19.1901 16.778 19.7249 16.3351 20.1181C15.4265 20.925 13.7133 22.3147 12 23C10.2868 22.3147 8.57355 20.925 7.66487 20.1181C7.22198 19.7249 6.93798 19.1901 6.82183 18.6093L4.99997 9.5L4.5 10.5L1.5 8L4.99997 3Z', duration: 0, delay: 1.25 }] }); }
+    });
+  });
+}
+
+function obtenerVariantesProducto(prod) {
+  const vars = {};
+  prod.variantes.forEach(v => {
+    if (v.tipo === "Talle") {
+      const sel = document.querySelector(`#talles-${prod.id} .talle-btn.selected`);
+      vars[v.tipo] = sel ? sel.dataset.talle : v.opciones[0];
+    } else {
+      const sel = document.getElementById(`variant-${prod.id}-${v.tipo}`);
+      vars[v.tipo] = sel ? sel.value : v.opciones[0];
+    }
+  });
+  return vars;
+}
+
+// ================================================================
+// LÓGICA DEL CARRITO
+// ================================================================
+function agregarAlCarritoLogica(prod, vars) {
+  const key = prod.id + JSON.stringify(vars);
+  const existente = carrito.find(i => i.id + JSON.stringify(i.variantes) === key);
+  if (existente) existente.cantidad++;
+  else carrito.push({ ...prod, variantes: vars, cantidad: 1 });
+  guardarCarrito();
+  mostrarNotificacion(`${prod.nombre} agregado al carrito`);
+}
+
+function guardarCarrito() {
+  localStorage.setItem("konigCarrito", JSON.stringify(carrito));
+  actualizarContador();
+}
+
+function cargarCarrito() {
+  const c = localStorage.getItem("konigCarrito");
+  if (c) { try { carrito = JSON.parse(c); } catch(e) { carrito = []; } }
+  actualizarContador();
+}
+
+function actualizarContador() {
+  const total = carrito.reduce((s,i) => s + i.cantidad, 0);
+  document.getElementById("cartCount").textContent = total;
+  document.getElementById("cartFabCount").textContent = total;
+}
+
+function mostrarNotificacion(msg) {
+  const n = document.createElement("div");
+  n.innerHTML = `<i class="fas fa-check" style="margin-right:8px;"></i>${msg}`;
+  Object.assign(n.style, { position:"fixed", bottom:"80px", right:"20px", background:"var(--oro)", color:"var(--negro)", padding:"12px 24px", borderRadius:"8px", zIndex:"1001", fontSize:".85rem", fontWeight:"bold", boxShadow:"0 4px 16px rgba(0,0,0,.4)", animation:"fadeUp .3s ease" });
+  document.body.appendChild(n);
+  setTimeout(() => n.remove(), 2500);
+}
+
+function mostrarCarrito() {
+  const modal = document.getElementById("cartModal");
+  const itemsDiv = document.getElementById("cartItems");
+  if (carrito.length === 0) {
+    itemsDiv.innerHTML = '<div class="empty-cart"><i class="fas fa-shopping-cart"></i><p>Tu carrito está vacío</p></div>';
+    document.getElementById("cartTotalItems").textContent = "0";
+    modal.classList.add("open");
+    return;
+  }
+  itemsDiv.innerHTML = carrito.map((item, idx) => {
+    const varsStr = Object.entries(item.variantes).map(([k,v]) => `${k}: ${v}`).join(", ");
+    return `<div class="cart-item"><div class="cart-item-img"><img src="${item.imagen}" alt="${item.nombre}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'70\' height=\'70\'%3E%3Crect width=\'70\' height=\'70\' fill=\'%231a1a1a\'/%3E%3C/svg%3E'"></div><div class="cart-item-info"><div class="cart-item-name">${item.nombre}</div><div class="cart-item-variant">${varsStr}</div>${item.precio ? `<div class="cart-item-variant">${item.precio} c/u</div>` : ''}<div class="cart-item-quantity">Cantidad:<div class="quantity-controls"><button class="quantity-btn" onclick="ajustarCantidad(${idx}, -1)">-</button><span>${item.cantidad}</span><button class="quantity-btn" onclick="ajustarCantidad(${idx}, 1)">+</button></div></div><button class="cart-item-remove" onclick="eliminarDelCarrito(${idx})"><i class="fas fa-trash-alt"></i> Eliminar</button></div></div>`;
+  }).join('');
+  document.getElementById("cartTotalItems").textContent = carrito.reduce((s,i) => s+i.cantidad, 0);
+  modal.classList.add("open");
+}
+
+function eliminarDelCarrito(idx) {
+  carrito.splice(idx, 1);
+  guardarCarrito();
+  mostrarCarrito();
+}
+
+function ajustarCantidad(idx, delta) {
+  if (!carrito[idx]) return;
+  carrito[idx].cantidad += delta;
+  if (carrito[idx].cantidad < 1) {
+    carrito.splice(idx, 1);
+  }
+  guardarCarrito();
+  mostrarCarrito();
+}
+
+function enviarPedidoWhatsApp() {
+  if (carrito.length === 0) { alert("El carrito está vacío"); return; }
+  let msg = "Hola König! 🍺 Quiero hacer el siguiente pedido:\n\n";
+  carrito.forEach(item => {
+    const vars = Object.entries(item.variantes).map(([k,v]) => `${k}: ${v}`).join(", ");
+    msg += `• ${item.nombre} (${vars}) x${item.cantidad}`;
+    if (item.precio) msg += ` — ${item.precio} c/u`;
+    msg += "\n";
+  });
+  msg += "\n¿Tienen disponibilidad? ¡Gracias!";
+  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// ================================================================
+// LIGHTBOX
+// ================================================================
+function abrirLightbox(id) {
+  const prod = productos.find(p => p.id === id);
+  if (!prod) return;
+  productoLightboxActual = id;
+  document.getElementById("lightboxImg").src = prod.imagen;
+  document.getElementById("lightboxTitle").textContent = prod.nombre;
+  document.getElementById("lightboxStyle").textContent = prod.style || "";
+  document.getElementById("lightboxDesc").textContent = prod.descripcion;
+  document.getElementById("lightboxPrice").innerHTML = prod.precio ? `${prod.precio} <small>/ unidad</small>` : '';
+  const tagEl = document.getElementById("lightboxTag");
+  if (prod.tag) { tagEl.textContent = prod.tag; tagEl.style.display = "inline-block"; }
+  else { tagEl.style.display = "none"; }
+  const specsEl = document.getElementById("lightboxSpecs");
+  if (prod.specs && Object.keys(prod.specs).length) {
+    specsEl.innerHTML = Object.entries(prod.specs).map(([k,v]) => `<div class="lightbox-spec"><strong>${k}</strong><span>${v}</span></div>`).join('');
+    specsEl.style.display = "flex";
+  } else { specsEl.style.display = "none"; }
+  const varEl = document.getElementById("lightboxVariants");
+  const esTalle = prod.variantes.some(v => v.tipo === "Talle");
+  if (esTalle) {
+    const v = prod.variantes.find(v => v.tipo === "Talle");
+    varEl.innerHTML = `<span class="variant-label">Talle</span><div class="talles-wrap" id="lightbox-talles-${id}">${v.opciones.map((op,i) => `<button class="talle-btn${i===0?' selected':''}" onclick="seleccionarTalleLightbox(event, '${id}')" data-talle="${op}">${op}</button>`).join('')}</div>`;
+  } else {
+    varEl.innerHTML = prod.variantes.map(v => `<span class="variant-label">${v.tipo}</span><select class="variant-select" id="lb-variant-${id}-${v.tipo}">${v.opciones.map(op => `<option value="${op}">${op}</option>`).join('')}</select>`).join('');
+  }
+  const conStock = tieneStock(id);
+  const addBtn = document.getElementById("lightboxAdd");
+  if (conStock) { addBtn.disabled = false; addBtn.style.cssText = ""; addBtn.innerHTML = '<i class="fas fa-cart-plus"></i> Agregar'; }
+  else { addBtn.disabled = true; addBtn.style.cssText = "background:var(--carbon3);color:var(--gris2);cursor:not-allowed;"; addBtn.innerHTML = '<i class="fas fa-times-circle"></i> Sin stock'; }
+  document.getElementById("lightbox").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function seleccionarTalleLightbox(event, prodId) {
+  event.stopPropagation();
+  const btn = event.currentTarget;
+  const container = btn.parentNode;
+  if (container) { container.querySelectorAll('.talle-btn').forEach(b => b.classList.remove('selected')); }
+  btn.classList.add('selected');
+}
+
+function cerrarLightbox() {
+  document.getElementById("lightbox").classList.remove("open");
+  document.body.style.overflow = "";
+  productoLightboxActual = null;
+}
+
+document.getElementById("lightboxClose").addEventListener("click", cerrarLightbox);
+document.getElementById("lightbox").addEventListener("click", e => { if (e.target === document.getElementById("lightbox")) cerrarLightbox(); });
+document.getElementById("lightboxAdd").addEventListener("click", () => {
+  if (productoLightboxActual) {
+    const prod = productos.find(p => p.id === productoLightboxActual);
+    if (prod) {
+      const vars = {};
+      prod.variantes.forEach(v => {
+        if (v.tipo === "Talle") {
+          const sel = document.querySelector(`#lightbox-talles-${productoLightboxActual} .talle-btn.selected`);
+          vars[v.tipo] = sel ? sel.dataset.talle : v.opciones[0];
+        } else {
+          const sel = document.getElementById(`lb-variant-${productoLightboxActual}-${v.tipo}`);
+          vars[v.tipo] = sel ? sel.value : v.opciones[0];
+        }
+      });
+      agregarAlCarritoLogica(prod, vars);
+      cerrarLightbox();
+    }
+  }
+});
+
+// ================================================================
+// FILTROS
+// ================================================================
+function filtrar(cat) {
+  categoriaActual = cat;
+  document.querySelectorAll(".filter-btn").forEach(b => { b.classList.toggle("active", b.dataset.categoria === cat); });
+  renderProductos();
+  document.querySelector('.products-sec').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function initFiltros() { document.querySelectorAll(".filter-btn").forEach(btn => { btn.addEventListener("click", () => filtrar(btn.dataset.categoria)); }); }
+
+// ================================================================
+// BANNER PENDIENTE
+// ================================================================
+function checkCarritoPendiente() {
+  const c = localStorage.getItem("konigCarrito");
+  if (!c) return;
+  try {
+    const items = JSON.parse(c);
+    if (items && items.length > 0) { setTimeout(() => document.getElementById("bannerPendiente").classList.add("visible"), 1200); }
+  } catch(e) {}
+}
+function continuarCompra() { document.getElementById("bannerPendiente").classList.remove("visible"); mostrarCarrito(); }
+function cerrarBanner() { document.getElementById("bannerPendiente").classList.remove("visible"); }
+
+// ================================================================
+// NAV MOBILE Y OTROS
+// ================================================================
+function cerrarMob() { document.getElementById("mob").classList.remove("open"); }
+document.getElementById("ham").addEventListener("click", () => { document.getElementById("mob").classList.toggle("open"); });
+document.getElementById("mobX").addEventListener("click", cerrarMob);
+document.getElementById("cartIconBtn").addEventListener("click", e => { e.preventDefault(); mostrarCarrito(); });
+document.getElementById("cartFab").addEventListener("click", () => mostrarCarrito());
+document.getElementById("cartCloseBtn").addEventListener("click", () => document.getElementById("cartModal").classList.remove("open"));
+document.getElementById("cartWhatsappBtn").addEventListener("click", enviarPedidoWhatsApp);
+document.addEventListener("keydown", e => { if (e.key === "Escape") { document.getElementById("cartModal").classList.remove("open"); cerrarLightbox(); } });
+
+// ================================================================
+// VERIFICACIÓN DE EDAD
+// ================================================================
+(function(){
+  const gate = document.getElementById('ageGate');
+  if (!gate) return;
+  const verified = sessionStorage.getItem('konig_age_ok');
+  if (verified === '1') { gate.style.display = 'none'; return; }
+  gate.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+})();
+function confirmarEdad(esMayor) {
+  const gate = document.getElementById('ageGate');
+  if (esMayor) { sessionStorage.setItem('konig_age_ok', '1'); gate.style.transition = 'opacity .6s'; gate.style.opacity = '0'; setTimeout(() => { gate.style.display = 'none'; document.body.style.overflow = ''; }, 600); }
+  else { window.location.href = 'https://www.google.com/search?q=actividades+sin+alcohol'; }
+}
+
+// ================================================================
+// INIT
+// ================================================================
+cargarCarrito();
+initFiltros();
+checkCarritoPendiente();
+cargarStock();
+</script>
+</body>
+</html>
