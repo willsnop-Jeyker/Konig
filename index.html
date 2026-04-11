@@ -1,0 +1,2395 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>König · Cerveza Artesanal</title>
+  <meta name="description"
+    content="König Cerveza Artesanal. Fabricamos cerveza craft en Villa Larroque, Entre Ríos. Bar en Gualeguay. Venta mayorista y distribución.">
+  <meta property="og:title" content="König · Cerveza Artesanal">
+  <meta property="og:description"
+    content="Cerveza artesanal entrerriana. Fábrica en Ciudad Larroque. Bar en Gualeguay. Distribución mayorista en todo el país.">
+  <meta property="og:type" content="website">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="preload" href="https://fonts.gstatic.com/s/cinzel/v23/8vIJ7ww63mVu7gt79mT7.woff2" as="font"
+    type="font/woff2" crossorigin>
+  <link rel="preload"
+    href="https://fonts.gstatic.com/s/cormorantgaramond/v21/co3YmX5slCNuHLi8bLeY9MK7whWMhyjornFLsS6V7w.woff2" as="font"
+    type="font/woff2" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,700;1,300;1,400;1,600;1,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>if (!sessionStorage.getItem('konig_age_ok')) { document.documentElement.style.visibility = 'hidden'; }</script>
+  <style>
+    /* ═══════════════════════════════════════════
+   KÖNIG × APPLE QUALITY — Design System
+═══════════════════════════════════════════ */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      /* Brand Palette — König official */
+      --g: #d4af37;
+      --g-dk: #b8860b;
+      --g-lt: rgba(212, 175, 55, .10);
+      --g-lt2: rgba(212, 175, 55, .06);
+      --g-bd: rgba(212, 175, 55, .22);
+      --g-bd2: rgba(212, 175, 55, .40);
+      --g-glow: rgba(212, 175, 55, .50);
+      --bk: #0a0a0a;
+      --sf: #1a1a1a;
+      --sf2: #141414;
+      --sf3: #222222;
+      --sf4: #2a2a2a;
+      --wh: #f4f4f4;
+      --gr: #888888;
+      --gr2: #666666;
+      --wa: #25d366;
+
+      /* Text */
+      --t1: rgba(244, 244, 244, .96);
+      --t2: rgba(244, 244, 244, .72);
+      --t3: rgba(244, 244, 244, .48);
+
+      /* Apple-quality spacing scale */
+      --sp-xl: 160px;
+      --sp-lg: 120px;
+      --sp-md: 80px;
+      --sp-sm: 48px;
+      --sp-xs: 28px;
+      --max-w: 1100px;
+      --gutter: clamp(24px, 6vw, 80px);
+
+      /* Fonts */
+      --ff-disp: 'Cormorant Garamond', Georgia, serif;
+      --ff-head: 'Cinzel', 'Palatino Linotype', serif;
+      --ff-body: 'Raleway', system-ui, sans-serif;
+
+      /* Radius — Apple uses generous rounding */
+      --r-sm: 8px;
+      --r-md: 16px;
+      --r-lg: 22px;
+      --r-xl: 32px;
+
+      /* Animation — Apple easing curves */
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-in: cubic-bezier(0.4, 0, 1, 1);
+      --t-fast: .28s;
+      --t-mid: .72s;
+      --t-slow: 1.1s;
+      --t-xslow: 1.5s;
+
+      /* Reveal */
+      --rv-dist: 40px;
+    }
+
+    body {
+      font-family: var(--ff-body);
+      background: var(--bk);
+      color: var(--t1);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--g);
+      border-radius: 2px;
+    }
+
+    /* Noise texture — very subtle */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: .022;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ── LOADER ── */
+    #loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #050505;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity .9s var(--ease), visibility .9s;
+    }
+
+    #loader.out {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .ld-logo {
+      width: 130px;
+      animation: ldpulse 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes ldpulse {
+      from {
+        opacity: .55;
+        transform: scale(.94);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1.04);
+      }
+    }
+
+    .ld-line {
+      width: 140px;
+      height: 1px;
+      background: rgba(255, 255, 255, .10);
+      margin-top: 32px;
+      overflow: hidden;
+      position: relative;
+      border-radius: 999px;
+    }
+
+    .ld-line::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -40%;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, .9), transparent);
+      animation: ldslide 1.5s var(--ease) infinite;
+    }
+
+    @keyframes ldslide {
+      from {
+        left: -40%;
+      }
+
+      to {
+        left: 100%;
+      }
+    }
+
+    .ld-txt {
+      color: var(--wh);
+      font-family: var(--ff-disp);
+      font-style: italic;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-top: 20px;
+      opacity: .7;
+    }
+
+    /* ── WA FLOAT ── */
+    .wa-float {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 500;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: var(--wa);
+      color: #fff;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 28px rgba(37, 211, 102, .35);
+      transition: transform var(--t-fast) var(--ease-spring), box-shadow var(--t-fast);
+    }
+
+    .wa-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 36px rgba(37, 211, 102, .5);
+    }
+
+    /* ── NAV — Apple-inspired minimal ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--gutter);
+      transition: background var(--t-mid), border-color var(--t-mid), backdrop-filter var(--t-mid);
+      border-bottom: 1px solid transparent;
+    }
+
+    nav.sc {
+      background: rgba(10, 10, 10, .88);
+      backdrop-filter: blur(24px) saturate(1.8);
+      -webkit-backdrop-filter: blur(24px) saturate(1.8);
+      border-bottom-color: rgba(212, 175, 55, .15);
+    }
+
+    .n-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: opacity var(--t-fast);
+    }
+
+    .n-logo:hover {
+      opacity: .8;
+    }
+
+    .n-logo img {
+      height: 44px;
+      width: 44px;
+      object-fit: contain;
+    }
+
+    .n-brand {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .n-nombre {
+      font-family: var(--ff-disp);
+      font-weight: 700;
+      font-style: italic;
+      font-size: 1.35rem;
+      color: var(--wh);
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+
+    .n-sub {
+      font-size: .45rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gr);
+      margin-top: 3px;
+      font-family: var(--ff-head);
+    }
+
+    .n-links {
+      display: flex;
+      gap: 0;
+      list-style: none;
+      align-items: center;
+    }
+
+    .n-links a {
+      font-size: .58rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(244, 244, 244, .75);
+      padding: 10px 16px;
+      font-weight: 600;
+      transition: color var(--t-fast);
+      font-family: var(--ff-head);
+    }
+
+    .n-links a:hover {
+      color: var(--wh);
+    }
+
+    .n-cta {
+      color: var(--g) !important;
+      border: 1px solid var(--g-bd);
+      padding: 9px 20px !important;
+      margin-left: 8px;
+      border-radius: var(--r-sm);
+      transition: color var(--t-fast), background var(--t-fast), border-color var(--t-fast) !important;
+    }
+
+    .n-cta:hover {
+      background: var(--g-lt);
+      border-color: var(--g-bd2) !important;
+      color: var(--g) !important;
+    }
+
+    .ham {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .ham span {
+      width: 22px;
+      height: 1px;
+      background: var(--wh);
+      display: block;
+      transition: all var(--t-fast) var(--ease);
+    }
+
+    .ham.open span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .ham.open span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .ham.open span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .mob {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 190;
+      background: rgba(10, 10, 10, .97);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    .mob.open {
+      display: flex;
+    }
+
+    .mob a {
+      font-family: var(--ff-head);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: rgba(244, 244, 244, .8);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      transition: color var(--t-fast);
+    }
+
+    .mob a:hover {
+      color: var(--g);
+    }
+
+    .mob-x {
+      position: absolute;
+      top: 24px;
+      right: 28px;
+      background: none;
+      border: none;
+      color: var(--gr);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: color var(--t-fast);
+    }
+
+    .mob-x:hover {
+      color: var(--wh);
+    }
+
+    /* ── BUTTONS — Apple polish ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 38px;
+      font-weight: 700;
+      font-size: .78rem;
+      transition: all var(--t-fast) var(--ease);
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      font-family: var(--ff-head);
+      border-radius: var(--r-sm);
+    }
+
+    .btn i {
+      font-size: .9rem;
+    }
+
+    .b-oro {
+      background: linear-gradient(145deg, var(--g) 0%, #e8c84a 50%, var(--g) 100%);
+      color: #080808;
+      border: 1px solid rgba(255, 255, 255, .06);
+      box-shadow: 0 4px 20px rgba(212, 175, 55, .2);
+    }
+
+    .b-oro:hover {
+      background: linear-gradient(145deg, #e8c84a 0%, var(--g) 60%, #e8c84a 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(212, 175, 55, .35);
+    }
+
+    .b-outline {
+      background: transparent;
+      color: var(--g);
+      border: 1px solid var(--g-bd2);
+    }
+
+    .b-outline:hover {
+      background: var(--g-lt);
+      border-color: var(--g);
+      transform: translateY(-2px);
+    }
+
+    .b-mayorista {
+      background: transparent;
+      color: var(--g);
+      border: 1.5px solid var(--g);
+    }
+
+    .b-mayorista:hover {
+      background: var(--g);
+      color: var(--bk);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(212, 175, 55, .3);
+    }
+
+    .b-wa {
+      background: var(--wa);
+      color: #fff;
+      border: 1px solid transparent;
+      box-shadow: 0 4px 18px rgba(37, 211, 102, .25);
+    }
+
+    .b-wa:hover {
+      background: #1fb855;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(37, 211, 102, .4);
+    }
+
+    .b-dark {
+      background: var(--sf);
+      color: var(--g);
+      border: 1px solid var(--g-bd);
+    }
+
+    .b-dark:hover {
+      background: var(--sf3);
+    }
+
+    /* ── SECTION BASE ── */
+    .sec {
+      padding: var(--sp-xl) var(--gutter);
+      position: relative;
+    }
+
+    .s-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    /* Section divider — ultra subtle, Apple style */
+    .sec-sep {
+      position: absolute;
+      top: 0;
+      left: var(--gutter);
+      right: var(--gutter);
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(212, 175, 55, .12) 30%, rgba(212, 175, 55, .12) 70%, transparent);
+    }
+
+    /* Kicker labels */
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--g);
+      font-size: .55rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      font-family: var(--ff-head);
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+
+    .kicker::after {
+      content: '';
+      flex: 0 0 40px;
+      height: 1px;
+      background: linear-gradient(to right, var(--g-bd2), transparent);
+    }
+
+    .kicker-c {
+      display: flex;
+      justify-content: center;
+    }
+
+    .kicker-c::before {
+      content: '';
+      flex: 0 0 40px;
+      height: 1px;
+      background: linear-gradient(to left, var(--g-bd2), transparent);
+    }
+
+    /* Headings */
+    .sh {
+      font-family: var(--ff-disp);
+      font-weight: 700;
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      color: var(--wh);
+      line-height: 1.08;
+      margin-bottom: 24px;
+      letter-spacing: .02em;
+    }
+
+    .sh em {
+      font-style: italic;
+      color: var(--g);
+    }
+
+    .sp {
+      color: var(--t2);
+      line-height: 2;
+      font-size: .9rem;
+      max-width: 580px;
+      font-weight: 400;
+      letter-spacing: .015em;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--bk);
+    }
+
+    .hero-bg-img {
+      position: absolute;
+      inset: 0;
+      background-image: url('imagenes/hero1.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: .45;
+      z-index: 1;
+      transition: transform 8s ease;
+    }
+
+    .hero-bg-img::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(10, 10, 10, .35) 0%, rgba(10, 10, 10, .6) 60%, rgba(10, 10, 10, .85) 100%),
+        radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, .06), transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: radial-gradient(ellipse at 50% 50%, rgba(212, 175, 55, .04), transparent 70%),
+        linear-gradient(to right, rgba(10, 10, 10, .25) 0%, rgba(10, 10, 10, .05) 50%, rgba(10, 10, 10, .25) 100%);
+    }
+
+    /* Decorative corners */
+    .hero-corner {
+      position: absolute;
+      width: 56px;
+      height: 56px;
+      opacity: .18;
+      z-index: 3;
+    }
+
+    .hero-corner.tl {
+      top: 92px;
+      left: var(--gutter);
+      border-top: 1px solid var(--g);
+      border-left: 1px solid var(--g);
+    }
+
+    .hero-corner.tr {
+      top: 92px;
+      right: var(--gutter);
+      border-top: 1px solid var(--g);
+      border-right: 1px solid var(--g);
+    }
+
+    .hero-corner.bl {
+      bottom: 52px;
+      left: var(--gutter);
+      border-bottom: 1px solid var(--g);
+      border-left: 1px solid var(--g);
+    }
+
+    .hero-corner.br {
+      bottom: 52px;
+      right: var(--gutter);
+      border-bottom: 1px solid var(--g);
+      border-right: 1px solid var(--g);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 4;
+      text-align: center;
+      padding: 128px var(--gutter) 88px;
+      max-width: 880px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 36px;
+      color: rgba(212, 175, 55, .75);
+      font-size: .55rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      font-family: var(--ff-head);
+    }
+
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--g-bd2);
+    }
+
+    .hero-logo-k {
+      width: clamp(120px, 22vw, 200px);
+      height: auto;
+      margin: 0 auto 24px;
+      display: block;
+      filter: drop-shadow(0 0 28px rgba(212, 175, 55, .35));
+      animation: logoglow 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes logoglow {
+      from {
+        filter: drop-shadow(0 0 18px rgba(212, 175, 55, .18));
+      }
+
+      to {
+        filter: drop-shadow(0 0 48px rgba(212, 175, 55, .55));
+      }
+    }
+
+    .hero-konig {
+      font-family: var(--ff-disp);
+      font-weight: 700;
+      font-style: italic;
+      font-size: clamp(4.5rem, 14vw, 9.5rem);
+      line-height: .95;
+      color: var(--wh);
+      letter-spacing: 1px;
+      display: block;
+      text-shadow: 0 4px 40px rgba(0, 0, 0, .6);
+    }
+
+    .hero-tagline {
+      display: inline-block;
+      background: var(--g);
+      color: #080808;
+      font-family: var(--ff-head);
+      font-weight: 700;
+      font-size: clamp(.6rem, 1.4vw, .82rem);
+      letter-spacing: .5em;
+      text-transform: uppercase;
+      padding: 7px 30px;
+      margin-top: 16px;
+      margin-bottom: 40px;
+    }
+
+    .hero-div {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      justify-content: center;
+      margin-bottom: 44px;
+    }
+
+    .hero-div::before,
+    .hero-div::after {
+      content: '';
+      flex: 1;
+      max-width: 80px;
+      height: 1px;
+      background: var(--g-bd2);
+    }
+
+    .hero-div span {
+      color: var(--g);
+      font-size: .65rem;
+      letter-spacing: 4px;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-slogan {
+      margin-top: 32px;
+      font-family: var(--ff-disp);
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      font-weight: 700;
+      font-style: italic;
+      letter-spacing: 1px;
+      color: var(--t1);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-chip-row {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+
+    .hero-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(212, 175, 55, .07);
+      border: 1px solid var(--g-bd);
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-family: var(--ff-head);
+      font-size: .5rem;
+      letter-spacing: 2.5px;
+      color: rgba(244, 244, 244, .6);
+      text-transform: uppercase;
+    }
+
+    .hero-chip i {
+      color: var(--g);
+      font-size: .52rem;
+    }
+
+    /* ── BRAND / HISTORIA ── */
+    .marca-sec {
+      background: var(--sf2);
+    }
+
+    .marca-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 96px;
+      align-items: start;
+    }
+
+    /* Image with curtain reveal */
+    .marca-img {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      border-radius: var(--r-md);
+      border: 1px solid var(--g-bd);
+      position: relative;
+      clip-path: inset(100% 0 0 0);
+      transition: clip-path var(--t-xslow) var(--ease);
+    }
+
+    .marca-img.on {
+      clip-path: inset(0% 0 0 0);
+    }
+
+    .marca-img img {
+      width: 100%;
+      height: 112%;
+      object-fit: cover;
+      display: block;
+      transition: transform .12s linear;
+      will-change: transform;
+    }
+
+    .marca-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(10, 10, 10, .45) 100%);
+      pointer-events: none;
+      z-index: 1;
+      border-radius: var(--r-md);
+    }
+
+    .logro-card {
+      background: var(--sf);
+      border: 1px solid var(--g-bd);
+      border-radius: var(--r-sm);
+      padding: 20px 22px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 14px;
+      text-decoration: none;
+      transition: border-color var(--t-fast), transform var(--t-fast) var(--ease), background var(--t-fast);
+    }
+
+    .logro-card:hover {
+      border-color: var(--g-bd2);
+      transform: translateY(-2px);
+      background: rgba(212, 175, 55, .06);
+    }
+
+    .logro-ico {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .logro-card strong {
+      display: block;
+      font-family: var(--ff-head);
+      font-size: .6rem;
+      letter-spacing: .12em;
+      color: var(--wh);
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .logro-card span {
+      font-size: .72rem;
+      color: var(--t2);
+      line-height: 1.5;
+    }
+
+    .logro-arrow {
+      margin-left: auto;
+      color: var(--g);
+      font-size: .78rem;
+      flex-shrink: 0;
+      transition: transform var(--t-fast) var(--ease);
+    }
+
+    .logro-card:hover .logro-arrow {
+      transform: translateX(4px);
+    }
+
+    .marca-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 36px;
+    }
+
+    .marca-item {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(212, 175, 55, .06);
+    }
+
+    .marca-item:last-child {
+      border-bottom: none;
+    }
+
+    .marca-item-ico {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--g-bd);
+      border-radius: var(--r-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--g);
+      font-size: .85rem;
+      flex-shrink: 0;
+      transition: background var(--t-fast);
+    }
+
+    .marca-item:hover .marca-item-ico {
+      background: var(--g-lt);
+    }
+
+    .marca-item strong {
+      display: block;
+      font-family: var(--ff-head);
+      font-size: .68rem;
+      letter-spacing: .1em;
+      color: var(--wh);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .marca-item p {
+      font-size: .8rem;
+      color: var(--t2);
+      line-height: 1.8;
+    }
+
+    blockquote.brand-quote {
+      border-left: 2px solid var(--g);
+      padding: 16px 0 16px 24px;
+      margin: 28px 0;
+      font-family: var(--ff-disp);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: rgba(212, 175, 55, .8);
+      line-height: 1.7;
+    }
+
+    /* ── FRANQUICIAS / BARES ── */
+    .bares-sec {
+      background: var(--bk);
+    }
+
+    .bares-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: var(--max-w);
+      margin: 56px auto 0;
+    }
+
+    .bar-card {
+      background: var(--sf);
+      border: 1px solid rgba(255, 255, 255, .05);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      transition: border-color var(--t-mid) var(--ease), transform var(--t-mid) var(--ease), box-shadow var(--t-mid);
+    }
+
+    .bar-card:hover {
+      border-color: var(--g-bd);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .4), 0 0 0 1px var(--g-bd);
+    }
+
+    .bar-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      position: relative;
+      background: var(--sf3);
+    }
+
+    .bar-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .6s var(--ease);
+    }
+
+    .bar-card:hover .bar-img img {
+      transform: scale(1.05);
+    }
+
+    .bar-body {
+      padding: 32px;
+    }
+
+    .bar-ciudad {
+      font-family: var(--ff-head);
+      font-size: .5rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--g);
+      margin-bottom: 10px;
+    }
+
+    .bar-nombre {
+      font-family: var(--ff-disp);
+      font-weight: 700;
+      font-style: italic;
+      font-size: 1.9rem;
+      color: var(--wh);
+      margin-bottom: 10px;
+      line-height: 1.1;
+    }
+
+    .bar-dir {
+      font-size: .8rem;
+      color: var(--t2);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bar-dir i {
+      color: var(--g);
+      font-size: .65rem;
+    }
+
+    .bar-horario {
+      font-size: .75rem;
+      color: var(--gr);
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .bar-btns {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .bbar {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 16px;
+      font-size: .58rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-family: var(--ff-head);
+      transition: all var(--t-fast) var(--ease);
+      border: 1px solid;
+      border-radius: 6px;
+    }
+
+    .bbar-wa {
+      background: var(--wa);
+      color: #fff;
+      border-color: var(--wa);
+      box-shadow: 0 4px 16px rgba(37, 211, 102, .2);
+    }
+
+    .bbar-wa:hover {
+      background: #1fb855;
+      box-shadow: 0 6px 22px rgba(37, 211, 102, .35);
+    }
+
+    .bbar-res {
+      background: transparent;
+      color: var(--g);
+      border-color: var(--g-bd2);
+    }
+
+    .bbar-res:hover {
+      background: var(--g-lt);
+      border-color: var(--g);
+    }
+
+    .bbar-del {
+      background: var(--sf3);
+      color: var(--t2);
+      border-color: transparent;
+    }
+
+    .bbar-del:hover {
+      border-color: var(--g-bd);
+      color: var(--g);
+    }
+
+    .bbar-ig {
+      background: transparent;
+      color: var(--gr);
+      border-color: rgba(255, 255, 255, .12);
+    }
+
+    .bbar-ig:hover {
+      color: var(--g);
+      border-color: var(--g-bd);
+    }
+
+    /* ── GALERÍA ── */
+    .galeria-sec {
+      background: var(--sf2);
+    }
+
+    .gal-grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      gap: 16px;
+      padding: 24px calc(50vw - 42.5vw);
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      cursor: grab;
+    }
+
+    .gal-grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    .gal-grid:active {
+      cursor: grabbing;
+      scroll-snap-type: none;
+    }
+
+    .gal-item {
+      flex: 0 0 85vw;
+      height: 55vh;
+      max-height: 550px;
+      scroll-snap-align: center;
+      background: var(--sf3);
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--r-md);
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    @media (min-width: 768px) {
+      .gal-grid {
+        padding: 24px calc(50vw - 32.5vw);
+      }
+
+      .gal-item {
+        flex: 0 0 65vw;
+        height: 500px;
+      }
+    }
+
+    @media (min-width: 1100px) {
+      .gal-grid {
+        padding: 24px calc(50vw - 25vw);
+      }
+
+      .gal-item {
+        flex: 0 0 50vw;
+        height: 600px;
+        max-width: 900px;
+      }
+    }
+
+    .gal-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s var(--ease);
+      display: block;
+      pointer-events: none;
+    }
+
+    .gal-item:hover img {
+      transform: scale(1.07);
+    }
+
+    .gal-ov {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10, 10, 10, .8), transparent 50%);
+      opacity: 0;
+      transition: opacity .35s var(--ease);
+      display: flex;
+      align-items: flex-end;
+      padding: 18px;
+    }
+
+    .gal-item:hover .gal-ov {
+      opacity: 1;
+    }
+
+    .gal-cap {
+      color: var(--wh);
+      font-size: .62rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      font-family: var(--ff-head);
+    }
+
+    /* ── INSTAGRAM ── */
+    .ig-sec {
+      background: var(--bk);
+      text-align: center;
+    }
+
+    .ig-icon-top {
+      font-size: 2rem;
+      color: var(--g);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .ig-grid {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      max-width: 860px;
+      margin: 44px auto 0;
+      flex-wrap: wrap;
+    }
+
+    .ig-card {
+      background: var(--sf);
+      border: 1px solid rgba(255, 255, 255, .06);
+      border-radius: var(--r-lg);
+      padding: 32px 30px;
+      text-align: center;
+      transition: all var(--t-mid) var(--ease);
+      position: relative;
+      overflow: hidden;
+      flex: 1;
+      min-width: 220px;
+      max-width: 280px;
+    }
+
+    .ig-card:hover {
+      background: var(--sf3);
+      border-color: var(--g-bd);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, .35);
+    }
+
+    .ig-tipo {
+      font-family: var(--ff-head);
+      font-size: .48rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--g);
+      margin-bottom: 8px;
+    }
+
+    .ig-handle {
+      font-family: var(--ff-disp);
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--wh);
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+
+    .ig-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--g);
+      font-size: .58rem;
+      font-weight: 600;
+      padding: 9px 18px;
+      border: 1px solid var(--g-bd);
+      border-radius: var(--r-sm);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: all var(--t-fast);
+      font-family: var(--ff-head);
+    }
+
+    .ig-btn:hover {
+      background: var(--g-lt);
+      border-color: var(--g-bd2);
+      color: var(--g);
+    }
+
+    /* ── MAYORISTAS ── */
+    .mayoristas-sec {
+      background: var(--sf2);
+    }
+
+    .mayoristas-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .may-feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .may-card {
+      background: var(--bk);
+      border: 1px solid rgba(255, 255, 255, .06);
+      border-radius: var(--r-sm);
+      padding: 22px;
+      transition: border-color var(--t-fast);
+    }
+
+    .may-card:hover {
+      border-color: var(--g-bd);
+    }
+
+    .may-card-ico {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .may-card strong {
+      display: block;
+      font-family: var(--ff-head);
+      font-size: .62rem;
+      letter-spacing: 1.5px;
+      color: var(--wh);
+      margin-bottom: 5px;
+    }
+
+    .may-card span {
+      font-size: .75rem;
+      color: var(--t2);
+      line-height: 1.6;
+    }
+
+    .may-panel {
+      background: var(--bk);
+      border: 1px solid var(--g-bd);
+      border-radius: var(--r-md);
+      padding: 44px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .may-panel::before {
+      content: 'K';
+      position: absolute;
+      top: -30px;
+      right: -10px;
+      font-size: 10rem;
+      font-family: var(--ff-disp);
+      font-weight: 700;
+      color: var(--g);
+      opacity: .04;
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    .may-panel-title {
+      font-family: var(--ff-head);
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--g);
+      margin-bottom: 28px;
+    }
+
+    .may-check-list {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .may-check-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .may-check-icon {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--g-bd);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--g);
+      flex-shrink: 0;
+      font-size: .8rem;
+    }
+
+    .may-check-item strong {
+      display: block;
+      font-family: var(--ff-head);
+      font-size: .65rem;
+      letter-spacing: 1px;
+      color: var(--wh);
+      margin-bottom: 4px;
+    }
+
+    .may-check-item p {
+      font-size: .75rem;
+      color: var(--t2);
+      line-height: 1.65;
+    }
+
+    .may-panel-quote {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(212, 175, 55, .1);
+      font-family: var(--ff-disp);
+      font-style: italic;
+      font-size: 1rem;
+      color: rgba(212, 175, 55, .7);
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--sf2);
+      border-top: 1px solid rgba(212, 175, 55, .1);
+      padding: 64px var(--gutter) 36px;
+    }
+
+    .ft-top {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr;
+      gap: 48px;
+      max-width: var(--max-w);
+      margin: 0 auto 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255, 255, 255, .05);
+    }
+
+    .ft-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .ft-logo img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .ft-nombre {
+      font-family: var(--ff-disp);
+      font-weight: 700;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--g);
+      letter-spacing: 2px;
+    }
+
+    .ft-sub {
+      font-size: .45rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gr2);
+      margin-top: 2px;
+      font-family: var(--ff-head);
+    }
+
+    .ft-desc {
+      font-size: .8rem;
+      color: var(--t2);
+      line-height: 1.9;
+      margin-top: 12px;
+    }
+
+    .ft-socs {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .ft-soc {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--g-bd);
+      border-radius: 8px;
+      color: var(--gr);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .8rem;
+      transition: all var(--t-fast);
+    }
+
+    .ft-soc:hover {
+      border-color: var(--g-bd2);
+      color: var(--g);
+    }
+
+    .ft-col h4 {
+      font-family: var(--ff-head);
+      font-size: .58rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--g);
+      margin-bottom: 18px;
+    }
+
+    .ft-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .ft-col ul li a {
+      font-size: .8rem;
+      color: var(--t2);
+      transition: color var(--t-fast);
+    }
+
+    .ft-col ul li a:hover {
+      color: var(--wh);
+    }
+
+    .ft-bot {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      text-align: center;
+    }
+
+    .ft-cr {
+      font-size: .65rem;
+      color: var(--gr2);
+    }
+
+    .ft-cr a {
+      color: var(--g);
+      opacity: .8;
+      transition: opacity var(--t-fast);
+    }
+
+    .ft-cr a:hover {
+      opacity: 1;
+    }
+
+    .ft-legal {
+      font-size: .6rem;
+      color: rgba(255, 255, 255, .25);
+      text-align: center;
+      line-height: 1.8;
+      margin-top: 6px;
+    }
+
+    /* ── REVEAL ANIMATIONS — Apple spring style ── */
+    .rv {
+      opacity: 0;
+      transform: translateY(var(--rv-dist));
+      transition: opacity var(--t-slow) var(--ease), transform var(--t-slow) var(--ease);
+      will-change: opacity, transform;
+    }
+
+    .rv.rv-left {
+      transform: translateX(-48px);
+    }
+
+    .rv.rv-right {
+      transform: translateX(48px);
+    }
+
+    .rv.rv-scale {
+      transform: scale(.95) translateY(20px);
+    }
+
+    .rv.on {
+      opacity: 1;
+      transform: translate(0) scale(1);
+    }
+
+    .rv.d1 {
+      transition-delay: .08s;
+    }
+
+    .rv.d2 {
+      transition-delay: .16s;
+    }
+
+    .rv.d3 {
+      transition-delay: .26s;
+    }
+
+    .rv.d4 {
+      transition-delay: .36s;
+    }
+
+    .rv.d5 {
+      transition-delay: .48s;
+    }
+
+    /* ── AGE GATE ── */
+    #ageGate {
+      display: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:960px) {
+      .n-links {
+        display: none;
+      }
+
+      .ham {
+        display: flex;
+      }
+
+      .marca-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .bares-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      /* Deleted gal-grid tablet overrides */
+
+      .ig-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .mayoristas-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .ft-top {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .sec {
+        padding: var(--sp-lg) var(--gutter);
+      }
+    }
+
+    @media(max-width:640px) {
+      :root {
+        --sp-xl: 96px;
+        --sp-lg: 72px;
+      }
+
+      .hero-inner {
+        padding: 100px 5% 72px;
+      }
+
+      .hero-konig {
+        font-size: clamp(3.8rem, 15vw, 5.5rem);
+      }
+
+      .hero-btns {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero-btns .btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+      }
+
+      .hero-corner {
+        width: 36px;
+        height: 36px;
+      }
+
+      /* Deleted gal-grid mobile overrides */
+
+      .sh {
+        font-size: clamp(1.8rem, 6vw, 2.4rem);
+      }
+
+      .may-feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .bar-body {
+        padding: 24px;
+      }
+
+      .may-panel {
+        padding: 28px;
+      }
+
+      .ft-top {
+        gap: 24px;
+      }
+    }
+
+    /* Fallback fonts */
+    @font-face {
+      font-family: 'Cinzel-fallback';
+      src: local('Palatino Linotype'), local('Palatino');
+      size-adjust: 92%;
+    }
+
+    @font-face {
+      font-family: 'Cormorant-fallback';
+      src: local('Georgia'), local('Times New Roman');
+      size-adjust: 105%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <img src="imagenes/logo_koing.png" alt="König" class="ld-logo"
+      onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%230a0a0a\'/%3E%3Ctext x=\'22\' y=\'68\' font-family=\'Cormorant Garamond\' font-size=\'48\' fill=\'%23d4af37\'%3EK%3C/text%3E%3C/svg%3E';">
+    <div class="ld-line"></div>
+    <p class="ld-txt">König</p>
+  </div>
+
+  <!-- VERIFICACIÓN DE EDAD -->
+  <div id="ageGate"
+    style="position:fixed;inset:0;z-index:10000;background:rgba(5,5,5,.98);display:none;flex-direction:column;align-items:center;justify-content:center;padding:32px;">
+    <img src="imagenes/logo_koing.png" alt="König"
+      style="width:84px;margin-bottom:32px;filter:drop-shadow(0 0 24px rgba(212,175,55,.4));"
+      onerror="this.style.display='none'">
+    <p
+      style="font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--g);margin-bottom:16px;">
+      König · Cerveza Artesanal</p>
+    <h2
+      style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(2.2rem,5vw,3rem);color:var(--wh);text-align:center;margin-bottom:16px;">
+      ¿Sos mayor de 18 años?</h2>
+    <p style="font-size:.9rem;color:var(--t2);margin-bottom:44px;text-align:center;max-width:400px;line-height:1.8;">El
+      consumo de alcohol está prohibido para menores de edad. Ingresá solo si tenés 18 años o más.</p>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;">
+      <button onclick="confirmarEdad(true)"
+        style="background:var(--g);color:#080808;border:none;padding:17px 44px;font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:background .2s;border-radius:8px;"
+        onmouseover="this.style.background='#e8c84a'" onmouseout="this.style.background='var(--g)'">Sí, tengo 18 o
+        más</button>
+      <button onclick="confirmarEdad(false)"
+        style="background:transparent;color:var(--t2);border:1px solid rgba(212,175,55,.35);padding:17px 44px;font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:all .2s;border-radius:8px;"
+        onmouseover="this.style.borderColor='var(--g)';this.style.color='var(--wh)'"
+        onmouseout="this.style.borderColor='rgba(212,175,55,.35)';this.style.color='var(--t2)'">No, soy menor</button>
+    </div>
+    <p style="font-size:.75rem;color:var(--gr);margin-top:36px;text-align:center;max-width:420px;line-height:1.8;">Al
+      ingresar confirmás que tenés 18 años o más y aceptás nuestros <a href="terminos.html#arrepentimiento"
+        style="color:var(--g);text-decoration:none;">Términos y Condiciones</a>. Ley 24.788 — Lucha contra el
+      Alcoholismo.</p>
+  </div>
+
+  <!-- WA FLOAT -->
+  <a href="https://wa.me/+5493446668916" target="_blank" class="wa-float"><i class="fab fa-whatsapp"></i></a>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#inicio" class="n-logo">
+      <img src="imagenes/logo_koing.png" alt="König"
+        onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'44\' height=\'44\' viewBox=\'0 0 44 44\'%3E%3Crect width=\'44\' height=\'44\' fill=\'%230a0a0a\'/%3E%3Ctext x=\'11\' y=\'32\' font-family=\'Cormorant Garamond\' font-size=\'28\' fill=\'%23d4af37\'%3EK%3C/text%3E%3C/svg%3E';">
+      <div class="n-brand">
+        <div class="n-nombre">König</div>
+        <div class="n-sub">Cerveza Artesanal</div>
+      </div>
+    </a>
+    <ul class="n-links">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#marca">Nosotros</a></li>
+      <li><a href="#bares">Franquicias</a></li>
+      <li><a href="#mayoristas">Mayoristas</a></li>
+      <li><a href="store.html" class="n-cta"><i class="fas fa-store"></i> Tienda König</a></li>
+    </ul>
+    <button class="ham" id="ham"><span></span><span></span><span></span></button>
+  </nav>
+
+  <!-- MOB MENU -->
+  <div class="mob" id="mob">
+    <button class="mob-x" id="mobX"><i class="fas fa-times"></i></button>
+    <a href="#inicio" onclick="cn()">Inicio</a>
+    <a href="#marca" onclick="cn()">Nosotros</a>
+    <a href="#bares" onclick="cn()">Franquicias</a>
+    <a href="#mayoristas" onclick="cn()">Mayoristas</a>
+    <a href="store.html" style="color:var(--g)"><i class="fas fa-store"></i> Tienda König</a>
+  </div>
+
+  <!-- ════════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+  <section class="hero" id="inicio">
+    <div class="hero-bg-img"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-corner tl"></div>
+    <div class="hero-corner tr"></div>
+    <div class="hero-corner bl"></div>
+    <div class="hero-corner br"></div>
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Ciudad Larroque · Entre Ríos · Argentina</div>
+      <img src="imagenes/logo_koing.png" alt="König" class="hero-logo-k"
+        onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\' viewBox=\'0 0 120 120\'%3E%3Crect width=\'120\' height=\'120\' fill=\'%230a0a0a\'/%3E%3Ctext x=\'28\' y=\'82\' font-family=\'Cormorant Garamond\' font-size=\'72\' fill=\'%23d4af37\'%3EK%3C/text%3E%3C/svg%3E';">
+      <span class="hero-konig">König</span>
+      <span class="hero-tagline">Cerveza Artesanal</span>
+      <div class="hero-div"><span>★</span></div>
+      <div class="hero-btns">
+        <a href="store.html" class="btn b-oro"><i class="fas fa-store"></i> Tienda König</a>
+        <a href="#mayoristas" class="btn b-mayorista"><i class="fas fa-handshake"></i> Venta Mayorista</a>
+      </div>
+      <p class="hero-slogan">Calidad premiada, sabor artesanal.</p>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+     NUESTRA HISTORIA / LA MARCA
+════════════════════════════════════════ -->
+  <section class="sec marca-sec" id="marca">
+    <div class="sec-sep"></div>
+    <div class="marca-inner">
+
+      <!-- Columna imagen -->
+      <div class="rv rv-left">
+        <div class="marca-img" id="marcaImg">
+          <img src="imagenes/duenos.jpg" id="marcaImgEl" loading="lazy" alt="Fundadores de Cervecería König"
+            onerror="this.parentElement.style.minHeight='300px';this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:300px;background:var(--sf3);border-radius:16px;font-size:4rem;\'>🍺</div>'">
+        </div>
+        <a href="medallas.html" class="logro-card rv d1">
+          <span class="logro-ico">🥇</span>
+          <div>
+            <strong>Medallas Logradas</strong>
+            <span>Premios en competencias artesanales. Hacé clic para ver nuestra historia.</span>
+          </div>
+          <i class="fas fa-arrow-right logro-arrow"></i>
+        </a>
+      </div>
+
+      <!-- Columna texto -->
+      <div class="rv d2">
+        <div class="kicker">Nuestra Historia</div>
+        <h2 class="sh">König<br><em>Cerveza Artesanal</em></h2>
+        <p class="sp" style="margin-bottom:20px;">
+          <span
+            style="font-family:var(--ff-disp);font-style:italic;font-size:3rem;font-weight:700;color:var(--g);float:left;line-height:.85;margin-right:10px;margin-top:6px;filter:drop-shadow(0 0 16px rgba(212,175,55,.35));">N</span>
+          o empezamos de casualidad, ni por moda. Empezamos con una idea clara: hacer cerveza de verdad, con identidad y
+          con propósito.
+        </p>
+        <p class="sp" style="margin-bottom:20px;">En Ciudad Larroque, Entre Ríos, nació König. No como un proyecto
+          improvisado, sino como el resultado de trabajo, inversión y una convicción firme: hacer las cosas bien desde
+          el primer día.</p>
+        <p class="sp" style="margin-bottom:20px;">Cada receta, cada proceso y cada detalle fue construido con
+          compromiso. Ese esfuerzo hoy se refleja en una marca registrada, habilitada a nivel nacional y reconocida con
+          medallas en competencias de cerveza artesanal.</p>
+
+        <blockquote class="brand-quote">"König no es solo cerveza. Es crecimiento, es comunidad, es un camino que sigue
+          expandiéndose."</blockquote>
+
+        <p class="sp" style="margin-bottom:16px;">Hoy contamos con franquicias en Gualeguay, Gualeguaychú y seguimos
+          avanzando con
+          la misma mentalidad del inicio: mejorar siempre.</p>
+        <p class="sp"><strong style="color:var(--g);">Gracias a todos los que forman parte de esta historia. Porque esto
+            recién empieza.</strong></p>
+
+        <div class="marca-items" style="margin-top:36px;">
+          <div class="marca-item">
+            <div class="marca-item-ico"><i class="fas fa-beer"></i></div>
+            <div>
+              <strong>Cervezas Craft Propias</strong>
+              <p>Dorada, Roja, Lupulada y más. Todas fabricadas en nuestra planta de Ciudad Larroque.</p>
+            </div>
+          </div>
+          <div class="marca-item">
+            <div class="marca-item-ico"><i class="fas fa-store"></i></div>
+            <div>
+              <strong>Bares Propios</strong>
+              <p>Dos sedes en Entre Ríos. El mismo espíritu, la misma cerveza König.</p>
+            </div>
+          </div>
+          <div class="marca-item">
+            <div class="marca-item-ico"><i class="fas fa-expand-arrows-alt"></i></div>
+            <div>
+              <strong>En Expansión</strong>
+              <p>Franquicias propias y proyección de crecimiento a nivel nacional.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:36px;">
+          <a href="https://www.instagram.com/cerveza_konig/" target="_blank" class="btn b-outline"
+            style="font-size:.65rem;padding:14px 28px;"><i class="fab fa-instagram"></i> @cerveza_konig</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+     NUESTRAS FRANQUICIAS
+════════════════════════════════════════ -->
+  <section class="sec bares-sec" id="bares">
+    <div class="sec-sep"></div>
+    <div class="s-inner">
+      <div class="rv" style="text-align:center;margin-bottom:0">
+        <div class="kicker kicker-c">Dónde encontrarnos</div>
+        <h2 class="sh" style="text-align:center">Nuestras <em>Franquicias</em></h2>
+        <p class="sp" style="text-align:center;margin:0 auto;">Dos sedes en Entre Ríos. El mismo espíritu, la misma
+          cerveza König.</p>
+      </div>
+      <div class="bares-grid rv d2">
+        <!-- Gualeguay -->
+        <div class="bar-card">
+          <div class="bar-img">
+            <img src="imagenes/bar_guay.jpg" loading="lazy" alt="König Gualeguay"
+              onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:var(--sf3);font-size:3rem;\'>🍺</div>'">
+          </div>
+          <div class="bar-body">
+            <div class="bar-ciudad"><i class="fas fa-map-marker-alt"></i> Gualeguay · Sede Original</div>
+            <div class="bar-nombre">König Gualeguay</div>
+            <div class="bar-dir"><i class="fas fa-map-marker-alt"></i> San Antonio & Primer Entrerriano</div>
+            <div class="bar-horario">Lun / Mié a Dom: 19:00 – 02:00 · Martes: cerrado</div>
+            <div class="bar-btns">
+              <a href="https://wa.me/5493444527876?text=Hola!%20Quiero%20consultar" target="_blank"
+                class="bbar bbar-wa"><i class="fab fa-whatsapp"></i> 3444 527876</a>
+              <a href="https://wa.me/5493444527876?text=Hola!%20Quiero%20reservar%20una%20mesa" target="_blank"
+                class="bbar bbar-res"><i class="fas fa-calendar-alt"></i> Reservar</a>
+              <a href="https://wa.me/5493444527876?text=Hola!%20Quiero%20pedir%20delivery" target="_blank"
+                class="bbar bbar-del"><i class="fas fa-motorcycle"></i> Delivery</a>
+              <a href="https://www.instagram.com/konig.guay24/" target="_blank" class="bbar bbar-ig"><i
+                  class="fab fa-instagram"></i> @konig.guay24</a>
+            </div>
+          </div>
+        </div>
+        <!-- Gualeguaychú -->
+        <div class="bar-card">
+          <div class="bar-img">
+            <img src="imagenes/bar_gchu.jpg" loading="lazy" alt="König Gualeguaychú"
+              onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:var(--sf3);font-size:3rem;\'>🍺</div>'">
+          </div>
+          <div class="bar-body">
+            <div class="bar-ciudad"><i class="fas fa-map-marker-alt"></i> Gualeguaychú · Nueva Sede</div>
+            <div class="bar-nombre">König Gualeguaychú</div>
+            <div class="bar-dir"><i class="fas fa-map-marker-alt"></i> <!-- Dirección a completar --></div>
+            <div class="bar-horario"><!-- Horarios a completar --></div>
+            <div class="bar-btns">
+              <a href="https://wa.me/5493446614536?text=Hola!%20Quiero%20consultar" target="_blank"
+                class="bbar bbar-wa"><i class="fab fa-whatsapp"></i> 3446614536</a>
+              <a href="https://wa.me/5493446614536?text=Hola!%20Quiero%20reservar%20una%20mesa" target="_blank"
+                class="bbar bbar-res"><i class="fas fa-calendar-alt"></i> Reservar</a>
+              <a href="https://wa.me/5493446614536?text=Hola!%20Quiero%20pedir%20delivery" target="_blank"
+                class="bbar bbar-del"><i class="fas fa-motorcycle"></i> Delivery</a>
+              <a href="https://www.instagram.com/konig.gchu/" target="_blank" class="bbar bbar-ig"><i
+                  class="fab fa-instagram"></i> @konig.gchu</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+     GALERÍA
+════════════════════════════════════════ -->
+  <section class="sec galeria-sec" id="galeria">
+    <div class="sec-sep"></div>
+    <div class="s-inner" style="margin-bottom:48px;">
+      <div class="rv" style="text-align:center;">
+        <div class="kicker kicker-c">Imágenes</div>
+        <h2 class="sh" style="text-align:center;">El mundo <em>König</em></h2>
+        <p class="sp" style="margin:0 auto;text-align:center;">La fábrica, los bares, las cervezas. Una sola identidad.
+        </p>
+      </div>
+    </div>
+    <div class="gal-grid rv d2">
+      <div class="gal-item">
+        <img src="imagenes/galeria1.jpg" loading="lazy" alt="Ambiente König"
+          onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:var(--sf3);font-size:2.5rem;\'>🍺</div>'">
+        <div class="gal-ov"><span class="gal-cap">Ambiente König</span></div>
+      </div>
+      <div class="gal-item">
+        <img src="imagenes/galeria2.jpg" loading="lazy" alt="Nuestros tragos"
+          onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:var(--sf3);font-size:2.5rem;\'>🍹</div>'">
+        <div class="gal-ov"><span class="gal-cap">Nuestros tragos</span></div>
+      </div>
+      <div class="gal-item">
+        <img src="imagenes/galeria3.jpg" loading="lazy" alt="Interior"
+          onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:var(--sf3);font-size:2.5rem;\'>🏠</div>'">
+        <div class="gal-ov"><span class="gal-cap">Interior</span></div>
+      </div>
+      <div class="gal-item">
+        <img src="imagenes/galeria4.jpg" loading="lazy" alt="Gastronomía"
+          onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:var(--sf3);font-size:2.5rem;\'>🧀</div>'">
+        <div class="gal-ov"><span class="gal-cap">Gastronomía</span></div>
+      </div>
+      <div class="gal-item">
+        <img src="imagenes/galeria5.jpg" loading="lazy" alt="Música en vivo"
+          onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:var(--sf3);font-size:2.5rem;\'>🎸</div>'">
+        <div class="gal-ov"><span class="gal-cap">Música en vivo</span></div>
+      </div>
+      <div class="gal-item">
+        <img src="imagenes/galeria6.jpg" loading="lazy" alt="Nuestro equipo"
+          onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:var(--sf3);font-size:2.5rem;\'>👥</div>'">
+        <div class="gal-ov"><span class="gal-cap">Nuestro equipo</span></div>
+      </div>
+    </div>
+    <p
+      style="max-width:var(--max-w);margin:20px auto 0;padding:0 var(--gutter);text-align:center;color:var(--gr);font-size:.75rem;font-style:italic;">
+      <a href="https://www.instagram.com/cerveza_konig/" target="_blank" style="color:var(--g);">@cerveza_konig</a>
+      &nbsp;·&nbsp;
+      <a href="https://www.instagram.com/konig.gchu/" target="_blank" style="color:var(--g);">@konig.gchu</a>
+      &nbsp;·&nbsp;
+      <a href="https://www.instagram.com/konig.guay24/" target="_blank" style="color:var(--g);">@konig.guay24</a>
+    </p>
+  </section>
+
+  <!-- ════════════════════════════════════════
+     INSTAGRAM
+════════════════════════════════════════ -->
+  <section class="sec ig-sec" id="instagram">
+    <div class="sec-sep"></div>
+    <div class="s-inner">
+      <div class="rv" style="text-align:center;">
+        <i class="fab fa-instagram ig-icon-top"></i>
+        <h2 class="sh" style="text-align:center;">Seguinos en <em>Instagram</em></h2>
+        <p class="sp" style="text-align:center;margin:0 auto;">Eventos, promociones, novedades y todo lo que pasa en
+          König. La comunidad está ahí.</p>
+      </div>
+      <div class="ig-grid">
+        <div class="ig-card rv d1">
+          <div class="ig-tipo">Cervecería · Ciudad Larroque</div>
+          <div class="ig-handle">@cerveza_konig</div>
+          <a href="https://www.instagram.com/cerveza_konig/" target="_blank" class="ig-btn"><i
+              class="fab fa-instagram"></i> Seguir</a>
+        </div>
+        <div class="ig-card rv d2">
+          <div class="ig-tipo">Bar · Gualeguay</div>
+          <div class="ig-handle">@konig.guay24</div>
+          <a href="https://www.instagram.com/konig.guay24/" target="_blank" class="ig-btn"><i
+              class="fab fa-instagram"></i> Seguir</a>
+        </div>
+        <div class="ig-card rv d3">
+          <div class="ig-tipo">Bar · Gualeguaychú</div>
+          <div class="ig-handle">@konig.gchu</div>
+          <a href="https://www.instagram.com/konig.gchu/" target="_blank" class="ig-btn"><i
+              class="fab fa-instagram"></i> Seguir</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+     MAYORISTAS
+════════════════════════════════════════ -->
+  <section class="sec mayoristas-sec" id="mayoristas">
+    <div class="sec-sep"></div>
+    <div class="s-inner">
+      <div class="mayoristas-inner">
+
+        <!-- Texto -->
+        <div class="rv">
+          <div class="kicker">Distribución</div>
+          <h2 class="sh">Vendé <em>König</em><br>en tu negocio</h2>
+          <p class="sp" style="margin-bottom:20px;">Si tenés un bar, restaurante, almacén, o cualquier punto
+            de venta, König es la cerveza artesanal que tus clientes van a pedir.</p>
+          <p class="sp" style="margin-bottom:20px;">Somos productores directos. Sin intermediarios. Eso significa que te
+            ofrecemos <strong style="color:var(--g);">precios mayoristas reales</strong>, stock garantizado y una marca
+            que ya tiene identidad propia en Entre Ríos.</p>
+          <p class="sp" style="margin-bottom:40px;">No importa el tamaño de tu negocio. Si querés sumar König a tu
+            carta, hablemos.</p>
+
+          <div class="may-feature-grid">
+            <div class="may-card">
+              <div class="may-card-ico">🍺</div>
+              <strong>Latas</strong>
+              <span>Todas las variedades por caja o pallet.</span>
+            </div>
+            <div class="may-card">
+              <div class="may-card-ico">🛢️</div>
+              <strong>Barriles</strong>
+              <span>20, 30 y 50 litros para tu bar.</span>
+            </div>
+            <div class="may-card">
+              <div class="may-card-ico">🚚</div>
+              <strong>Entrega Directa</strong>
+              <span>Desde nuestra fábrica en Ciudad Larroque.</span>
+            </div>
+            <div class="may-card">
+              <div class="may-card-ico">📋</div>
+              <strong>Precio Mayorista</strong>
+              <span>Sin intermediarios. Directo de fábrica.</span>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:14px;flex-wrap:wrap;">
+            <a href="https://wa.me/5493446668916?text=Hola!%20Me%20interesa%20vender%20König%20en%20mi%20negocio.%20Quiero%20información%20mayorista."
+              target="_blank" class="btn b-wa"><i class="fab fa-whatsapp"></i> Quiero ser distribuidor</a>
+            <a href="https://wa.me/5493446668916?text=Hola!%20Quiero%20cotización%20de%20barriles%20König."
+              target="_blank" class="btn b-outline"><i class="fas fa-barrel"></i> Cotizar barriles</a>
+          </div>
+        </div>
+
+        <!-- Panel ¿Por qué König? -->
+        <div class="rv d2">
+          <div class="may-panel">
+            <div class="may-panel-title">¿Por qué elegir König?</div>
+            <div class="may-check-list">
+              <div class="may-check-item">
+                <div class="may-check-icon">✓</div>
+                <div>
+                  <strong>Marca con identidad propia</strong>
+                  <p>Logo, diseño y reconocimiento en la región. Tus clientes ya la conocen.</p>
+                </div>
+              </div>
+              <div class="may-check-item">
+                <div class="may-check-icon">✓</div>
+                <div>
+                  <strong>Habilitación nacional</strong>
+                  <p>Aptos para venta en cualquier punto del país.</p>
+                </div>
+              </div>
+              <div class="may-check-item">
+                <div class="may-check-icon">✓</div>
+                <div>
+                  <strong>Medallas en competencias</strong>
+                  <p>Calidad reconocida. Una cerveza premiada en tu carta habla por sí sola.</p>
+                </div>
+              </div>
+              <div class="may-check-item">
+                <div class="may-check-icon">✓</div>
+                <div>
+                  <strong>Stock garantizado</strong>
+                  <p>Fábrica propia. No dependemos de terceros para abastecerte.</p>
+                </div>
+              </div>
+            </div>
+            <div class="may-panel-quote">"Si ponés König en tu carta,<br>estás poniendo calidad."</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+  <footer>
+    <div class="ft-top">
+      <div>
+        <div class="ft-logo">
+          <img src="imagenes/logo_koing.png" alt="König"
+            onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Crect width=\'40\' height=\'40\' fill=\'%230a0a0a\'/%3E%3Ctext x=\'10\' y=\'28\' font-family=\'Cormorant Garamond\' font-size=\'24\' fill=\'%23d4af37\'%3EK%3C/text%3E%3C/svg%3E';">
+          <div>
+            <div class="ft-nombre">König</div>
+            <div class="ft-sub">Cerveza Artesanal</div>
+          </div>
+        </div>
+        <p class="ft-desc">Cervecería artesanal entrerriana. Fábrica en Ciudad Larroque. Bar en Gualeguay. Distribución
+          en todo el país.</p>
+        <div class="ft-socs">
+          <a href="https://www.instagram.com/cerveza_konig/" target="_blank" class="ft-soc" title="@cerveza_konig"><i
+              class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/5493444527876" target="_blank" class="ft-soc"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#marca">Nosotros</a></li>
+          <li><a href="#bares">Franquicias</a></li>
+          <li><a href="#galeria">Galería</a></li>
+          <li><a href="#mayoristas">Mayoristas</a></li>
+          <li><a href="store.html">Tienda König</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="https://wa.me/5493444527876" target="_blank">📱 Gualeguay · 3444 527876</a></li>
+          <li><a href="#">📍 San Antonio & 1er Entrerriano · Gualeguay</a></li>
+          <li><a href="https://wa.me/5493446668916" target="_blank">📱 Mayoristas · 3446 668916</a></li>
+          <li><a href="#">🏭 Cervecería · Ciudad Larroque, ER</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <p class="ft-cr">© 2026 König · Cerveza Artesanal · Entre Ríos, Argentina</p>
+      <p class="ft-cr">Diseño web: <a href="https://www.wbserviceinformatica.com.ar" target="_blank"
+          rel="noopener noreferrer">WB Service</a></p>
+      <div style="margin-top:12px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;">
+        <a href="privacidad.html" class="ft-cr" style="color:rgba(212,175,55,.5);transition:color .2s;"
+          onmouseover="this.style.color='var(--g)'" onmouseout="this.style.color='rgba(212,175,55,.5)'">Política de
+          Privacidad</a>
+        <span style="color:rgba(255,255,255,.15);font-size:.65rem;">|</span>
+        <a href="terminos.html" class="ft-cr" style="color:rgba(212,175,55,.5);transition:color .2s;"
+          onmouseover="this.style.color='var(--g)'" onmouseout="this.style.color='rgba(212,175,55,.5)'">Términos y
+          Condiciones</a>
+      </div>
+      <p class="ft-legal">Beber con moderación. Prohibida la venta a menores de 18 años. Ley 24.788.<br>Los precios
+        pueden variar sin previo aviso. CUIT: <span>A completar por König</span> · König Cerveza Artesanal · Villa
+        Larroque, Entre Ríos.<br>Ley N° 24.240 — Defensa del Consumidor · Ley N° 25.326 — Protección de Datos
+        Personales.</p>
+    </div>
+  </footer>
+
+  <script>
+    /* ── LOADER ── */
+    var loaderDone = false;
+    function cerrarLoader() { if (loaderDone) return; loaderDone = true; var l = document.getElementById('loader'); if (l) l.classList.add('out'); }
+    setTimeout(cerrarLoader, 2000);
+    window.addEventListener('load', function () { setTimeout(cerrarLoader, 400); });
+
+    /* ── NAV SCROLL ── */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('sc', window.scrollY > 72), { passive: true });
+
+    /* ── HAMBURGER ── */
+    const ham = document.getElementById('ham'), mob = document.getElementById('mob');
+    ham.addEventListener('click', () => {
+      const o = mob.classList.contains('open');
+      if (o) { cn(); } else { ham.classList.add('open'); mob.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    });
+    document.getElementById('mobX').addEventListener('click', cn);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') cn(); });
+    mob.addEventListener('click', e => { if (e.target === mob) cn(); });
+    function cn() { mob.classList.remove('open'); ham.classList.remove('open'); document.body.style.overflow = ''; }
+    document.querySelectorAll('.mob a').forEach(a => a.addEventListener('click', () => cn()));
+
+    /* ── REVEAL — IntersectionObserver + parallax ── */
+    (function () {
+      const revealObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          if (el.dataset.delay) el.style.transitionDelay = el.dataset.delay + 'ms';
+          el.classList.add('on');
+          if (el.classList.contains('marca-img')) el.classList.add('on');
+          var img = el.querySelector('.marca-img');
+          if (img) img.classList.add('on');
+          revealObs.unobserve(el);
+        });
+      }, { threshold: window.innerWidth < 768 ? 0.04 : 0.07, rootMargin: '0px 0px -36px 0px' });
+      document.querySelectorAll('.rv').forEach(function (el) { revealObs.observe(el); });
+      var marcaImgEl = document.getElementById('marcaImg');
+      if (marcaImgEl) revealObs.observe(marcaImgEl);
+
+      /* Parallax on brand image */
+      var marcaWrap = document.getElementById('marcaImg');
+      var marcaImg = document.getElementById('marcaImgEl');
+      if (marcaWrap && marcaImg) {
+        var ticking = false;
+        function updateParallax() {
+          var rect = marcaWrap.getBoundingClientRect();
+          var ratio = ((rect.top + rect.height / 2) - window.innerHeight / 2) / window.innerHeight;
+          var offset = Math.min(Math.max(ratio * 12, -12), 12);
+          marcaImg.style.transform = 'translateY(' + offset + 'px)';
+          ticking = false;
+        }
+        window.addEventListener('scroll', function () { if (!ticking) { requestAnimationFrame(updateParallax); ticking = true; } }, { passive: true });
+        updateParallax();
+      }
+    })();
+
+    /* ── HIGHLIGHT CURRENT DAY ── */
+    const ds = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    const hoy = ds[new Date().getDay()];
+    document.querySelectorAll('[data-dia]').forEach(r => { if (r.dataset.dia === hoy) r.classList.add('hoy'); });
+
+    /* ── AGE GATE ── */
+    (function () {
+      var gate = document.getElementById('ageGate');
+      if (!gate) return;
+      document.documentElement.style.visibility = 'visible';
+      if (sessionStorage.getItem('konig_age_ok') === '1') { gate.style.display = 'none'; return; }
+      gate.style.display = 'flex';
+      gate.style.opacity = '0';
+      gate.style.transition = 'opacity .3s ease';
+      document.body.style.overflow = 'hidden';
+      function mostrarGate() { gate.style.opacity = '1'; }
+      if (document.fonts && document.fonts.ready) { document.fonts.ready.then(mostrarGate); }
+      else { setTimeout(mostrarGate, 300); }
+      setTimeout(mostrarGate, 800);
+    })();
+
+    function confirmarEdad(esMayor) {
+      var gate = document.getElementById('ageGate');
+      if (esMayor) {
+        sessionStorage.setItem('konig_age_ok', '1');
+        gate.style.transition = 'opacity .45s ease';
+        gate.style.opacity = '0';
+        setTimeout(() => { gate.style.display = 'none'; document.body.style.overflow = ''; }, 460);
+      } else {
+        window.location.href = 'https://www.google.com';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const slider = document.querySelector('.gal-grid');
+
+      // Clonar imágenes para hacer un loop infinito
+      const items = Array.from(slider.children);
+      items.forEach(item => {
+        const clone = item.cloneNode(true);
+        slider.appendChild(clone);
+      });
+
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+      let autoPlayInterval;
+
+      // Auto-avance
+      const autoScroll = () => {
+        if (!isDown) {
+          // Si pasó la mitad (es decir, terminó la primera tanda original), volver al principio sin animación
+          if (slider.scrollLeft >= slider.scrollWidth / 2 - 10) {
+            slider.style.scrollBehavior = 'auto'; // Desactiva smooth un momento
+            slider.scrollLeft = 0;
+            slider.offsetHeight; // Forzar reflow
+            slider.style.scrollBehavior = 'smooth'; // Vuelve smooth
+          }
+          // Avanzar una imagen
+          slider.scrollBy({ left: items[0].clientWidth + 16, behavior: 'smooth' });
+        }
+      };
+
+      const startAutoPlay = () => {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = setInterval(autoScroll, 3500);
+      };
+
+      startAutoPlay();
+
+      slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        clearInterval(autoPlayInterval);
+        slider.style.scrollSnapType = 'none';
+        slider.style.scrollBehavior = 'auto';
+        slider.style.cursor = 'grabbing';
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+      });
+
+      const finishDrag = () => {
+        if (!isDown) return;
+        isDown = false;
+        slider.style.scrollSnapType = 'x mandatory';
+        slider.style.scrollBehavior = 'smooth';
+        slider.style.cursor = 'grab';
+        startAutoPlay();
+      };
+
+      slider.addEventListener('mouseleave', finishDrag);
+      slider.addEventListener('mouseup', finishDrag);
+
+      slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        slider.scrollLeft = scrollLeft - walk;
+      });
+
+      // Pausar auto-scroll al tocar en móviles
+      slider.addEventListener('touchstart', () => clearInterval(autoPlayInterval), { passive: true });
+      slider.addEventListener('touchend', startAutoPlay);
+    });
+  </script>
+</body>
+
+</html>
