@@ -1584,49 +1584,30 @@
     }
 
     /* ── REVEAL ANIMATIONS — Apple spring style ── */
+    /* ── SCROLL REVEAL — rich multi-direction entries ── */
     .rv {
       opacity: 0;
-      transform: translateY(var(--rv-dist));
-      transition: opacity var(--t-slow) var(--ease), transform var(--t-slow) var(--ease);
-      will-change: opacity, transform;
+      transform: translateY(var(--rv-dist, 36px));
+      transition:
+        opacity  .75s cubic-bezier(0.22,1,0.36,1),
+        transform .75s cubic-bezier(0.22,1,0.36,1);
     }
-
-    .rv.rv-left {
-      transform: translateX(-48px);
-    }
-
-    .rv.rv-right {
-      transform: translateX(48px);
-    }
-
-    .rv.rv-scale {
-      transform: scale(.95) translateY(20px);
-    }
+    .rv.rv-left  { transform: translateX(-52px) translateY(16px); }
+    .rv.rv-right { transform: translateX( 52px) translateY(16px); }
+    .rv.rv-scale { transform: scale(.93) translateY(24px); }
+    .rv.rv-fade  { transform: translateY(12px); }
 
     .rv.on {
       opacity: 1;
       transform: translate(0) scale(1);
     }
 
-    .rv.d1 {
-      transition-delay: .08s;
-    }
-
-    .rv.d2 {
-      transition-delay: .16s;
-    }
-
-    .rv.d3 {
-      transition-delay: .26s;
-    }
-
-    .rv.d4 {
-      transition-delay: .36s;
-    }
-
-    .rv.d5 {
-      transition-delay: .48s;
-    }
+    /* Stagger delays — tighter feel */
+    .rv.d1 { transition-delay: .06s; }
+    .rv.d2 { transition-delay: .14s; }
+    .rv.d3 { transition-delay: .22s; }
+    .rv.d4 { transition-delay: .32s; }
+    .rv.d5 { transition-delay: .44s; }
 
     /* ── AGE GATE ── */
     #ageGate {
@@ -1725,6 +1706,871 @@
 
       .ft-top {
         gap: 24px;
+      }
+    }
+
+    /* ════════════════════════════════════════
+       🍺 KÖNIG × NEXT-GEN UX — Apple inspired
+    ════════════════════════════════════════ */
+
+    /* Scroll progress bar (gold) */
+    .scroll-prog {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      z-index: 250;
+      background: transparent;
+      pointer-events: none;
+    }
+
+    .scroll-prog::before {
+      content: '';
+      display: block;
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, transparent, var(--g) 20%, #f3d878 50%, var(--g) 80%, transparent);
+      box-shadow: 0 0 14px var(--g-glow);
+      transform: scaleX(var(--prog, 0));
+      transform-origin: left;
+      transition: transform .12s linear;
+    }
+
+    /* Background gold orbs (depth without distraction) */
+    .orbs {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: .12;
+      background: radial-gradient(circle, var(--g) 0%, transparent 70%);
+      animation: orbDrift 22s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    .orb-1 {
+      width: 540px;
+      height: 540px;
+      top: 8%;
+      left: -10%;
+    }
+
+    .orb-2 {
+      width: 440px;
+      height: 440px;
+      top: 55%;
+      right: -8%;
+      animation-delay: -8s;
+      opacity: .08;
+    }
+
+    .orb-3 {
+      width: 380px;
+      height: 380px;
+      top: 130%;
+      left: 40%;
+      animation-delay: -14s;
+      opacity: .06;
+    }
+
+    @keyframes orbDrift {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      33% {
+        transform: translate(60px, -40px) scale(1.1);
+      }
+
+      66% {
+        transform: translate(-40px, 60px) scale(.95);
+      }
+    }
+
+    /* Push real content above orbs — sólo z-index, NO tocar position */
+    section,
+    footer {
+      position: relative;
+      z-index: 2;
+    }
+
+    nav {
+      z-index: 200;
+    }
+
+    .wa-float {
+      z-index: 500;
+    }
+
+    .mob {
+      z-index: 190;
+    }
+
+    /* ── Premium reveal: opacity + transform + blur ── */
+    /* Enhanced reveal for larger screens */
+    .rv {
+      filter: blur(4px);
+      transition:
+        opacity  .85s cubic-bezier(0.22,1,0.36,1),
+        transform .85s cubic-bezier(0.22,1,0.36,1),
+        filter   .85s cubic-bezier(0.22,1,0.36,1) !important;
+    }
+    .rv.on { filter: blur(0); }
+
+    /* ── HERO refined: parallax-ready + shimmer ── */
+    .hero-bg-img {
+      will-change: transform;
+    }
+
+    .hero-inner {
+      will-change: transform, opacity;
+    }
+
+    .hero-logo-k {
+      transition: transform .8s var(--ease-spring), filter .8s var(--ease);
+    }
+
+    .hero-inner:hover .hero-logo-k {
+      transform: scale(1.05) rotate(-2deg);
+    }
+
+    .hero-tagline {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-tagline::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, .55) 50%, transparent 80%);
+      transform: translateX(-130%);
+      animation: tagShine 5s ease-in-out infinite;
+    }
+
+    @keyframes tagShine {
+      0%, 50% {
+        transform: translateX(-130%);
+      }
+
+      75%, 100% {
+        transform: translateX(130%);
+      }
+    }
+
+    .hero-eyebrow {
+      animation: heroSlideDown 1.2s var(--ease) backwards;
+    }
+
+    .hero-konig {
+      animation: heroSlideUp 1.4s var(--ease) .2s backwards;
+    }
+
+    .hero-tagline {
+      animation: heroSlideUp 1.4s var(--ease) .35s backwards;
+    }
+
+    .hero-btns {
+      animation: heroSlideUp 1.4s var(--ease) .55s backwards;
+    }
+
+    .hero-slogan {
+      animation: heroSlideUp 1.4s var(--ease) .7s backwards;
+    }
+
+    @keyframes heroSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+        filter: blur(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
+    }
+
+    @keyframes heroSlideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── BUTTONS — premium shine + lift ── */
+    .btn {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      transition:
+        transform .4s var(--ease-spring),
+        box-shadow .5s var(--ease),
+        background .5s var(--ease),
+        border-color .5s var(--ease) !important;
+    }
+
+    .btn>* {
+      position: relative;
+      z-index: 2;
+    }
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, .35) 50%, transparent 70%);
+      transform: translateX(-130%);
+      transition: transform .9s var(--ease);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .btn:hover::after {
+      transform: translateX(130%);
+    }
+
+    .btn:hover {
+      transform: translateY(-4px) scale(1.025);
+    }
+
+    .b-oro:hover {
+      box-shadow: 0 22px 55px -10px rgba(212, 175, 55, .55), 0 8px 22px rgba(0, 0, 0, .4);
+    }
+
+    .b-mayorista:hover {
+      box-shadow: 0 18px 45px -10px rgba(212, 175, 55, .4);
+    }
+
+    .b-wa:hover {
+      box-shadow: 0 18px 45px -10px rgba(37, 211, 102, .55);
+    }
+
+    .btn:active {
+      transform: translateY(-2px) scale(1);
+    }
+
+    .bbar {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bbar::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, .25) 50%, transparent 70%);
+      transform: translateX(-130%);
+      transition: transform .8s var(--ease);
+      pointer-events: none;
+    }
+
+    .bbar:hover::after {
+      transform: translateX(130%);
+    }
+
+    .bbar:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .35);
+    }
+
+    /* ── NAV refined ── */
+    nav.sc {
+      background: rgba(10, 10, 10, .72) !important;
+      backdrop-filter: blur(28px) saturate(2) !important;
+      -webkit-backdrop-filter: blur(28px) saturate(2) !important;
+    }
+
+    .n-links a:not(.n-cta) {
+      position: relative;
+    }
+
+    .n-links a:not(.n-cta)::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      width: 0;
+      height: 1px;
+      background: var(--g);
+      box-shadow: 0 0 8px var(--g-glow);
+      transition: width .4s var(--ease), left .4s var(--ease);
+    }
+
+    .n-links a:not(.n-cta):hover::after {
+      width: 60%;
+      left: 20%;
+    }
+
+    .n-cta {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      border-radius: var(--r-sm) !important;
+    }
+
+    .n-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--g), #f3d878);
+      opacity: 0;
+      transition: opacity .4s var(--ease);
+      z-index: -1;
+      border-radius: inherit;
+    }
+
+    .n-cta:hover::before {
+      opacity: 1;
+    }
+
+    .n-cta:hover {
+      color: var(--bk) !important;
+      border-color: var(--g) !important;
+    }
+
+    .n-logo img {
+      transition: transform .6s var(--ease-spring);
+    }
+
+    .n-logo:hover img {
+      transform: rotate(-8deg) scale(1.08);
+    }
+
+    /* ── BRAND / NOSOTROS — premium 3D image ── */
+    .marca-img {
+      border-radius: var(--r-xl);
+      box-shadow:
+        0 30px 90px rgba(0, 0, 0, .55),
+        0 0 0 1px var(--g-bd2);
+      transform-style: preserve-3d;
+      perspective: 1200px;
+      will-change: transform;
+      transition:
+        clip-path var(--t-xslow) var(--ease),
+        transform .8s var(--ease) !important;
+    }
+
+    .marca-img::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(212, 175, 55, .25) 0%, transparent 35%, transparent 65%, rgba(212, 175, 55, .15) 100%);
+      opacity: 0;
+      transition: opacity .7s var(--ease);
+      z-index: 2;
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    .marca-img:hover::before {
+      opacity: 1;
+    }
+
+    .marca-img img {
+      transition: transform 1.4s var(--ease) !important;
+    }
+
+    .marca-img:hover img {
+      transform: scale(1.08) translateY(-4px);
+    }
+
+    .marca-item {
+      transition: transform .5s var(--ease), padding-left .5s var(--ease);
+      position: relative;
+    }
+
+    .marca-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 0;
+      height: 1px;
+      background: var(--g);
+      box-shadow: 0 0 8px var(--g-glow);
+      transition: width .5s var(--ease);
+      transform: translateY(-50%);
+    }
+
+    .marca-item:hover {
+      padding-left: 18px;
+    }
+
+    .marca-item:hover::before {
+      width: 14px;
+    }
+
+    .marca-item-ico {
+      transition: all .5s var(--ease-spring) !important;
+    }
+
+    .marca-item:hover .marca-item-ico {
+      background: var(--g);
+      color: var(--bk);
+      border-color: var(--g);
+      transform: rotate(-8deg) scale(1.1);
+      box-shadow: 0 8px 22px rgba(212, 175, 55, .35);
+    }
+
+    .logro-card {
+      transition: all .5s var(--ease-spring) !important;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logro-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent 30%, rgba(212, 175, 55, .2) 50%, transparent 70%);
+      transform: translateX(-130%);
+      transition: transform .9s var(--ease);
+      pointer-events: none;
+    }
+
+    .logro-card:hover::after {
+      transform: translateX(130%);
+    }
+
+    .logro-card:hover {
+      transform: translateY(-5px) scale(1.012);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, .45), 0 0 30px rgba(212, 175, 55, .12);
+      border-color: var(--g);
+    }
+
+    blockquote.brand-quote {
+      position: relative;
+      background: linear-gradient(135deg, rgba(212, 175, 55, .06), transparent);
+      border-radius: var(--r-sm);
+      padding: 22px 26px !important;
+      transition: transform .5s var(--ease), background .5s var(--ease);
+    }
+
+    blockquote.brand-quote::before {
+      content: '"';
+      position: absolute;
+      top: -20px;
+      right: 18px;
+      font-size: 6rem;
+      font-family: var(--ff-disp);
+      color: var(--g);
+      opacity: .12;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    blockquote.brand-quote:hover {
+      background: linear-gradient(135deg, rgba(212, 175, 55, .1), transparent);
+      transform: translateX(4px);
+    }
+
+    /* ── BARES — 3D tilt cards ── */
+    .bar-card {
+      background: linear-gradient(160deg, var(--sf) 0%, var(--sf2) 100%);
+      transition:
+        transform .7s var(--ease),
+        border-color .6s var(--ease),
+        box-shadow .7s var(--ease) !important;
+      will-change: transform;
+    }
+
+    .bar-card:hover {
+      transform: translateY(-12px) scale(1.012);
+      box-shadow:
+        0 50px 120px rgba(0, 0, 0, .6),
+        0 0 0 1px var(--g-bd2),
+        0 0 100px rgba(212, 175, 55, .1);
+    }
+
+    .bar-card .bar-img img {
+      transition: transform 1.6s var(--ease) !important;
+    }
+
+    .bar-card:hover .bar-img img {
+      transform: scale(1.14);
+    }
+
+    .bar-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 55%, rgba(10, 10, 10, .8));
+      pointer-events: none;
+      opacity: .9;
+      transition: opacity .6s var(--ease);
+    }
+
+    .bar-card:hover .bar-img::after {
+      opacity: .45;
+    }
+
+    /* ── GALERÍA — Apple-quality scroll depth ── */
+    .galeria-sec {
+      overflow: hidden;
+    }
+
+    .gal-grid {
+      perspective: 1500px;
+      padding-top: 50px !important;
+      padding-bottom: 50px !important;
+    }
+
+    .gal-item {
+      border-radius: var(--r-xl);
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, .55),
+        0 0 0 1px rgba(212, 175, 55, .12);
+      transition:
+        transform .8s var(--ease),
+        box-shadow .8s var(--ease) !important;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .gal-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, transparent 50%, rgba(10, 10, 10, .75) 100%);
+      z-index: 1;
+      pointer-events: none;
+      opacity: .85;
+      transition: opacity .6s var(--ease);
+      border-radius: inherit;
+    }
+
+    .gal-item:hover {
+      transform: translateY(-14px) scale(1.025);
+      box-shadow:
+        0 60px 140px rgba(0, 0, 0, .7),
+        0 0 100px rgba(212, 175, 55, .2),
+        0 0 0 1px var(--g-bd2);
+    }
+
+    .gal-item:hover::before {
+      opacity: .5;
+    }
+
+    .gal-item img {
+      transition: transform 1.8s var(--ease) !important;
+    }
+
+    .gal-item:hover img {
+      transform: scale(1.14);
+    }
+
+    .gal-ov {
+      z-index: 2;
+      opacity: 1 !important;
+      background: linear-gradient(to top, rgba(10, 10, 10, .9), transparent 60%) !important;
+    }
+
+    .gal-cap {
+      transform: translateY(20px);
+      opacity: 0;
+      transition: transform .6s var(--ease), opacity .5s var(--ease);
+      background: rgba(10, 10, 10, .55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--g-bd);
+      display: inline-block;
+    }
+
+    .gal-item:hover .gal-cap {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* ── INSTAGRAM CARDS — aurora border + glow ── */
+    .ig-card {
+      transition:
+        transform .55s var(--ease-spring),
+        background .45s var(--ease),
+        box-shadow .55s var(--ease);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    /* Aurora border: flowing gradient behind card — no spin reset */
+    .ig-card::before {
+      content: '';
+      position: absolute;
+      inset: -1.5px;
+      border-radius: inherit;
+      background: linear-gradient(
+        135deg,
+        transparent 0%,
+        rgba(212,175,55,.15) 20%,
+        rgba(212,175,55,.7) 45%,
+        rgba(255,220,100,.5) 55%,
+        rgba(212,175,55,.15) 75%,
+        transparent 100%
+      );
+      background-size: 300% 300%;
+      opacity: 0;
+      transition: opacity .55s var(--ease);
+      animation: auroraFlow 5s ease-in-out infinite;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Inner fill to hide aurora behind content area */
+    .ig-card::after {
+      content: '';
+      position: absolute;
+      inset: 1px;
+      background: var(--sf);
+      border-radius: calc(var(--r-lg) - 1px);
+      z-index: -1;
+      transition: background .45s var(--ease);
+    }
+
+    .ig-card:hover::after {
+      background: var(--sf3);
+    }
+
+    .ig-card > * { position: relative; z-index: 1; }
+
+    .ig-card:hover {
+      transform: translateY(-10px) scale(1.028);
+      box-shadow:
+        0 0 0 1px rgba(212,175,55,.35),
+        0 20px 60px rgba(0,0,0,.55),
+        0 0 40px rgba(212,175,55,.12);
+    }
+
+    /* Reveal the aurora only on hover */
+    .ig-card:hover::before {
+      opacity: 1;
+      animation: auroraFlow 3.5s ease-in-out infinite;
+    }
+
+    /* Smooth infinite loop — no visible reset */
+    @keyframes auroraFlow {
+      0%   { background-position: 0%   50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0%   50%; }
+    }
+
+    /* Shimmer sweep inside card on hover */
+    .ig-card .ig-shimmer {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.04) 50%, transparent 65%);
+      background-size: 200% 100%;
+      background-position: 200% 0;
+      transition: none;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ig-card:hover .ig-shimmer {
+      animation: igShimmerSweep .9s var(--ease) forwards;
+    }
+    @keyframes igShimmerSweep {
+      from { background-position: 200% 0; }
+      to   { background-position: -50% 0; }
+    }
+
+    /* Pulsing icon */
+    .ig-icon-top {
+      animation: igPulse 3.5s ease-in-out infinite;
+    }
+    @keyframes igPulse {
+      0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 8px rgba(212,175,55,.35));
+      }
+      50% {
+        transform: scale(1.09);
+        filter: drop-shadow(0 0 26px rgba(212,175,55,.7));
+      }
+    }
+
+    /* ── MAYORISTAS — premium ── */
+    .may-card {
+      position: relative;
+      overflow: hidden;
+      transition: all .5s var(--ease) !important;
+    }
+
+    .may-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--g-lt), transparent);
+      opacity: 0;
+      transition: opacity .5s var(--ease);
+      pointer-events: none;
+    }
+
+    .may-card>* {
+      position: relative;
+      z-index: 1;
+    }
+
+    .may-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--g);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, .4);
+    }
+
+    .may-card:hover::before {
+      opacity: 1;
+    }
+
+    .may-card-ico {
+      transition: transform .5s var(--ease-spring);
+      display: inline-block;
+    }
+
+    .may-card:hover .may-card-ico {
+      transform: scale(1.2) rotate(-8deg);
+    }
+
+    .may-panel {
+      background: linear-gradient(160deg, var(--bk) 0%, var(--sf2) 100%);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, .5);
+    }
+
+    .may-check-item {
+      transition: transform .4s var(--ease);
+    }
+
+    .may-check-item:hover {
+      transform: translateX(8px);
+    }
+
+    .may-check-item:hover .may-check-icon {
+      background: var(--g);
+      color: var(--bk);
+      transform: rotate(-8deg) scale(1.12);
+      box-shadow: 0 8px 22px rgba(212, 175, 55, .4);
+    }
+
+    .may-check-icon {
+      transition: all .4s var(--ease-spring);
+    }
+
+    /* ── HEADINGS — gradient gold em ── */
+    .sh em {
+      background: linear-gradient(135deg, var(--g) 0%, #f3d878 50%, var(--g) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 16px rgba(212, 175, 55, .25));
+      background-size: 200% 200%;
+      animation: gradShift 6s ease-in-out infinite;
+    }
+
+    @keyframes gradShift {
+      0%, 100% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    /* ── WhatsApp float refined ── */
+    .wa-float {
+      animation: waFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes waFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    .wa-float::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1px solid var(--wa);
+      opacity: .8;
+      pointer-events: none;
+      animation: waPulse 2.6s ease-out infinite;
+    }
+
+    @keyframes waPulse {
+      0% {
+        transform: scale(.9);
+        opacity: .85;
+      }
+
+      100% {
+        transform: scale(1.7);
+        opacity: 0;
+      }
+    }
+
+    /* ── FOOTER subtle ── */
+    .ft-soc {
+      transition: all .4s var(--ease-spring);
+    }
+
+    .ft-soc:hover {
+      transform: translateY(-3px) rotate(-6deg);
+      background: var(--g-lt);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .4);
+    }
+
+    .ft-col ul li a {
+      position: relative;
+      transition: color .35s var(--ease), padding-left .35s var(--ease);
+    }
+
+    .ft-col ul li a::before {
+      content: '→';
+      position: absolute;
+      left: -16px;
+      opacity: 0;
+      color: var(--g);
+      transition: opacity .35s var(--ease), left .35s var(--ease);
+    }
+
+    .ft-col ul li a:hover {
+      padding-left: 14px;
+    }
+
+    .ft-col ul li a:hover::before {
+      opacity: 1;
+      left: -2px;
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
       }
     }
 
@@ -1946,10 +2792,7 @@
           <div class="bar-body">
             <div class="bar-ciudad"><i class="fas fa-map-marker-alt"></i> Gualeguay · Sede Original</div>
             <div class="bar-nombre">König Gualeguay</div>
-            <div class="bar-dir"><a
-                href="https://www.google.com/maps/search/?api=1&query=San+Antonio+y+Primer+Entrerriano,+Gualeguay"
-                target="_blank" style="text-decoration: underline; color: inherit;"><i
-                  class="fas fa-map-marker-alt"></i> San Antonio & Primer Entrerriano</a></div>
+            <div class="bar-dir"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/?q=San+Antonio+y+Primer+Entrerriano,+Gualeguay,+Entre+Rios" target="_blank" rel="noopener noreferrer" style="color:var(--g);text-decoration:none;">San Antonio & Primer Entrerriano</a></div>
             <div class="bar-horario">Lun / Mié a Dom: 19:00 – 02:00 · Martes: cerrado</div>
             <div class="bar-btns">
               <a href="https://wa.me/5493444527876?text=Hola!%20Quiero%20consultar" target="_blank"
@@ -1972,12 +2815,8 @@
           <div class="bar-body">
             <div class="bar-ciudad"><i class="fas fa-map-marker-alt"></i> Gualeguaychú · Nueva Sede</div>
             <div class="bar-nombre">König Gualeguaychú</div>
-            <div class="bar-dir"><a
-                href="https://www.google.com/maps/search/?api=1&query=Av+del+Valle+y+Alem,+Gualeguaychú" target="_blank"
-                style="text-decoration: underline; color: inherit;"><i class="fas fa-map-marker-alt"></i> Av del Valle y
-                Alem</a></div>
-            <div class="bar-horario"><i class="fas fa-"></i> Miércoles / domingos desde las 19hs - Lunes y martes
-              cerrado</div>
+            <div class="bar-dir"><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/?q=Av+del+Valle+y+Alem,+Gualeguaychu,+Entre+Rios" target="_blank" rel="noopener noreferrer" style="color:var(--g);text-decoration:none;">Av. del Valle y Alem</a></div>
+            <div class="bar-horario">Mié / Dom: 19:00 hs en adelante · Lun y Mar: cerrado</div>
             <div class="bar-btns">
               <a href="https://wa.me/5493446614536?text=Hola!%20Quiero%20consultar" target="_blank"
                 class="bbar bbar-wa"><i class="fab fa-whatsapp"></i> 3446614536</a>
@@ -2063,18 +2902,21 @@
       </div>
       <div class="ig-grid">
         <div class="ig-card rv d1">
+          <div class="ig-shimmer"></div>
           <div class="ig-tipo">Cervecería · Ciudad Larroque</div>
           <div class="ig-handle">@cerveza_konig</div>
           <a href="https://www.instagram.com/cerveza_konig/" target="_blank" class="ig-btn"><i
               class="fab fa-instagram"></i> Seguir</a>
         </div>
         <div class="ig-card rv d2">
+          <div class="ig-shimmer"></div>
           <div class="ig-tipo">Bar · Gualeguay</div>
           <div class="ig-handle">@konig.guay24</div>
           <a href="https://www.instagram.com/konig.guay24/" target="_blank" class="ig-btn"><i
               class="fab fa-instagram"></i> Seguir</a>
         </div>
         <div class="ig-card rv d3">
+          <div class="ig-shimmer"></div>
           <div class="ig-tipo">Bar · Gualeguaychú</div>
           <div class="ig-handle">@konig.gchu</div>
           <a href="https://www.instagram.com/konig.gchu/" target="_blank" class="ig-btn"><i
@@ -2191,8 +3033,8 @@
             <div class="ft-sub">Cerveza Artesanal</div>
           </div>
         </div>
-        <p class="ft-desc">Cervecería artesanal entrerriana. Fábrica en Ciudad Larroque. Distribución en todo el país.
-        </p>
+        <p class="ft-desc">Cervecería artesanal entrerriana. Fábrica en Ciudad Larroque. Bar en Gualeguay. Distribución
+          en todo el país.</p>
         <div class="ft-socs">
           <a href="https://www.instagram.com/cerveza_konig/" target="_blank" class="ft-soc" title="@cerveza_konig"><i
               class="fab fa-instagram"></i></a>
@@ -2214,11 +3056,9 @@
         <h4>Contacto</h4>
         <ul>
           <li><a href="https://wa.me/5493444527876" target="_blank">📱 Gualeguay · 3444 527876</a></li>
-          <li><a href="https://www.google.com/maps/search/?api=1&query=San+Antonio+y+Primer+Entrerriano,+Gualeguay"
-              target="_blank">📍 San Antonio & 1er Entrerriano · Gualeguay</a></li>
+          <li><a href="https://maps.google.com/?q=San+Antonio+y+Primer+Entrerriano,+Gualeguay,+Entre+Rios" target="_blank" rel="noopener noreferrer">📍 San Antonio & 1er Entrerriano · Gualeguay</a></li>
           <li><a href="https://wa.me/5493446614536" target="_blank">📱 Gualeguaychú · 3446 614536</a></li>
-          <li><a href="https://www.google.com/maps/search/?api=1&query=Av+del+Valle+y+Alem,+Gualeguaychú"
-              target="_blank">📍 Av del Valle y Alem · Gualeguaychú</a></li>
+          <li><a href="https://maps.google.com/?q=Av+del+Valle+y+Alem,+Gualeguaychu,+Entre+Rios" target="_blank" rel="noopener noreferrer">📍 Av. del Valle y Alem · Gualeguaychú</a></li>
           <li><a href="https://wa.me/5493446668916" target="_blank">📱 Mayoristas · 3446 668916</a></li>
           <li><a href="#">🏭 Cervecería · Ciudad Larroque, ER</a></li>
         </ul>
@@ -2237,9 +3077,9 @@
           onmouseover="this.style.color='var(--g)'" onmouseout="this.style.color='rgba(212,175,55,.5)'">Términos y
           Condiciones</a>
         <span style="color:rgba(255,255,255,.15);font-size:.65rem;">|</span>
-        <a href="devolucion.html" class="ft-cr" style="color:#e74c3c;font-weight:600;transition:color .2s;"
-          onmouseover="this.style.color='#ff6b5b'" onmouseout="this.style.color='#e74c3c'">⟵ Arrepentimiento de compra
-          (Ley 24.240)</a>
+        <a href="devolucion.html" class="ft-cr" style="color:rgba(212,175,55,.5);transition:color .2s;"
+          onmouseover="this.style.color='var(--g)'" onmouseout="this.style.color='rgba(212,175,55,.5)'">Botón de
+          Arrepentimiento</a>
       </div>
       <p class="ft-legal">Beber con moderación. Prohibida la venta a menores de 18 años. Ley 24.788.<br>Los precios
         pueden variar sin previo aviso. CUIT: <span>A completar por König</span> · König Cerveza Artesanal · Villa
@@ -2410,6 +3250,241 @@
       slider.addEventListener('touchstart', () => clearInterval(autoPlayInterval), { passive: true });
       slider.addEventListener('touchend', startAutoPlay);
     });
+
+    /* ════════════════════════════════════════
+       🍺 KÖNIG NEXT-GEN — Scroll FX + 3D tilt
+    ════════════════════════════════════════ */
+    (function () {
+      // Background gold orbs
+      var orbs = document.createElement('div');
+      orbs.className = 'orbs';
+      orbs.innerHTML = '<div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>';
+      document.body.insertBefore(orbs, document.body.firstChild);
+
+      // Scroll progress bar
+      var prog = document.createElement('div');
+      prog.className = 'scroll-prog';
+      document.body.appendChild(prog);
+
+      var heroBg = document.querySelector('.hero-bg-img');
+      var heroInner = document.querySelector('.hero-inner');
+      var ticking = false;
+
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () {
+          var sy = window.scrollY;
+          var maxH = document.documentElement.scrollHeight - window.innerHeight;
+          prog.style.setProperty('--prog', maxH > 0 ? (sy / maxH).toFixed(3) : 0);
+
+          // Hero parallax (only while hero in view)
+          if (sy < window.innerHeight) {
+            if (heroBg) {
+              heroBg.style.transform = 'scale(' + (1 + sy * 0.0004) + ') translateY(' + (sy * 0.35) + 'px)';
+            }
+            if (heroInner) {
+              heroInner.style.transform = 'translateY(' + (sy * 0.28) + 'px)';
+              heroInner.style.opacity = Math.max(0, 1 - sy / (window.innerHeight * 0.85));
+            }
+          }
+          ticking = false;
+        });
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // 3D tilt: marca image (mouse-driven)
+      var marca = document.getElementById('marcaImg');
+      if (marca && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        marca.addEventListener('mousemove', function (e) {
+          var r = marca.getBoundingClientRect();
+          var x = (e.clientX - r.left) / r.width - 0.5;
+          var y = (e.clientY - r.top) / r.height - 0.5;
+          marca.style.transform = 'perspective(1200px) rotateX(' + (-y * 6).toFixed(2) + 'deg) rotateY(' + (x * 8).toFixed(2) + 'deg) scale(1.02)';
+        });
+        marca.addEventListener('mouseleave', function () {
+          marca.style.transform = 'perspective(1200px) rotateX(0) rotateY(0) scale(1)';
+        });
+      }
+
+      // 3D tilt: bar-cards & ig-cards
+      if (window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 900px)').matches) {
+        document.querySelectorAll('.bar-card, .ig-card').forEach(function (card) {
+          card.addEventListener('mousemove', function (e) {
+            var r = card.getBoundingClientRect();
+            var x = (e.clientX - r.left) / r.width - 0.5;
+            var y = (e.clientY - r.top) / r.height - 0.5;
+            card.style.transform = 'perspective(1100px) rotateX(' + (-y * 4).toFixed(2) + 'deg) rotateY(' + (x * 6).toFixed(2) + 'deg) translateY(-10px) scale(1.015)';
+          });
+          card.addEventListener('mouseleave', function () {
+            card.style.transform = '';
+          });
+        });
+
+        // Subtle parallax on gallery items based on viewport position
+        var galItems = document.querySelectorAll('.gal-item');
+        function galParallax() {
+          galItems.forEach(function (item) {
+            var r = item.getBoundingClientRect();
+            var center = r.left + r.width / 2;
+            var diff = (center - window.innerWidth / 2) / window.innerWidth;
+            var img = item.querySelector('img');
+            if (img && !item.matches(':hover')) {
+              img.style.transform = 'scale(1.05) translateX(' + (diff * 24).toFixed(1) + 'px)';
+            }
+          });
+        }
+        var galSlider = document.querySelector('.gal-grid');
+        if (galSlider) {
+          galSlider.addEventListener('scroll', galParallax, { passive: true });
+          window.addEventListener('scroll', galParallax, { passive: true });
+          galParallax();
+        }
+      }
+    })();
+  </script>
+
+  <!-- ── BURBUJAS DE CERVEZA (canvas — muy sutiles) ── -->
+  <canvas id="bubbleCanvas" aria-hidden="true" style="
+    position:fixed;inset:0;width:100%;height:100%;
+    pointer-events:none;z-index:0;opacity:.45;
+    mix-blend-mode:screen;
+  "></canvas>
+
+  <style>
+    /* Aseguramos que el canvas no tape contenido */
+    #bubbleCanvas { will-change: auto; }
+
+    /* ── PERFORMANCE: content-visibility en secciones below-the-fold ── */
+    .ig-sec,
+    .mayoristas-sec,
+    footer {
+      content-visibility: auto;
+      contain-intrinsic-size: 0 500px;
+    }
+  </style>
+
+  <script>
+  /* ── BEER BUBBLES — canvas ligero con parallax al scroll ── */
+  (function () {
+    var cvs = document.getElementById('bubbleCanvas');
+    if (!cvs || typeof cvs.getContext !== 'function') return;
+    var ctx = cvs.getContext('2d');
+
+    var W, H, bubbles = [], RAF;
+    var scrollY = 0, targetScrollY = 0;
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) { cvs.style.display = 'none'; return; }
+
+    /* Paleta: dorado muy tenue */
+    var COLORS = [
+      'rgba(212,175,55,',
+      'rgba(255,220,90,',
+      'rgba(200,160,40,'
+    ];
+
+    function resize() {
+      W = cvs.width  = window.innerWidth;
+      H = cvs.height = window.innerHeight;
+    }
+
+    function makeBubble(forceBottom) {
+      var r = 2 + Math.random() * 4;          /* radio 2–6 px */
+      return {
+        x : Math.random() * W,
+        y : forceBottom ? H + r : Math.random() * H,
+        r : r,
+        speedY : 0.18 + Math.random() * 0.28, /* sube lento */
+        drift  : (Math.random() - .5) * 0.18,  /* meandro horizontal */
+        wobble : Math.random() * Math.PI * 2,  /* fase aleatoria */
+        alpha  : 0.06 + Math.random() * 0.1,
+        color  : COLORS[Math.floor(Math.random() * COLORS.length)]
+      };
+    }
+
+    function init() {
+      bubbles = [];
+      /* 28 burbujas distribuidas por la pantalla */
+      for (var i = 0; i < 28; i++) bubbles.push(makeBubble(false));
+    }
+
+    /* Parallax suave al scroll */
+    window.addEventListener('scroll', function () {
+      targetScrollY = window.scrollY;
+    }, { passive: true });
+
+    var lastTS = 0;
+    function draw(ts) {
+      RAF = requestAnimationFrame(draw);
+      var dt = Math.min(ts - lastTS, 50); /* cap a 50 ms para tabs ocultos */
+      lastTS = ts;
+
+      /* Lerp scroll para movimiento suave */
+      scrollY += (targetScrollY - scrollY) * 0.06;
+
+      ctx.clearRect(0, 0, W, H);
+
+      bubbles.forEach(function (b) {
+        b.wobble += 0.018;
+        b.x += Math.sin(b.wobble) * b.drift;
+        /* La burbuja sube; el scroll la desplaza levemente hacia abajo (parallax) */
+        b.y -= b.speedY * (dt / 16);
+
+        /* Reciclar cuando sale por arriba */
+        if (b.y + b.r < 0) {
+          var nb = makeBubble(true);
+          b.x = nb.x; b.y = nb.y; b.r = nb.r;
+          b.speedY = nb.speedY; b.drift = nb.drift;
+          b.wobble = nb.wobble; b.alpha = nb.alpha;
+          b.color = nb.color;
+        }
+
+        /* Offset parallax: burbujas más grandes se mueven más al scroll */
+        var parallaxOff = (scrollY * b.r * 0.004);
+
+        ctx.save();
+        ctx.globalAlpha = b.alpha;
+
+        /* Círculo exterior tenue */
+        ctx.beginPath();
+        ctx.arc(b.x, b.y + parallaxOff, b.r, 0, Math.PI * 2);
+        ctx.strokeStyle = b.color + (b.alpha * 1.8) + ')';
+        ctx.lineWidth = .8;
+        ctx.stroke();
+
+        /* Brillo interior (reflejo) */
+        var grad = ctx.createRadialGradient(
+          b.x - b.r * .3, b.y + parallaxOff - b.r * .3, b.r * .05,
+          b.x, b.y + parallaxOff, b.r
+        );
+        grad.addColorStop(0, b.color + (b.alpha * 1.5) + ')');
+        grad.addColorStop(1, b.color + '0)');
+        ctx.beginPath();
+        ctx.arc(b.x, b.y + parallaxOff, b.r, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+
+        ctx.restore();
+      });
+    }
+
+    resize();
+    init();
+    RAF = requestAnimationFrame(draw);
+
+    /* Pausa cuando la tab no es visible — ahorro de CPU */
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) { cancelAnimationFrame(RAF); }
+      else { lastTS = 0; RAF = requestAnimationFrame(draw); }
+    });
+
+    window.addEventListener('resize', function () {
+      resize();
+      init();
+    }, { passive: true });
+  })();
   </script>
 </body>
 
