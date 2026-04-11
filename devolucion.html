@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Arrepentimiento de Compra · König Cerveza Artesanal</title>
+  <meta name="description" content="Formulario de arrepentimiento de compra según Ley 24.240 de Defensa del Consumidor. König Cerveza Artesanal.">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,700;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --negro: #0a0a0a;
+      --carbon: #111;
+      --carbon2: #1a1a1a;
+      --carbon3: #242424;
+      --oro: #c9971c;
+      --oro2: #e8b832;
+      --oro-borde: rgba(201,151,28,.4);
+      --blanco: #f5f0e8;
+      --gris2: #c9bb94;
+      --txt2: rgba(245,240,232,.88);
+      --rojo: #e74c3c;
+      --rojo2: #c0392b;
+    }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: var(--negro);
+      color: var(--blanco);
+      min-height: 100vh;
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-thumb { background: var(--oro); border-radius: 2px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6%;
+      background: rgba(10,10,10,.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--oro-borde);
+    }
+
+    .n-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .n-logo img { height: 44px; width: 44px; object-fit: contain; }
+
+    .n-nombre {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--oro2);
+    }
+
+    .n-sub {
+      font-size: .5rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gris2);
+    }
+
+    .nav-back {
+      font-family: 'Cinzel', serif;
+      font-size: .65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--txt2);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 0;
+      transition: color .2s;
+    }
+
+    .nav-back:hover { color: var(--oro2); }
+    .nav-back i { margin-right: 6px; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 130px 6% 60px;
+      text-align: center;
+      border-bottom: 1px solid rgba(201,151,28,.12);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(231,76,60,.1);
+      border: 1px solid rgba(231,76,60,.3);
+      border-radius: 40px;
+      padding: 6px 18px;
+      font-family: 'Cinzel', serif;
+      font-size: .6rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--rojo);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      color: var(--blanco);
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+
+    .hero h1 span { color: var(--oro2); font-style: italic; }
+
+    .hero-desc {
+      max-width: 640px;
+      margin: 0 auto 20px;
+      font-size: .9rem;
+      line-height: 1.8;
+      color: var(--txt2);
+    }
+
+    /* ── LEY INFO BOX ── */
+    .ley-box {
+      max-width: 720px;
+      margin: 0 auto 50px;
+      background: rgba(201,151,28,.06);
+      border: 1px solid var(--oro-borde);
+      border-radius: 14px;
+      padding: 24px 28px;
+      text-align: left;
+    }
+
+    .ley-box-title {
+      font-family: 'Cinzel', serif;
+      font-size: .65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--oro2);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ley-box p {
+      font-size: .82rem;
+      line-height: 1.7;
+      color: var(--gris2);
+    }
+
+    .ley-box strong { color: var(--blanco); }
+
+    /* ── MAIN CONTENT ── */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 6% 80px;
+    }
+
+    /* ── FORM ── */
+    .form-section {
+      background: var(--carbon);
+      border: 1px solid rgba(201,151,28,.18);
+      border-radius: 18px;
+      padding: 40px 36px;
+    }
+
+    .form-section-title {
+      font-family: 'Cinzel', serif;
+      font-size: .7rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--oro);
+      margin-bottom: 28px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(201,151,28,.15);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .form-group.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: .72rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gris2);
+      font-weight: 600;
+    }
+
+    label span.req { color: var(--rojo); margin-left: 2px; }
+
+    input, select, textarea {
+      background: var(--carbon2);
+      border: 1px solid rgba(201,151,28,.2);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--blanco);
+      font-family: 'Raleway', sans-serif;
+      font-size: .88rem;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+      width: 100%;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--oro);
+      box-shadow: 0 0 0 3px rgba(201,151,28,.12);
+    }
+
+    input::placeholder, textarea::placeholder { color: rgba(201,187,148,.35); }
+
+    select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9971c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+
+    select option { background: var(--carbon2); }
+
+    textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
+
+    /* ── MOTIVO RADIOS ── */
+    .motivos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .motivo-opt {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--carbon2);
+      border: 1px solid rgba(201,151,28,.15);
+      border-radius: 8px;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+    }
+
+    .motivo-opt:hover { border-color: var(--oro-borde); }
+
+    .motivo-opt input[type="radio"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--oro);
+      flex-shrink: 0;
+      padding: 0;
+    }
+
+    .motivo-opt span {
+      font-size: .8rem;
+      color: var(--txt2);
+      line-height: 1.3;
+    }
+
+    .motivo-opt:has(input:checked) {
+      border-color: var(--oro);
+      background: rgba(201,151,28,.08);
+    }
+
+    /* ── DIVIDER ── */
+    .form-divider {
+      border: none;
+      border-top: 1px solid rgba(201,151,28,.1);
+      margin: 28px 0;
+    }
+
+    /* ── SUBMIT ── */
+    .btn-wa {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      background: #25d366;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 16px 24px;
+      font-family: 'Cinzel', serif;
+      font-size: .75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background .2s, transform .15s;
+      margin-top: 10px;
+    }
+
+    .btn-wa:hover { background: #1ebe5c; transform: translateY(-2px); }
+    .btn-wa:active { transform: translateY(0); }
+    .btn-wa i { font-size: 1.1rem; }
+
+    .form-note {
+      margin-top: 16px;
+      font-size: .72rem;
+      color: var(--gris2);
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--carbon);
+      border-top: 1px solid var(--oro-borde);
+      padding: 32px 6% 24px;
+      text-align: center;
+    }
+
+    .ft-cr {
+      font-size: .62rem;
+      letter-spacing: 1px;
+      color: #555;
+      margin-bottom: 6px;
+    }
+
+    .ft-cr a { color: var(--oro2); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .form-section { padding: 28px 20px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .motivos-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="n-logo">
+      <img src="imagenes/logo_koing.png" alt="König" loading="eager">
+      <div>
+        <div class="n-nombre">König</div>
+        <div class="n-sub">Cerveza Artesanal</div>
+      </div>
+    </a>
+    <a href="store.html" class="nav-back"><i class="fas fa-arrow-left"></i>Volver a la tienda</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge"><i class="fas fa-shield-alt"></i> Ley 24.240 — Defensa del Consumidor</div>
+    <h1>Formulario de<br><span>Arrepentimiento de Compra</span></h1>
+    <p class="hero-desc">
+      Ejercé tu derecho de arrepentimiento dentro de los <strong>10 días Corridos</strong> desde la fecha de entrega del producto o celebración del contrato, sin necesidad de justificación y sin costo alguno.
+    </p>
+
+    <div class="ley-box">
+      <div class="ley-box-title"><i class="fas fa-balance-scale"></i> Art. 34 — Ley 24.240 de Defensa del Consumidor</div>
+      <p>
+        <strong>Derecho de arrepentimiento:</strong> En los casos de venta a distancia, el consumidor tiene derecho a revocar la aceptación durante el plazo de <strong>diez (10) días corridos</strong> contados a partir de la fecha de entrega, sin responsabilidad alguna. Si el derecho de revocación es ejercido, los importes abonados deben ser devueltos de inmediato.
+      </p>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <main>
+    <form class="form-section" id="formDevolucion" novalidate>
+
+      <div class="form-section-title"><i class="fas fa-user" style="margin-right:8px;color:var(--oro)"></i>Datos del consumidor</div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="nombre">Nombre completo <span class="req">*</span></label>
+          <input type="text" id="nombre" name="nombre" placeholder="Ej: María García" required>
+        </div>
+        <div class="form-group">
+          <label for="dni">DNI <span class="req">*</span></label>
+          <input type="text" id="dni" name="dni" placeholder="Ej: 28.000.000" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email <span class="req">*</span></label>
+          <input type="email" id="email" name="email" placeholder="tucorreo@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="telefono">Teléfono <span class="req">*</span></label>
+          <input type="tel" id="telefono" name="telefono" placeholder="Ej: 3444 000000" required>
+        </div>
+      </div>
+
+      <hr class="form-divider">
+      <div class="form-section-title"><i class="fas fa-shopping-bag" style="margin-right:8px;color:var(--oro)"></i>Datos de la compra</div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="fechaCompra">Fecha de compra <span class="req">*</span></label>
+          <input type="date" id="fechaCompra" name="fechaCompra" required>
+        </div>
+        <div class="form-group">
+          <label for="nroPedido">Número de envío</label>
+          <input type="text" id="nroPedido" name="nroPedido" placeholder="Si lo tenés (opcional)">
+        </div>
+        <div class="form-group full">
+          <label for="producto">Producto/s a devolver <span class="req">*</span></label>
+          <input type="text" id="producto" name="producto" placeholder="Ej: Milk Stout Pack x6, Remera König talle L" required>
+        </div>
+        <div class="form-group">
+          <label for="monto">Monto abonado ($) <span class="req">*</span></label>
+          <input type="text" id="monto" name="monto" placeholder="Ej: 4.000" required>
+        </div>
+        <div class="form-group">
+          <label for="medioPago">Medio de pago</label>
+          <select id="medioPago" name="medioPago">
+            <option value="" disabled selected>Seleccioná</option>
+            <option>Transferencia bancaria</option>
+            <option>Mercado Pago</option>
+            <option>Efectivo</option>
+            <option>Otro</option>
+          </select>
+        </div>
+      </div>
+
+      <hr class="form-divider">
+      <div class="form-section-title"><i class="fas fa-comment-alt" style="margin-right:8px;color:var(--oro)"></i>Motivo del arrepentimiento</div>
+
+      <div class="form-group full" style="margin-bottom:16px;">
+        <label>Motivo principal <span class="req">*</span></label>
+        <div class="motivos-grid" id="motivoGroup">
+          <label class="motivo-opt">
+            <input type="radio" name="motivo" value="No era lo que esperaba">
+            <span>No era lo que esperaba</span>
+          </label>
+          <label class="motivo-opt">
+            <input type="radio" name="motivo" value="Me arrepentí de la compra">
+            <span>Me arrepentí de la compra</span>
+          </label>
+          <label class="motivo-opt">
+            <input type="radio" name="motivo" value="Compré por error">
+            <span>Compré por error</span>
+          </label>
+          <label class="motivo-opt">
+            <input type="radio" name="motivo" value="Encontré mejor precio">
+            <span>Encontré mejor precio</span>
+          </label>
+          <label class="motivo-opt">
+            <input type="radio" name="motivo" value="Producto dañado o en mal estado">
+            <span>Producto dañado o en mal estado</span>
+          </label>
+          <label class="motivo-opt">
+            <input type="radio" name="motivo" value="Otro motivo">
+            <span>Otro motivo</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group full">
+        <label for="detalle">Detalle adicional (opcional)</label>
+        <textarea id="detalle" name="detalle" placeholder="Podés ampliar el motivo aquí..."></textarea>
+      </div>
+
+      <hr class="form-divider">
+
+      <button type="submit" class="btn-wa" id="btnEnviar">
+        <i class="fab fa-whatsapp"></i>
+        Enviar solicitud por WhatsApp
+      </button>
+
+      <p class="form-note">
+        Al enviar este formulario se abrirá WhatsApp con los datos completos de tu solicitud.<br>
+        Tu pedido será procesado en un plazo máximo de <strong>10 días Corridos</strong> conforme a la Ley 24.240.<br>
+        <strong>König Cerveza Artesanal</strong> · Villa Larroque, Entre Ríos, Argentina.
+      </p>
+
+    </form>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="ft-cr">© 2026 König · Cerveza Artesanal · Entre Ríos, Argentina</p>
+    <p class="ft-cr" style="margin-top:4px;">Diseño web: <a href="https://www.wbserviceinformatica.com.ar" target="_blank" rel="noopener noreferrer">WB Service</a></p>
+    <p class="ft-cr" style="margin-top:8px;font-size:.58rem;color:#444;">Ley N° 24.240 — Defensa del Consumidor · Ley N° 25.326 — Protección de Datos Personales.<br>Beber con moderación. Prohibida la venta a menores de 18 años. Ley 24.788.</p>
+  </footer>
+
+  <script>
+    const WA_NUMBER = "5493446668916";
+
+    document.getElementById('formDevolucion').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Validaciones básicas
+      const nombre = document.getElementById('nombre').value.trim();
+      const dni = document.getElementById('dni').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const telefono = document.getElementById('telefono').value.trim();
+      const fechaCompra = document.getElementById('fechaCompra').value;
+      const producto = document.getElementById('producto').value.trim();
+      const monto = document.getElementById('monto').value.trim();
+      const motivoEl = document.querySelector('input[name="motivo"]:checked');
+      const detalle = document.getElementById('detalle').value.trim();
+      const nroPedido = document.getElementById('nroPedido').value.trim();
+      const medioPago = document.getElementById('medioPago').value;
+
+      if (!nombre || !dni || !email || !telefono || !fechaCompra || !producto || !monto) {
+        alert('Por favor completá todos los campos obligatorios (*).');
+        return;
+      }
+
+      if (!motivoEl) {
+        alert('Por favor seleccioná el motivo del arrepentimiento.');
+        return;
+      }
+
+      const motivo = motivoEl.value;
+
+      // Fecha legible
+      const [y, m, d] = fechaCompra.split('-');
+      const fechaLegible = `${d}/${m}/${y}`;
+
+      // Armar mensaje
+      let msg = `*SOLICITUD DE ARREPENTIMIENTO DE COMPRA*\n`;
+      msg += `_(Ley 24.240 — Defensa del Consumidor)_\n\n`;
+      msg += `*DATOS DEL CONSUMIDOR*\n`;
+      msg += `• Nombre: ${nombre}\n`;
+      msg += `• DNI: ${dni}\n`;
+      msg += `• Email: ${email}\n`;
+      msg += `• Teléfono: ${telefono}\n\n`;
+      msg += `*DATOS DE LA COMPRA*\n`;
+      msg += `• Fecha de compra: ${fechaLegible}\n`;
+      if (nroPedido) msg += `• N° de pedido: ${nroPedido}\n`;
+      msg += `• Producto/s: ${producto}\n`;
+      msg += `• Monto abonado: $${monto}\n`;
+      if (medioPago) msg += `• Medio de pago: ${medioPago}\n`;
+      msg += `\n*MOTIVO*\n`;
+      msg += `• ${motivo}\n`;
+      if (detalle) msg += `• Detalle: ${detalle}\n`;
+      msg += `\nSolicito la devolución del importe abonado conforme al Art. 34 de la Ley 24.240.`;
+
+      const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    });
+  </script>
+
+</body>
+</html>

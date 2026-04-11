@@ -288,7 +288,7 @@
       color: var(--wh);
       letter-spacing: 2px;
       line-height: 1;
-      text-shadow: 0 4px 12px rgba(0,0,0,0.9);
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.9);
     }
 
     .n-sub {
@@ -298,7 +298,7 @@
       color: rgba(255, 255, 255, 0.85);
       margin-top: 3px;
       font-family: var(--ff-head);
-      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
     }
 
     .n-links {
@@ -317,7 +317,7 @@
       font-weight: 700;
       transition: color var(--t-fast);
       font-family: var(--ff-head);
-      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
     }
 
     .n-links a:hover {
@@ -678,7 +678,7 @@
       letter-spacing: .3em;
       text-transform: uppercase;
       font-family: var(--ff-head);
-      text-shadow: 0 2px 8px rgba(0,0,0,0.8), 0 0 12px rgba(212, 175, 55, 0.4);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 12px rgba(212, 175, 55, 0.4);
     }
 
     .hero-eyebrow::before,
@@ -717,7 +717,7 @@
       color: var(--wh);
       letter-spacing: 1px;
       display: block;
-      text-shadow: 0 6px 40px rgba(0, 0, 0, 0.9), 0 2px 10px rgba(0,0,0,0.6);
+      text-shadow: 0 6px 40px rgba(0, 0, 0, 0.9), 0 2px 10px rgba(0, 0, 0, 0.6);
     }
 
     .hero-tagline {
@@ -1946,7 +1946,10 @@
           <div class="bar-body">
             <div class="bar-ciudad"><i class="fas fa-map-marker-alt"></i> Gualeguay · Sede Original</div>
             <div class="bar-nombre">König Gualeguay</div>
-            <div class="bar-dir"><i class="fas fa-map-marker-alt"></i> San Antonio & Primer Entrerriano</div>
+            <div class="bar-dir"><a
+                href="https://www.google.com/maps/search/?api=1&query=San+Antonio+y+Primer+Entrerriano,+Gualeguay"
+                target="_blank" style="text-decoration: underline; color: inherit;"><i
+                  class="fas fa-map-marker-alt"></i> San Antonio & Primer Entrerriano</a></div>
             <div class="bar-horario">Lun / Mié a Dom: 19:00 – 02:00 · Martes: cerrado</div>
             <div class="bar-btns">
               <a href="https://wa.me/5493444527876?text=Hola!%20Quiero%20consultar" target="_blank"
@@ -1969,8 +1972,12 @@
           <div class="bar-body">
             <div class="bar-ciudad"><i class="fas fa-map-marker-alt"></i> Gualeguaychú · Nueva Sede</div>
             <div class="bar-nombre">König Gualeguaychú</div>
-            <div class="bar-dir"><i class="fas fa-map-marker-alt"></i> <!-- Dirección a completar --></div>
-            <div class="bar-horario"><!-- Horarios a completar --></div>
+            <div class="bar-dir"><a
+                href="https://www.google.com/maps/search/?api=1&query=Av+del+Valle+y+Alem,+Gualeguaychú" target="_blank"
+                style="text-decoration: underline; color: inherit;"><i class="fas fa-map-marker-alt"></i> Av del Valle y
+                Alem</a></div>
+            <div class="bar-horario"><i class="fas fa-"></i> Miércoles / domingos desde las 19hs - Lunes y martes
+              cerrado</div>
             <div class="bar-btns">
               <a href="https://wa.me/5493446614536?text=Hola!%20Quiero%20consultar" target="_blank"
                 class="bbar bbar-wa"><i class="fab fa-whatsapp"></i> 3446614536</a>
@@ -2184,8 +2191,8 @@
             <div class="ft-sub">Cerveza Artesanal</div>
           </div>
         </div>
-        <p class="ft-desc">Cervecería artesanal entrerriana. Fábrica en Ciudad Larroque. Bar en Gualeguay. Distribución
-          en todo el país.</p>
+        <p class="ft-desc">Cervecería artesanal entrerriana. Fábrica en Ciudad Larroque. Distribución en todo el país.
+        </p>
         <div class="ft-socs">
           <a href="https://www.instagram.com/cerveza_konig/" target="_blank" class="ft-soc" title="@cerveza_konig"><i
               class="fab fa-instagram"></i></a>
@@ -2207,7 +2214,11 @@
         <h4>Contacto</h4>
         <ul>
           <li><a href="https://wa.me/5493444527876" target="_blank">📱 Gualeguay · 3444 527876</a></li>
-          <li><a href="#">📍 San Antonio & 1er Entrerriano · Gualeguay</a></li>
+          <li><a href="https://www.google.com/maps/search/?api=1&query=San+Antonio+y+Primer+Entrerriano,+Gualeguay"
+              target="_blank">📍 San Antonio & 1er Entrerriano · Gualeguay</a></li>
+          <li><a href="https://wa.me/5493446614536" target="_blank">📱 Gualeguaychú · 3446 614536</a></li>
+          <li><a href="https://www.google.com/maps/search/?api=1&query=Av+del+Valle+y+Alem,+Gualeguaychú"
+              target="_blank">📍 Av del Valle y Alem · Gualeguaychú</a></li>
           <li><a href="https://wa.me/5493446668916" target="_blank">📱 Mayoristas · 3446 668916</a></li>
           <li><a href="#">🏭 Cervecería · Ciudad Larroque, ER</a></li>
         </ul>
@@ -2225,6 +2236,10 @@
         <a href="terminos.html" class="ft-cr" style="color:rgba(212,175,55,.5);transition:color .2s;"
           onmouseover="this.style.color='var(--g)'" onmouseout="this.style.color='rgba(212,175,55,.5)'">Términos y
           Condiciones</a>
+        <span style="color:rgba(255,255,255,.15);font-size:.65rem;">|</span>
+        <a href="devolucion.html" class="ft-cr" style="color:#e74c3c;font-weight:600;transition:color .2s;"
+          onmouseover="this.style.color='#ff6b5b'" onmouseout="this.style.color='#e74c3c'">⟵ Arrepentimiento de compra
+          (Ley 24.240)</a>
       </div>
       <p class="ft-legal">Beber con moderación. Prohibida la venta a menores de 18 años. Ley 24.788.<br>Los precios
         pueden variar sin previo aviso. CUIT: <span>A completar por König</span> · König Cerveza Artesanal · Villa
