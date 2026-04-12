@@ -9,12 +9,16 @@
     content="Tienda oficial König. Cervezas artesanales, remeras, gorras, hoodies y accesorios. Pedidos por WhatsApp.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.gstatic.com/s/cinzel/v23/8vIJ7ww63mVu7gt79mT7.woff2" as="font" type="font/woff2" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,700;1,300;1,400;1,600;1,700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MorphSVGPlugin.min.js"></script>
+  <!-- Font Awesome no bloqueante -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+  <!-- GSAP diferido: no bloquea el render inicial -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MorphSVGPlugin.min.js"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="manifest" href="site.webmanifest">
@@ -2042,6 +2046,80 @@
         animation-iteration-count: 1 !important;
       }
     }
+
+    /* ── OPTIMIZACIONES MÓVILES ── */
+    img[loading="lazy"] {
+      background: var(--carbon2);
+    }
+
+    /* content-visibility para secciones fuera de pantalla */
+    #productos-section,
+    footer {
+      content-visibility: auto;
+      contain-intrinsic-size: 0 800px;
+    }
+
+    /* ══════════════════════════════════════════
+       TOUCH / MÓVIL — (pointer: coarse)
+    ══════════════════════════════════════════ */
+    @media (pointer: coarse) {
+
+      /* ── Animaciones infinitas: APAGADAS ──
+         orbDrift, heroLogoFloat, gradShift, cartPulse, fabPulse
+         son las que más consumen GPU en Android */
+      .store-hero-orb           { animation: none !important; }
+      .store-hero-logo          { animation: none !important;
+                                  filter: drop-shadow(0 0 28px rgba(201,151,28,.55)); }
+      .mayoristas-bg,
+      .store-hero::before       { animation: none !important; }
+      .cart-fab                 { animation: none !important; }
+      .cart-fab::before         { animation: none !important; }
+
+      /* ── backdrop-filter: mínimo en touch ──
+         blur(20px)/blur(28px) con saturate es doble pasada de GPU */
+      nav {
+        backdrop-filter: blur(8px) !important;
+        -webkit-backdrop-filter: blur(8px) !important;
+      }
+      .mob-menu,
+      .mobile-nav {
+        backdrop-filter: blur(8px) !important;
+        -webkit-backdrop-filter: blur(8px) !important;
+      }
+      /* El carrito/lightbox con blur alto — reducir */
+      #cartDrawer,
+      .lightbox,
+      .modal {
+        backdrop-filter: blur(8px) !important;
+        -webkit-backdrop-filter: blur(8px) !important;
+      }
+
+      /* ── will-change: liberar VRAM ── */
+      .product-card,
+      .store-hero-logo,
+      .cart-fab {
+        will-change: auto !important;
+      }
+
+      /* ── Hover en cards: no existe en touch, quitar el costo CSS ── */
+      .product-card:hover {
+        transform: none !important;
+        box-shadow: 0 4px 16px rgba(0,0,0,.5) !important;
+      }
+      .product-card::before     { display: none !important; }
+      .product-img::before      { display: none !important; }
+      .product-img img          { transition: none !important; }
+
+      /* ── Botón carrito: transición simple ── */
+      .add-to-cart-btn {
+        transition: opacity .2s ease !important;
+      }
+
+      /* ── Carrito lateral: ancho completo ── */
+      #cartDrawer {
+        width: 100% !important;
+      }
+    }
   </style>
 </head>
 
@@ -2051,7 +2129,7 @@
   <!-- VERIFICACIÓN DE EDAD -->
   <div id="ageGate"
     style="position:fixed;inset:0;z-index:10000;background:rgba(5,5,5,.98);display:none;flex-direction:column;align-items:center;justify-content:center;padding:28px;">
-    <img src="imagenes/logo_koing.png" alt="König"
+    <img src="imagenes/logo_koing.webp" alt="König"
       style="width:90px;margin-bottom:28px;filter:drop-shadow(0 0 20px rgba(201,151,28,.4));"
       onerror="this.style.display='none'">
     <p
@@ -2084,7 +2162,7 @@
 
   <nav>
     <a href="index.html" class="n-logo">
-      <img src="imagenes/logo_koing.png" alt="König" width="48" height="48">
+      <img src="imagenes/logo_koing.webp" alt="König" width="48" height="48">
       <div>
         <div class="n-nombre">König</div>
         <div class="n-sub">Cerveza Artesanal</div>
@@ -2111,7 +2189,7 @@
 
   <section class="store-hero">
     <div class="store-hero-icon">
-      <img src="imagenes/logo_koing.png" alt="König" width="80" height="80" loading="eager">
+      <img src="imagenes/logo_koing.webp" alt="König" width="80" height="80" loading="eager">
     </div>
     <h1>Tienda <em>König</em></h1>
     <p>Cervezas artesanales, indumentaria y accesorios oficiales. Pedidos por WhatsApp.</p>
@@ -2192,7 +2270,7 @@
     <div class="ft-top">
       <div>
         <div class="ft-logo">
-          <img src="imagenes/logo_koing.png" alt="König" width="44" height="44" loading="lazy">
+          <img src="imagenes/logo_koing.webp" alt="König" width="44" height="44" loading="lazy">
           <div class="ft-nombre">König</div>
         </div>
         <p class="ft-desc">Cervecería Artesanal<br>Villa Larroque, Entre Ríos</p>
@@ -2261,19 +2339,19 @@
     // PRODUCTOS
     // ================================================================
     const productos = [
-      { id: 1, nombre: "Blonde", categoria: "cervezas", style: "Rubia · Maltosa", descripcion: "Rubia, suave y refrescante. Perfil maltoso y bajo amargor.", specs: { "Graduación": "4.5% ABV", "Amargor": "14 IBU", "Perfil": "Maltoso", "Temperatura": "4–6°C" }, imagen: "imagenes/productos/pack-cervezas1.jpg", variantes: [{ tipo: "Presentación", opciones: ["Lata 473ml", "Pack x6"] }], precio: "$3.500", tag: "Clásica" },
-      { id: 2, nombre: "Sweet Red", categoria: "cervezas", style: "Red Ale · Estilo Irlandés", descripcion: "Roja estilo irlandés con cuerpo medio, notas de caramelo dulce y bajo amargor.", specs: { "Graduación": "4.2% ABV", "Amargor": "14 IBU", "Perfil": "Caramelo dulce", "Temperatura": "6–8°C" }, imagen: "imagenes/productos/pack-cervezas2.jpg", variantes: [{ tipo: "Presentación", opciones: ["Lata 473ml", "Pack x6"] }], precio: "$3.500", tag: "Premiada" },
-      { id: 3, nombre: "Honey", categoria: "cervezas", style: "Rubia con Miel", descripcion: "Rubia de cuerpo medio con intenso aroma y sabor a miel. Fresca y agradable.", specs: { "Graduación": "6.0% ABV", "Amargor": "12 IBU", "Perfil": "Miel · Floral", "Temperatura": "4–6°C" }, imagen: "imagenes/productos/pack-cervezas3.jpg", variantes: [{ tipo: "Presentación", opciones: ["Lata 473ml", "Pack x6"] }], precio: "$3.500", tag: "⭐ Top ventas" },
-      { id: 4, nombre: "Session IPA", categoria: "cervezas", style: "Session IPA", descripcion: "Ligera y refrescante con lúpulos cítricos y herbales. Bajo alcohol y amargor moderado.", specs: { "Graduación": "4.2% ABV", "Amargor": "30 IBU", "Perfil": "Cítrico · Herbal", "Temperatura": "5–7°C" }, imagen: "imagenes/productos/pack-cervezas4.jpg", variantes: [{ tipo: "Presentación", opciones: ["Lata 473ml", "Pack x6"] }], precio: "$4.000", tag: "Refrescante" },
-      { id: 5, nombre: "American IPA", categoria: "cervezas", style: "American IPA", descripcion: "Cuerpo medio, amargor moderado y lúpulos americanos con notas cítricas, tropicales y melón.", specs: { "Graduación": "5.5% ABV", "Amargor": "40 IBU", "Perfil": "Cítrico · Tropical", "Temperatura": "6–8°C" }, imagen: "imagenes/productos/pack-cervezas5.jpg", variantes: [{ tipo: "Presentación", opciones: ["Lata 473ml", "Pack x6"] }], precio: "$4.000", tag: "Hoppy" },
-      { id: 6, nombre: "Bohemia Pilsen", categoria: "cervezas", style: "Pilsen · Bohemia", descripcion: "Dorada, liviana y refrescante. Fácil de tomar para cualquier ocasión.", specs: { "Graduación": "5.2% ABV", "Amargor": "13 IBU", "Perfil": "Suave · Dorado", "Temperatura": "4–6°C" }, imagen: "imagenes/productos/pack-cervezas6.jpg", variantes: [{ tipo: "Presentación", opciones: ["Lata 473ml", "Pack x6"] }], precio: "$3.500", tag: "Verano" },
-      { id: 7, nombre: "NEIPA", categoria: "cervezas", style: "New England IPA", descripcion: "Cerveza turbia de amargor suave con notas frutales tropicales, textura cremosa y fácil de beber.", specs: { "Graduación": "6.5% ABV", "Amargor": "40 IBU", "Perfil": "Tropical · Cremoso", "Temperatura": "6–8°C" }, imagen: "imagenes/productos/pack-cervezas7.jpg", variantes: [{ tipo: "Presentación", opciones: ["Lata 473ml", "Pack x6"] }], precio: "$4.000", tag: "Edición especial" },
-      { id: 13, nombre: "Milk Stout", categoria: "cervezas", style: "Stout · Cremosa", descripcion: "Cerveza negra, cremosa y suave, con notas a chocolate y café. Dulzor equilibrado y final sedoso.", specs: { "Graduación": "5.4% ABV", "Amargor": "16 IBU", "Perfil": "Chocolate · Café", "Temperatura": "8–10°C" }, imagen: "imagenes/productos/pack-cerveza8.jpg", variantes: [{ tipo: "Presentación", opciones: ["Lata 473ml", "Pack x6"] }], precio: "$3.500", tag: "Novedad" },
-      { id: 8, nombre: "Remera König", categoria: "remeras", style: "Indumentaria oficial", descripcion: "100% algodón peinado. Estampado frontal con logo König.", specs: { "Material": "100% algodón", "Estampado": "Frontal serigrafía", "Cuidado": "Lavar a 30°C" }, imagen: "imagenes/productos/remera-konig.jpg", variantes: [{ tipo: "Talle", opciones: ["S", "M", "L", "XL"] }], precio: "$8.500", tag: "Nuevo" },
-      { id: 9, nombre: "Remera König (Mujer)", categoria: "remeras", style: "Indumentaria oficial", descripcion: "Remerón oversize. Algodón premium.", specs: { "Material": "100% algodón", "Corte": "Oversize", "Cuidado": "Lavar a 30°C" }, imagen: "imagenes/productos/remera-mujer.jpg", variantes: [{ tipo: "Talle", opciones: ["S", "M", "L"] }], precio: "$8.500", tag: "Nuevo" },
-      { id: 10, nombre: "Hoodie König", categoria: "hoodies", style: "Indumentaria oficial", descripcion: "Buzo canguro con capucha. Frisa interior.", specs: { "Material": "Algodón + poliéster", "Interior": "Frisa", "Cuidado": "Lavar a 30°C" }, imagen: "imagenes/productos/hoodie-konig.jpg", variantes: [{ tipo: "Talle", opciones: ["S", "M", "L", "XL"] }], precio: "$18.000", tag: "Edición limitada" },
-      { id: 11, nombre: "Gorra König", categoria: "gorras", style: "Accesorio oficial", descripcion: "Gorra negra con bordado König. Ajustable.", specs: { "Material": "100% algodón", "Cierre": "Ajustable", "Bordado": "Logo frontal" }, imagen: "imagenes/productos/gorra-konig.jpg", variantes: [{ tipo: "Color", opciones: ["Negro", "Dorado"] }], precio: "$6.500", tag: "Top ventas" },
-      { id: 12, nombre: "Vaso König", categoria: "vasos", style: "Accesorio oficial", descripcion: "Vaso de vidrio grabado con logo König.", specs: { "Material": "Vidrio templado", "Capacidad": "500ml", "Grabado": "Láser" }, imagen: "imagenes/productos/vaso-konig.jpg", variantes: [{ tipo: "Modelo", opciones: ["Pinta", "Largo"] }], precio: "$4.800", tag: "Exclusivo" }
+      { id: 1, nombre: "Blonde", categoria: "cervezas", style: "Rubia · Maltosa", descripcion: "Rubia, suave y refrescante. Perfil maltoso y bajo amargor.", specs: { "Graduación": "4.5% ABV", "Amargor": "14 IBU", "Perfil": "Maltoso", "Temperatura": "4–6°C" }, imagen: "imagenes/productos/pack-cervezas1.webp", variantes: [{ tipo: "Presentación", opciones: ["Lata 473ml", "Pack x6"] }], precio: "$3.500", tag: "Clásica" },
+      { id: 2, nombre: "Sweet Red", categoria: "cervezas", style: "Red Ale · Estilo Irlandés", descripcion: "Roja estilo irlandés con cuerpo medio, notas de caramelo dulce y bajo amargor.", specs: { "Graduación": "4.2% ABV", "Amargor": "14 IBU", "Perfil": "Caramelo dulce", "Temperatura": "6–8°C" }, imagen: "imagenes/productos/pack-cervezas2.webp", variantes: [{ tipo: "Presentación", opciones: ["Lata 473ml", "Pack x6"] }], precio: "$3.500", tag: "Premiada" },
+      { id: 3, nombre: "Honey", categoria: "cervezas", style: "Rubia con Miel", descripcion: "Rubia de cuerpo medio con intenso aroma y sabor a miel. Fresca y agradable.", specs: { "Graduación": "6.0% ABV", "Amargor": "12 IBU", "Perfil": "Miel · Floral", "Temperatura": "4–6°C" }, imagen: "imagenes/productos/pack-cervezas3.webp", variantes: [{ tipo: "Presentación", opciones: ["Lata 473ml", "Pack x6"] }], precio: "$3.500", tag: "⭐ Top ventas" },
+      { id: 4, nombre: "Session IPA", categoria: "cervezas", style: "Session IPA", descripcion: "Ligera y refrescante con lúpulos cítricos y herbales. Bajo alcohol y amargor moderado.", specs: { "Graduación": "4.2% ABV", "Amargor": "30 IBU", "Perfil": "Cítrico · Herbal", "Temperatura": "5–7°C" }, imagen: "imagenes/productos/pack-cervezas4.webp", variantes: [{ tipo: "Presentación", opciones: ["Lata 473ml", "Pack x6"] }], precio: "$4.000", tag: "Refrescante" },
+      { id: 5, nombre: "American IPA", categoria: "cervezas", style: "American IPA", descripcion: "Cuerpo medio, amargor moderado y lúpulos americanos con notas cítricas, tropicales y melón.", specs: { "Graduación": "5.5% ABV", "Amargor": "40 IBU", "Perfil": "Cítrico · Tropical", "Temperatura": "6–8°C" }, imagen: "imagenes/productos/pack-cervezas5.webp", variantes: [{ tipo: "Presentación", opciones: ["Lata 473ml", "Pack x6"] }], precio: "$4.000", tag: "Hoppy" },
+      { id: 6, nombre: "Bohemia Pilsen", categoria: "cervezas", style: "Pilsen · Bohemia", descripcion: "Dorada, liviana y refrescante. Fácil de tomar para cualquier ocasión.", specs: { "Graduación": "5.2% ABV", "Amargor": "13 IBU", "Perfil": "Suave · Dorado", "Temperatura": "4–6°C" }, imagen: "imagenes/productos/pack-cervezas6.webp", variantes: [{ tipo: "Presentación", opciones: ["Lata 473ml", "Pack x6"] }], precio: "$3.500", tag: "Verano" },
+      { id: 7, nombre: "NEIPA", categoria: "cervezas", style: "New England IPA", descripcion: "Cerveza turbia de amargor suave con notas frutales tropicales, textura cremosa y fácil de beber.", specs: { "Graduación": "6.5% ABV", "Amargor": "40 IBU", "Perfil": "Tropical · Cremoso", "Temperatura": "6–8°C" }, imagen: "imagenes/productos/pack-cervezas7.webp", variantes: [{ tipo: "Presentación", opciones: ["Lata 473ml", "Pack x6"] }], precio: "$4.000", tag: "Edición especial" },
+      { id: 13, nombre: "Milk Stout", categoria: "cervezas", style: "Stout · Cremosa", descripcion: "Cerveza negra, cremosa y suave, con notas a chocolate y café. Dulzor equilibrado y final sedoso.", specs: { "Graduación": "5.4% ABV", "Amargor": "16 IBU", "Perfil": "Chocolate · Café", "Temperatura": "8–10°C" }, imagen: "imagenes/productos/pack-cerveza8.webp", variantes: [{ tipo: "Presentación", opciones: ["Lata 473ml", "Pack x6"] }], precio: "$3.500", tag: "Novedad" },
+      { id: 8, nombre: "Remera König", categoria: "remeras", style: "Indumentaria oficial", descripcion: "100% algodón peinado. Estampado frontal con logo König.", specs: { "Material": "100% algodón", "Estampado": "Frontal serigrafía", "Cuidado": "Lavar a 30°C" }, imagen: "imagenes/productos/remera-konig.webp", variantes: [{ tipo: "Talle", opciones: ["S", "M", "L", "XL"] }], precio: "$8.500", tag: "Nuevo" },
+      { id: 9, nombre: "Remera König (Mujer)", categoria: "remeras", style: "Indumentaria oficial", descripcion: "Remerón oversize. Algodón premium.", specs: { "Material": "100% algodón", "Corte": "Oversize", "Cuidado": "Lavar a 30°C" }, imagen: "imagenes/productos/remera-mujer.webp", variantes: [{ tipo: "Talle", opciones: ["S", "M", "L"] }], precio: "$8.500", tag: "Nuevo" },
+      { id: 10, nombre: "Hoodie König", categoria: "hoodies", style: "Indumentaria oficial", descripcion: "Buzo canguro con capucha. Frisa interior.", specs: { "Material": "Algodón + poliéster", "Interior": "Frisa", "Cuidado": "Lavar a 30°C" }, imagen: "imagenes/productos/hoodie-konig.webp", variantes: [{ tipo: "Talle", opciones: ["S", "M", "L", "XL"] }], precio: "$18.000", tag: "Edición limitada" },
+      { id: 11, nombre: "Gorra König", categoria: "gorras", style: "Accesorio oficial", descripcion: "Gorra negra con bordado König. Ajustable.", specs: { "Material": "100% algodón", "Cierre": "Ajustable", "Bordado": "Logo frontal" }, imagen: "imagenes/productos/gorra-konig.webp", variantes: [{ tipo: "Color", opciones: ["Negro", "Dorado"] }], precio: "$6.500", tag: "Top ventas" },
+      { id: 12, nombre: "Vaso König", categoria: "vasos", style: "Accesorio oficial", descripcion: "Vaso de vidrio grabado con logo König.", specs: { "Material": "Vidrio templado", "Capacidad": "500ml", "Grabado": "Láser" }, imagen: "imagenes/productos/vaso-konig.webp", variantes: [{ tipo: "Modelo", opciones: ["Pinta", "Largo"] }], precio: "$4.800", tag: "Exclusivo" }
     ];
 
     // ================================================================

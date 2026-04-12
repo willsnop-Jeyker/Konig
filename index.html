@@ -15,6 +15,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="manifest" href="site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.gstatic.com/s/cinzel/v23/8vIJ7ww63mVu7gt79mT7.woff2" as="font"
     type="font/woff2" crossorigin>
   <link rel="preload"
@@ -23,7 +25,9 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,700;1,300;1,400;1,600;1,700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Font Awesome cargado de forma no bloqueante -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
   <script>if (!sessionStorage.getItem('konig_age_ok')) { document.documentElement.style.visibility = 'hidden'; }</script>
   <style>
     /* ═══════════════════════════════════════════
@@ -594,7 +598,7 @@
     .hero-bg-img {
       position: absolute;
       inset: 0;
-      background-image: url('imagenes/hero1.jpg');
+      background-image: url('imagenes/hero1.webp');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -2586,6 +2590,79 @@
       src: local('Georgia'), local('Times New Roman');
       size-adjust: 105%;
     }
+
+    /* ── OPTIMIZACIONES MÓVILES ── */
+    /* content-visibility: mejora render en secciones fuera de pantalla */
+    .marca-sec,
+    .bares-sec,
+    .galeria-sec,
+    .mayoristas-sec,
+    footer {
+      content-visibility: auto;
+      contain-intrinsic-size: 0 600px;
+    }
+
+    /* will-change solo donde hay animación real */
+    .hero-bg-img {
+      will-change: transform;
+    }
+
+    /* ══════════════════════════════════════════
+       OPTIMIZACIONES MÓVIL — (pointer: coarse)
+       Aplica a cualquier pantalla táctil
+    ══════════════════════════════════════════ */
+    @media (pointer: coarse) {
+
+      /* ── Animaciones infinitas: APAGADAS en touch ──
+         Estas son las que más drenan GPU en Android:
+         logoglow, orbDrift, tagShine, auroraFlow, igPulse, gradShift */
+      .hero-logo-k             { animation: none !important; filter: drop-shadow(0 0 28px rgba(212,175,55,.35)); }
+      .ig-orb                  { animation: none !important; }
+      .tag-shine::after        { animation: none !important; }
+      .ig-sec::before,
+      .ig-sec::after           { animation: none !important; }
+      .ig-badge                { animation: none !important; }
+      .mayoristas-sec::before  { animation: none !important; }
+
+      /* ── backdrop-filter: mínimo en touch ──
+         blur alto + saturate = doble pasada de GPU */
+      nav, nav.sc {
+        backdrop-filter: blur(8px) !important;
+        -webkit-backdrop-filter: blur(8px) !important;
+      }
+      .mob {
+        backdrop-filter: blur(8px) !important;
+        -webkit-backdrop-filter: blur(8px) !important;
+      }
+
+      /* ── filter:blur en scroll-reveal: APAGADO ──
+         Blur en transición de reveal fuerza repaint en cada frame */
+      .rv {
+        filter: none !important;
+        transition: opacity .5s ease, transform .5s ease !important;
+      }
+      .rv.on { filter: none !important; }
+
+      /* ── will-change: solo donde importa, libera VRAM ── */
+      .hero-inner { will-change: auto !important; }
+      .hero-bg-img { will-change: auto !important; transition: none !important; }
+
+      /* ── Noise texture: OFF — gasta GPU sin beneficio visual ── */
+      body::before { display: none !important; }
+
+      /* ── Variables de timing más cortas en móvil ── */
+      :root {
+        --rv-dist: 18px;
+        --t-slow: .55s;
+        --t-xslow: .7s;
+        --t-mid: .35s;
+      }
+    }
+
+    /* Imágenes lazy: placeholder mientras cargan */
+    img[loading="lazy"] {
+      background: var(--sf3);
+    }
   </style>
 </head>
 
@@ -2593,7 +2670,7 @@
 
   <!-- LOADER -->
   <div id="loader">
-    <img src="imagenes/logo_koing.png" alt="König" class="ld-logo"
+    <img src="imagenes/logo_koing.webp" alt="König" class="ld-logo"
       onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%230a0a0a\'/%3E%3Ctext x=\'22\' y=\'68\' font-family=\'Cormorant Garamond\' font-size=\'48\' fill=\'%23d4af37\'%3EK%3C/text%3E%3C/svg%3E';">
     <div class="ld-line"></div>
     <p class="ld-txt">König</p>
@@ -2602,7 +2679,7 @@
   <!-- VERIFICACIÓN DE EDAD -->
   <div id="ageGate"
     style="position:fixed;inset:0;z-index:10000;background:rgba(5,5,5,.98);display:none;flex-direction:column;align-items:center;justify-content:center;padding:32px;">
-    <img src="imagenes/logo_koing.png" alt="König"
+    <img src="imagenes/logo_koing.webp" alt="König"
       style="width:84px;margin-bottom:32px;filter:drop-shadow(0 0 24px rgba(212,175,55,.4));"
       onerror="this.style.display='none'">
     <p
@@ -2635,7 +2712,7 @@
   <!-- NAV -->
   <nav id="nav">
     <a href="#inicio" class="n-logo">
-      <img src="imagenes/logo_koing.png" alt="König"
+      <img src="imagenes/logo_koing.webp" alt="König"
         onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'44\' height=\'44\' viewBox=\'0 0 44 44\'%3E%3Crect width=\'44\' height=\'44\' fill=\'%230a0a0a\'/%3E%3Ctext x=\'11\' y=\'32\' font-family=\'Cormorant Garamond\' font-size=\'28\' fill=\'%23d4af37\'%3EK%3C/text%3E%3C/svg%3E';">
       <div class="n-brand">
         <div class="n-nombre">König</div>
@@ -2674,7 +2751,7 @@
     <div class="hero-corner br"></div>
     <div class="hero-inner">
       <div class="hero-eyebrow">Ciudad Larroque · Entre Ríos · Argentina</div>
-      <img src="imagenes/logo_koing.png" alt="König" class="hero-logo-k"
+      <img src="imagenes/logo_koing.webp" alt="König" class="hero-logo-k"
         onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\' viewBox=\'0 0 120 120\'%3E%3Crect width=\'120\' height=\'120\' fill=\'%230a0a0a\'/%3E%3Ctext x=\'28\' y=\'82\' font-family=\'Cormorant Garamond\' font-size=\'72\' fill=\'%23d4af37\'%3EK%3C/text%3E%3C/svg%3E';">
       <span class="hero-konig">König</span>
       <span class="hero-tagline">Cerveza Artesanal</span>
@@ -2698,7 +2775,7 @@
       <!-- Columna imagen -->
       <div class="rv rv-left">
         <div class="marca-img" id="marcaImg">
-          <img src="imagenes/duenos.jpg" id="marcaImgEl" loading="lazy" alt="Fundadores de Cervecería König"
+          <img src="imagenes/duenos.webp" id="marcaImgEl" loading="lazy" alt="Fundadores de Cervecería König"
             onerror="this.parentElement.style.minHeight='300px';this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:300px;background:var(--sf3);border-radius:16px;font-size:4rem;\'>🍺</div>'">
         </div>
         <a href="medallas.html" class="logro-card rv d1">
@@ -2786,7 +2863,7 @@
         <!-- Gualeguay -->
         <div class="bar-card">
           <div class="bar-img">
-            <img src="imagenes/bar_guay.jpg" loading="lazy" alt="König Gualeguay"
+            <img src="imagenes/bar_guay.webp" loading="lazy" alt="König Gualeguay"
               onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:var(--sf3);font-size:3rem;\'>🍺</div>'">
           </div>
           <div class="bar-body">
@@ -2809,7 +2886,7 @@
         <!-- Gualeguaychú -->
         <div class="bar-card">
           <div class="bar-img">
-            <img src="imagenes/bar_gchu.jpg" loading="lazy" alt="König Gualeguaychú"
+            <img src="imagenes/bar_gchu.webp" loading="lazy" alt="König Gualeguaychú"
               onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:var(--sf3);font-size:3rem;\'>🍺</div>'">
           </div>
           <div class="bar-body">
@@ -2848,32 +2925,32 @@
     </div>
     <div class="gal-grid rv d2">
       <div class="gal-item">
-        <img src="imagenes/galeria1.jpg" loading="lazy" alt="Ambiente König"
+        <img src="imagenes/galeria1.webp" loading="lazy" alt="Ambiente König"
           onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:var(--sf3);font-size:2.5rem;\'>🍺</div>'">
         <div class="gal-ov"><span class="gal-cap">Ambiente König</span></div>
       </div>
       <div class="gal-item">
-        <img src="imagenes/galeria2.jpg" loading="lazy" alt="Nuestros tragos"
+        <img src="imagenes/galeria2.webp" loading="lazy" alt="Nuestros tragos"
           onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:var(--sf3);font-size:2.5rem;\'>🍹</div>'">
         <div class="gal-ov"><span class="gal-cap">Nuestros tragos</span></div>
       </div>
       <div class="gal-item">
-        <img src="imagenes/galeria3.jpg" loading="lazy" alt="Interior"
+        <img src="imagenes/galeria3.webp" loading="lazy" alt="Interior"
           onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:var(--sf3);font-size:2.5rem;\'>🏠</div>'">
         <div class="gal-ov"><span class="gal-cap">Interior</span></div>
       </div>
       <div class="gal-item">
-        <img src="imagenes/galeria4.jpg" loading="lazy" alt="Gastronomía"
+        <img src="imagenes/galeria4.webp" loading="lazy" alt="Gastronomía"
           onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:var(--sf3);font-size:2.5rem;\'>🧀</div>'">
         <div class="gal-ov"><span class="gal-cap">Gastronomía</span></div>
       </div>
       <div class="gal-item">
-        <img src="imagenes/galeria5.jpg" loading="lazy" alt="Música en vivo"
+        <img src="imagenes/galeria5.webp" loading="lazy" alt="Música en vivo"
           onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:var(--sf3);font-size:2.5rem;\'>🎸</div>'">
         <div class="gal-ov"><span class="gal-cap">Música en vivo</span></div>
       </div>
       <div class="gal-item">
-        <img src="imagenes/galeria6.jpg" loading="lazy" alt="Nuestro equipo"
+        <img src="imagenes/galeria6.webp" loading="lazy" alt="Nuestro equipo"
           onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:var(--sf3);font-size:2.5rem;\'>👥</div>'">
         <div class="gal-ov"><span class="gal-cap">Nuestro equipo</span></div>
       </div>
@@ -3026,7 +3103,7 @@
     <div class="ft-top">
       <div>
         <div class="ft-logo">
-          <img src="imagenes/logo_koing.png" alt="König"
+          <img src="imagenes/logo_koing.webp" alt="König"
             onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Crect width=\'40\' height=\'40\' fill=\'%230a0a0a\'/%3E%3Ctext x=\'10\' y=\'28\' font-family=\'Cormorant Garamond\' font-size=\'24\' fill=\'%23d4af37\'%3EK%3C/text%3E%3C/svg%3E';">
           <div>
             <div class="ft-nombre">König</div>
@@ -3269,6 +3346,8 @@
       var heroBg = document.querySelector('.hero-bg-img');
       var heroInner = document.querySelector('.hero-inner');
       var ticking = false;
+      // En touch el parallax causa jank constante — se desactiva completamente
+      var isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
 
       function onScroll() {
         if (ticking) return;
@@ -3278,8 +3357,8 @@
           var maxH = document.documentElement.scrollHeight - window.innerHeight;
           prog.style.setProperty('--prog', maxH > 0 ? (sy / maxH).toFixed(3) : 0);
 
-          // Hero parallax (only while hero in view)
-          if (sy < window.innerHeight) {
+          // Hero parallax: solo en desktop (no touch)
+          if (!isTouchDevice && sy < window.innerHeight) {
             if (heroBg) {
               heroBg.style.transform = 'scale(' + (1 + sy * 0.0004) + ') translateY(' + (sy * 0.35) + 'px)';
             }
@@ -3376,7 +3455,8 @@
     var W, H, bubbles = [], RAF;
     var scrollY = 0, targetScrollY = 0;
     var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) { cvs.style.display = 'none'; return; }
+    var isTouch = window.matchMedia('(pointer: coarse)').matches;
+    if (prefersReduced || isTouch) { cvs.style.display = 'none'; return; }
 
     /* Paleta: dorado muy tenue */
     var COLORS = [
