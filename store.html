@@ -1358,19 +1358,23 @@
         padding: 0 12px;
       }
 
-      /* 2 columnas de productos en móvil */
+      /* 1 columna de productos en móvil */
       .products-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
+        grid-template-columns: 1fr;
+        gap: 16px;
       }
 
       .products-sec {
         padding: 12px 12px 60px;
       }
 
-      /* Reducir imagen de card en móvil para que entre bien */
+      /* Imagen completa en móvil */
       .product-img {
-        aspect-ratio: 4/3;
+        aspect-ratio: 1/1;
+      }
+
+      .product-img img {
+        object-fit: contain;
       }
 
       .product-info {
